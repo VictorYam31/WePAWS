@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/home_menu_vet_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.HomeButton"
+        android:text="@string/home_menu_vet"
+        />
+
+    <Button
+        android:id="@+id/home_menu_store_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/home_menu_vet_btn"
+        android:theme="@style/AppTheme.HomeButton"
+        android:text="@string/home_menu_store"
+        />
+
+    <Button
+        android:id="@+id/home_menu_dining_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/home_menu_store_btn"
+        android:theme="@style/AppTheme.HomeButton"
+        android:text="@string/home_menu_dining"
+        />
+
+    <Button
+        android:id="@+id/home_menu_park_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/home_menu_dining_btn"
+        android:theme="@style/AppTheme.HomeButton"
+        android:text="@string/home_menu_park"
+        />
+
+</RelativeLayout>
