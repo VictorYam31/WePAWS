@@ -1,7 +1,11 @@
 package com.victoryam.wepaws;
 
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +18,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import java.util.Locale;
 
 public class PreferenceFragment extends Fragment {
     Spinner languageSpinner;
@@ -48,6 +54,17 @@ public class PreferenceFragment extends Fragment {
 
         public void onNothingSelected(AdapterView<?> parent) {
         }
+    }
+
+    private void setLocale(String lang) {
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+        Intent refresh = new Intent(getActivity(), MainActivity.class);
+        startActivity(refresh);
     }
 
 }
