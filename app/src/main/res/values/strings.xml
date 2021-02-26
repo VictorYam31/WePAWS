@@ -7,4 +7,8 @@
     <string name="home_menu_store">Store</string>
     <string name="home_menu_dining">Dining</string>
     <string name="home_menu_park">Park</string>
+    <string name="preference_language">Language</string>
+    <string name="preference_language_en">English</string>
+    <string name="preference_language_zh">中文</string>
+    <string name="preference_save">Save</string>
 </resources>
