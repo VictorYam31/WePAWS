@@ -1,12 +1,20 @@
 <resources>
     <string name="app_name">WePAWS</string>
+
     <string name="nav_menu_home">Home</string>
     <string name="nav_menu_search">Search</string>
     <string name="nav_menu_preference">Preference</string>
+
+    <string name="home_menu_search_hint">Search</string>
     <string name="home_menu_vet">Vet</string>
+    <string name="home_menu_search_vet">Search Vet</string>
     <string name="home_menu_store">Store</string>
+    <string name="home_menu_search_store">Search Store</string>
     <string name="home_menu_dining">Dining</string>
+    <string name="home_menu_search_dining">Search Dining</string>
     <string name="home_menu_park">Park</string>
+    <string name="home_menu_search_park">Search Park</string>
+
     <string name="preference_language">Language</string>
     <string name="preference_language_en">English</string>
     <string name="preference_language_zh">中文</string>

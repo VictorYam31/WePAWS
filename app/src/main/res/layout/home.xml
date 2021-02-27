@@ -3,12 +3,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    
+    <SearchView
+        android:id="@+id/home_menu_search"
+        android:layout_width="match_parent"
+        android:layout_height="75sp"
+        android:paddingTop="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="15dp"
+        android:theme="@style/Home.FontSize"
+        android:iconifiedByDefault="false"
+        android:queryHint="@string/home_menu_search_hint"
+        />
 
     <Button
         android:id="@+id/home_menu_vet_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.HomeButton"
+        android:layout_below="@id/home_menu_search"
+        android:theme="@style/Home.Button"
         android:text="@string/home_menu_vet"
         />
 
@@ -17,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/home_menu_vet_btn"
-        android:theme="@style/AppTheme.HomeButton"
+        android:theme="@style/Home.Button"
         android:text="@string/home_menu_store"
         />
 
@@ -26,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/home_menu_store_btn"
-        android:theme="@style/AppTheme.HomeButton"
+        android:theme="@style/Home.Button"
         android:text="@string/home_menu_dining"
         />
 
@@ -35,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/home_menu_dining_btn"
-        android:theme="@style/AppTheme.HomeButton"
+        android:theme="@style/Home.Button"
         android:text="@string/home_menu_park"
         />
 

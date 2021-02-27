@@ -18,9 +18,14 @@
         <item name="android:textSize">30sp</item>
     </style>
 
-    <style name="AppTheme.HomeButton" parent="Widget.AppCompat.Button">
+    <style name="Home.Button" parent="Widget.AppCompat.Button">
         <item name="android:backgroundTint">@color/orange_dark</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:onClick">homeSearch</item>
+    </style>
+
+    <style name="Home.FontSize" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">30sp</item>
     </style>
 
