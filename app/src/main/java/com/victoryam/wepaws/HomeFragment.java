@@ -14,26 +14,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 public class HomeFragment extends Fragment {
-    Button vetButton;
-    Button storeButton;
-    Button diningButton;
-    Button parkButton;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home, container, false);
 
-        vetButton = (Button) view.findViewById(R.id.home_menu_vet_btn);
+        Button vetButton = (Button) view.findViewById(R.id.home_menu_vet_btn);
         vetButton.setOnClickListener(new vetButtonClicked());
 
-        storeButton = (Button) view.findViewById(R.id.home_menu_store_btn);
+        Button storeButton = (Button) view.findViewById(R.id.home_menu_store_btn);
         storeButton.setOnClickListener(new storeButtonClicked());
 
-        diningButton = (Button) view.findViewById(R.id.home_menu_dining_btn);
+        Button diningButton = (Button) view.findViewById(R.id.home_menu_dining_btn);
         diningButton.setOnClickListener(new diningButtonClicked());
 
-        parkButton = (Button) view.findViewById(R.id.home_menu_park_btn);
+        Button parkButton = (Button) view.findViewById(R.id.home_menu_park_btn);
         parkButton.setOnClickListener(new parkButtonClicked());
 
         return view;
@@ -46,7 +42,7 @@ public class HomeFragment extends Fragment {
 //            Intent intent = new Intent(getApplicationContext(), .class);
 //            startActivity(intent);
             ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.home_menu_search_vet);
-            createFragment(v);
+            replaceFragment(v);
         }
     }
 
@@ -56,7 +52,7 @@ public class HomeFragment extends Fragment {
 //            Intent intent = new Intent(getApplicationContext(), .class);
 //            startActivity(intent);
             ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.home_menu_search_store);
-            createFragment(v);
+            replaceFragment(v);
         }
     }
 
@@ -66,7 +62,7 @@ public class HomeFragment extends Fragment {
 //            Intent intent = new Intent(getApplicationContext(), .class);
 //            startActivity(intent);
             ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.home_menu_search_dining);
-            createFragment(v);
+            replaceFragment(v);
         }
     }
 
@@ -76,11 +72,11 @@ public class HomeFragment extends Fragment {
 //            Intent intent = new Intent(getApplicationContext(), .class);
 //            startActivity(intent);
             ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.home_menu_search_park);
-            createFragment(v);
+            replaceFragment(v);
         }
     }
 
-    private void createFragment(View v) {
+    private void replaceFragment(View v) {
         int viewId = v.getId();
         Fragment focus = new SearchFragment();
         Bundle args = new Bundle();

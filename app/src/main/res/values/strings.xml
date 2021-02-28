@@ -19,4 +19,12 @@
     <string name="preference_language_en">English</string>
     <string name="preference_language_zh">中文</string>
     <string name="preference_save">Save</string>
+
+    <string name="search_component_animal">Animal</string>
+    <string name="search_component_district">District</string>
+    <string name="search_component_opening_hours">Opening Hours</string>
+    <string name="search_component_specialist">Specialist</string>
+    <string name="search_component_keyword">Keyword</string>
+    <string name="search_component_search">Search</string>
+
 </resources>
