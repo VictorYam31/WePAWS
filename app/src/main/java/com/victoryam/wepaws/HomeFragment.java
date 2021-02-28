@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 public class HomeFragment extends Fragment {
@@ -41,9 +42,11 @@ public class HomeFragment extends Fragment {
     private class vetButtonClicked implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            Toast.makeText(getActivity(), "vetBtn", Toast.LENGTH_LONG).show();
+//            Toast.makeText(getActivity(), "vetBtn", Toast.LENGTH_LONG).show();
 //            Intent intent = new Intent(getApplicationContext(), .class);
 //            startActivity(intent);
+            ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.home_menu_search_vet);
+            createFragment(v);
         }
     }
 
@@ -52,6 +55,8 @@ public class HomeFragment extends Fragment {
         public void onClick(View v) {
 //            Intent intent = new Intent(getApplicationContext(), .class);
 //            startActivity(intent);
+            ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.home_menu_search_store);
+            createFragment(v);
         }
     }
 
@@ -60,6 +65,8 @@ public class HomeFragment extends Fragment {
         public void onClick(View v) {
 //            Intent intent = new Intent(getApplicationContext(), .class);
 //            startActivity(intent);
+            ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.home_menu_search_dining);
+            createFragment(v);
         }
     }
 
@@ -68,6 +75,18 @@ public class HomeFragment extends Fragment {
         public void onClick(View v) {
 //            Intent intent = new Intent(getApplicationContext(), .class);
 //            startActivity(intent);
+            ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.home_menu_search_park);
+            createFragment(v);
         }
     }
+
+    private void createFragment(View v) {
+        int viewId = v.getId();
+        Fragment focus = new SearchFragment();
+        Bundle args = new Bundle();
+        args.putInt("viewId", viewId);
+        focus.setArguments(args);
+        ((AppCompatActivity)getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.mainframe, focus).commit();
+    }
+
 }

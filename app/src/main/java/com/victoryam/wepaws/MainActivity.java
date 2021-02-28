@@ -36,28 +36,32 @@ public class MainActivity extends AppCompatActivity {
         navigationbar.setOnNavigationItemSelectedListener(navListener);
     }
 
-    public void homeSearch(View view) {
-        int viewId = view.getId();
-        Fragment focus = new SearchFragment(viewId);
-
-        switch(viewId) {
-            case R.id.home_menu_vet_btn:
-                Log.v("button test", "pressed vet button");
-                getSupportActionBar().setTitle(R.string.home_menu_search_vet);
-                break;
-            case R.id.home_menu_store_btn:
-                getSupportActionBar().setTitle(R.string.home_menu_search_store);
-                break;
-            case R.id.home_menu_dining_btn:
-                getSupportActionBar().setTitle(R.string.home_menu_search_dining);
-                break;
-            case R.id.home_menu_park_btn:
-                getSupportActionBar().setTitle(R.string.home_menu_search_park);
-                break;
-        }
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.mainframe, focus).commit();
-    }
+//    old
+//    public void homeSearch(View view) {
+//        int viewId = view.getId();
+//        Fragment focus = new SearchFragment();
+//        Bundle args = new Bundle();
+//        args.putInt("viewId", viewId);
+//        focus.setArguments(args);
+//
+//        switch(viewId) {
+//            case R.id.home_menu_vet_btn:
+//                Log.v("button test", "pressed vet button");
+//                getSupportActionBar().setTitle(R.string.home_menu_search_vet);
+//                break;
+//            case R.id.home_menu_store_btn:
+//                getSupportActionBar().setTitle(R.string.home_menu_search_store);
+//                break;
+//            case R.id.home_menu_dining_btn:
+//                getSupportActionBar().setTitle(R.string.home_menu_search_dining);
+//                break;
+//            case R.id.home_menu_park_btn:
+//                getSupportActionBar().setTitle(R.string.home_menu_search_park);
+//                break;
+//        }
+//
+//        getSupportFragmentManager().beginTransaction().replace(R.id.mainframe, focus).commit();
+//    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
