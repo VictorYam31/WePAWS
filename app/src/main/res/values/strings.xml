@@ -28,4 +28,10 @@
     <string name="search_component_keyword_hint">Enter keywords</string>
     <string name="search_component_search">Search</string>
 
+    <string name="fragment_home">fragment_home</string>
+    <string name="fragment_search_vet">fragment_search_vet</string>
+    <string name="fragment_search_store">fragment_search_store</string>
+    <string name="fragment_search_dining">fragment_search_dining</string>
+    <string name="fragment_search_park">fragment_search_park</string>
+
 </resources>

@@ -42,7 +42,9 @@ public class HomeFragment extends Fragment {
 //            Intent intent = new Intent(getApplicationContext(), .class);
 //            startActivity(intent);
             ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.home_menu_search_vet);
-            replaceFragment(v);
+//            ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//            ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+            replaceFragment(v, getResources().getString(R.string.fragment_search_vet));
         }
     }
 
@@ -52,7 +54,7 @@ public class HomeFragment extends Fragment {
 //            Intent intent = new Intent(getApplicationContext(), .class);
 //            startActivity(intent);
             ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.home_menu_search_store);
-            replaceFragment(v);
+            replaceFragment(v, getResources().getString(R.string.fragment_search_store));
         }
     }
 
@@ -62,7 +64,7 @@ public class HomeFragment extends Fragment {
 //            Intent intent = new Intent(getApplicationContext(), .class);
 //            startActivity(intent);
             ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.home_menu_search_dining);
-            replaceFragment(v);
+            replaceFragment(v, getResources().getString(R.string.fragment_search_dining));
         }
     }
 
@@ -72,17 +74,17 @@ public class HomeFragment extends Fragment {
 //            Intent intent = new Intent(getApplicationContext(), .class);
 //            startActivity(intent);
             ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.home_menu_search_park);
-            replaceFragment(v);
+            replaceFragment(v, getResources().getString(R.string.fragment_search_park));
         }
     }
 
-    private void replaceFragment(View v) {
+    private void replaceFragment(View v, String fragmentName) {
         int viewId = v.getId();
         Fragment focus = new SearchFragment();
         Bundle args = new Bundle();
         args.putInt("viewId", viewId);
         focus.setArguments(args);
-        ((AppCompatActivity)getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.mainframe, focus).commit();
+        ((AppCompatActivity)getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.mainframe, focus, fragmentName).commit();
     }
 
 }

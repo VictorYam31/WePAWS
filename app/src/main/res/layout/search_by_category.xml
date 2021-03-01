@@ -14,17 +14,14 @@
         android:layout_above="@id/search_by_category_keywords"
         />
 
-    <SearchView
+    <EditText
         android:id="@+id/search_by_category_keywords"
         android:layout_width="match_parent"
         android:layout_height="75sp"
         android:layout_above="@id/search_by_category_button"
-        android:paddingTop="15dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:paddingBottom="15dp"
-        android:iconifiedByDefault="false"
-        android:queryHint="@string/search_component_keyword_hint"
+        android:layout_margin="10dp"
+        android:theme="@style/Search.Component"
+        android:hint="@string/search_component_keyword_hint"
         />
 
     <Button
