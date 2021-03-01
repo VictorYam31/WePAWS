@@ -25,6 +25,7 @@
     <string name="search_component_opening_hours">Opening Hours</string>
     <string name="search_component_specialist">Specialist</string>
     <string name="search_component_keyword">Keyword</string>
+    <string name="search_component_keyword_hint">Enter keywords</string>
     <string name="search_component_search">Search</string>
 
 </resources>

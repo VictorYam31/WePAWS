@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ListView
+        android:id="@+id/seach_by_category_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/search_by_category_keywords"
+        />
+
+    <SearchView
+        android:id="@+id/search_by_category_keywords"
+        android:layout_width="match_parent"
+        android:layout_height="75sp"
+        android:layout_above="@id/search_by_category_button"
+        android:paddingTop="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="15dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="@string/search_component_keyword_hint"
+        />
+
+    <Button
+        android:id="@+id/search_by_category_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="15dp"
+        android:theme="@style/Home.Button"
+        android:text="@string/search_component_search"
+        />
+
+</RelativeLayout>

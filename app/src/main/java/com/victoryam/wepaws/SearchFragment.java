@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 public class SearchFragment extends Fragment {
@@ -22,37 +21,36 @@ public class SearchFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = null;
-        String[] componentNames = null;
-        String[] spinnerItems = null;
-        ListView listView = null;
+        View view = inflater.inflate(R.layout.search_by_category, container, false);
 //        Log.v("viewId", String.valueOf(getArguments().getInt("viewId")));
 
         switch (getArguments().getInt("viewId")) {
             case R.id.home_menu_vet_btn:
 //                Log.v("test create", "creating search vet fragment");
-                componentNames = new String[]{getResources().getString(R.string.search_component_animal), getResources().getString(R.string.search_component_district),
-                        getResources().getString(R.string.search_component_opening_hours), getResources().getString(R.string.search_component_specialist)};
-                spinnerItems = new String[]{"Item 1", "Item 2", "Item 3"};
-
-                view = inflater.inflate(R.layout.search_vet, container, false);
-                listView = (ListView)view.findViewById(R.id.seach_vet_listview);
-
-                ComponentAdapter componentAdapter = new ComponentAdapter(this.getContext(), componentNames, spinnerItems);
-                listView.setAdapter(componentAdapter);
+                initComponents(view, getResources().getStringArray(R.array.search_vet_component_names));
                 break;
             case R.id.home_menu_store_btn:
-                view = inflater.inflate(R.layout.search_store, container, false);
+                initComponents(view, getResources().getStringArray(R.array.search_shop_component_names));
                 break;
             case R.id.home_menu_dining_btn:
-                view = inflater.inflate(R.layout.search_dining, container, false);
+                initComponents(view, getResources().getStringArray(R.array.search_dining_component_names));
                 break;
             case R.id.home_menu_park_btn:
-                view = inflater.inflate(R.layout.search_park, container, false);
+                initComponents(view, getResources().getStringArray(R.array.search_park_component_names));
                 break;
         }
 
         return view;
+    }
+
+    private void initComponents(View view, String[] componentNames) {
+        ListView listView = (ListView)view.findViewById(R.id.seach_by_category_listview);
+
+        // Change this later ***
+        String[] spinnerItems = new String[]{"Item 1", "Item 2", "Item 3"};
+
+        ComponentAdapter componentAdapter = new ComponentAdapter(this.getContext(), componentNames, spinnerItems);
+        listView.setAdapter(componentAdapter);
     }
 
     class ComponentAdapter extends ArrayAdapter<String> {
