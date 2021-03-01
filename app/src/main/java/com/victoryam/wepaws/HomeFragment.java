@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment {
             ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.home_menu_search_vet);
 //            ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //            ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-            replaceFragment(v, getResources().getString(R.string.fragment_search_vet));
+            replaceFragment(v, getResources().getString(R.string.home_menu_search_vet));
         }
     }
 
@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment {
 //            Intent intent = new Intent(getApplicationContext(), .class);
 //            startActivity(intent);
             ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.home_menu_search_store);
-            replaceFragment(v, getResources().getString(R.string.fragment_search_store));
+            replaceFragment(v, getResources().getString(R.string.home_menu_search_store));
         }
     }
 
@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
 //            Intent intent = new Intent(getApplicationContext(), .class);
 //            startActivity(intent);
             ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.home_menu_search_dining);
-            replaceFragment(v, getResources().getString(R.string.fragment_search_dining));
+            replaceFragment(v, getResources().getString(R.string.home_menu_search_dining));
         }
     }
 
@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment {
 //            Intent intent = new Intent(getApplicationContext(), .class);
 //            startActivity(intent);
             ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.home_menu_search_park);
-            replaceFragment(v, getResources().getString(R.string.fragment_search_park));
+            replaceFragment(v, getResources().getString(R.string.home_menu_search_park));
         }
     }
 
@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment {
         Bundle args = new Bundle();
         args.putInt("viewId", viewId);
         focus.setArguments(args);
-        ((AppCompatActivity)getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.mainframe, focus, fragmentName).commit();
+        ((AppCompatActivity)getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.mainframe, focus).addToBackStack(fragmentName).commit();
     }
 
 }

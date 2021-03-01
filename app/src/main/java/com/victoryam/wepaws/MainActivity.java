@@ -15,8 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
-
-//    fragment finish()?
+    BottomNavigationView navigationbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +29,21 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.mainframe, new HomeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.mainframe, new HomeFragment()).addToBackStack(getResources().getString(R.string.app_name)).commit();
 
-        BottomNavigationView navigationbar = findViewById(R.id.navigationbar);
+        navigationbar = findViewById(R.id.navigationbar);
         navigationbar.setOnNavigationItemSelectedListener(navListener);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            super.onBackPressed();
+            int index = getSupportFragmentManager().getBackStackEntryCount() - 1;
+            getSupportActionBar().setTitle(getSupportFragmentManager().getBackStackEntryAt(index).getName());
+        } else {
+            Log.v("back pressed", "top level, cannot go back");
+        }
     }
 
 //    old
@@ -68,20 +78,23 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     Fragment focus = null;
+                    String title = null;
 
                     switch(item.getItemId()) {
                         case R.id.nav_menu_home:
-                            getSupportActionBar().setTitle(R.string.app_name);
+                            title = getResources().getString(R.string.app_name);
                             focus = new HomeFragment();
                             break;
                         case R.id.nav_menu_search:
                             break;
                         case R.id.nav_menu_preference:
-                            getSupportActionBar().setTitle(R.string.nav_menu_preference);
+                            title = getResources().getString(R.string.nav_menu_preference);
                             focus = new PreferenceFragment();
                             break;
                     }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.mainframe, focus).commit();
+
+                    getSupportActionBar().setTitle(title);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.mainframe, focus).addToBackStack(title).commit();
 
                     return true;
                 }
