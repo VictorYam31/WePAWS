@@ -44,7 +44,7 @@ public class SearchFragment extends Fragment {
     }
 
     private void initComponents(View view, String[] componentNames) {
-        ListView listView = (ListView)view.findViewById(R.id.seach_by_category_listview);
+        ListView listView = (ListView)view.findViewById(R.id.search_by_category_listview);
 
         // Change this later ***
         String[] spinnerItems = new String[]{"Item 1", "Item 2", "Item 3"};

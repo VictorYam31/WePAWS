@@ -34,4 +34,45 @@
     <string name="fragment_search_dining">fragment_search_dining</string>
     <string name="fragment_search_park">fragment_search_park</string>
 
+    <string name="animal_type_dog">Dog</string>
+    <string name="animal_type_cat">Cat</string>
+    <string name="animal_type_rabbit">Rabbit</string>
+    <string name="animal_type_rat">Rat</string>
+    <string name="animal_type_fish">Fish</string>
+    <string name="animal_type_bird">Bird</string>
+    <string name="animal_type_amphibian">Amphibian</string>
+    <string name="animal_type_reptiles">Reptiles</string>
+    <string name="animal_type_insect">Insect</string>
+
+    <string name="hk_district_Hong_Kong_Island">-Hong Kong Island-</string>
+    <string name="hk_district_Central_and_Western">Central and Western</string>
+    <string name="hk_district_Eastern">Eastern</string>
+    <string name="hk_district_Southern">Southern</string>
+    <string name="hk_district_Wan_Chai">Wan Chai</string>
+    <string name="hk_district_Kowloon">-Kowloon-</string>
+    <string name="hk_district_Sham_Shui_Po">Sham Shui Po</string>
+    <string name="hk_district_Kowloon_City">Kowloon City</string>
+    <string name="hk_district_Kwun_Tong">Kwun Tong</string>
+    <string name="hk_district_Wong_Tai_Sin">Wong Tai Sin</string>
+    <string name="hk_district_Yau_Tsim_Mong">Yau Tsim Mong</string>
+    <string name="hk_district_New_Territories">-New Territories-</string>
+    <string name="hk_district_Islands">Islands</string>
+    <string name="hk_district_Kwai_Tsing">Kwai Tsing</string>
+    <string name="hk_district_North">North</string>
+    <string name="hk_district_Sai_Kung">Sai Kung</string>
+    <string name="hk_district_Sha_Tin">Sha Tin</string>
+    <string name="hk_district_Tai_Po">Tai Po</string>
+    <string name="hk_district_Tsuen_Wan">Tsuen Wan</string>
+    <string name="hk_district_Tuen_Mun">Tuen Mun</string>
+    <string name="hk_district_Yuen_Long">Yuen Long</string>
+
+    <string name="specialist_surgical">Surgical</string>
+    <string name="specialist_medical">Medical</string>
+    <string name="specialist_ophthalmology">Ophthalmology</string>
+    <string name="specialist_anesthesia">Anesthesia</string>
+    <string name="specialist_radiology">Radiology</string>
+    <string name="specialist_orthopedics">Orthopedics</string>
+    <string name="specialist_oncology">Oncology</string>
+
+
 </resources>

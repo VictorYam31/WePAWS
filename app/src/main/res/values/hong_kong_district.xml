@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="hong_kong_district_names">
+        <item> @string/hk_district_Hong_Kong_Island</item>
+        <item> @string/hk_district_Central_and_Western</item>
+        <item> @string/hk_district_Eastern</item>
+        <item> @string/hk_district_Southern</item>
+        <item> @string/hk_district_Wan_Chai</item>
+        <item> @string/hk_district_Kowloon</item>
+        <item> @string/hk_district_Sham_Shui_Po</item>
+        <item> @string/hk_district_Kowloon_City</item>
+        <item> @string/hk_district_Kwun_Tong</item>
+        <item> @string/hk_district_Wong_Tai_Sin</item>
+        <item> @string/hk_district_Yau_Tsim_Mong</item>
+        <item> @string/hk_district_New_Territories</item>
+        <item> @string/hk_district_Islands</item>
+        <item> @string/hk_district_Kwai_Tsing</item>
+        <item> @string/hk_district_North</item>
+        <item> @string/hk_district_Sai_Kung</item>
+        <item> @string/hk_district_Sha_Tin</item>
+        <item> @string/hk_district_Tai_Po</item>
+        <item> @string/hk_district_Tsuen_Wan</item>
+        <item> @string/hk_district_Tuen_Mun</item>
+        <item> @string/hk_district_Yuen_Long</item>
+    </string-array>
+</resources>

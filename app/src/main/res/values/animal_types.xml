@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="animal_type_names">
+        <item>@string/animal_type_dog</item>
+        <item>@string/animal_type_cat</item>
+        <item>@string/animal_type_rabbit</item>
+        <item>@string/animal_type_rat</item>
+        <item>@string/animal_type_fish</item>
+        <item>@string/animal_type_bird</item>
+        <item>@string/animal_type_amphibian</item>
+        <item>@string/animal_type_reptiles</item>
+        <item>@string/animal_type_insect</item>
+    </string-array>
+</resources>

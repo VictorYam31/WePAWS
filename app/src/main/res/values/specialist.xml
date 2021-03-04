@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="specialist_names">
+        <item>@string/animal_type_dog</item>
+        <item>@string/specialist_surgical</item>
+        <item>@string/specialist_medical</item>
+        <item>@string/specialist_ophthalmology</item>
+        <item>@string/specialist_anesthesia</item>
+        <item>@string/specialist_radiology</item>
+        <item>@string/specialist_orthopedics</item>
+        <item>@string/specialist_oncology</item>
+    </string-array>
+</resources>

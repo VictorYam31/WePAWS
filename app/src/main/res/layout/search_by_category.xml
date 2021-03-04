@@ -8,7 +8,7 @@
     >
 
     <ListView
-        android:id="@+id/seach_by_category_listview"
+        android:id="@+id/search_by_category_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/search_by_category_keywords"

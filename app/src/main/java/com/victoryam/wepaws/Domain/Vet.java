@@ -28,7 +28,7 @@ public class Vet {
     }
 
     public void setVetNameChi(String vet_name_chi) {
-        this.vet_name = vet_name_chi;
+        this.vet_name_chi = vet_name_chi;
     }
 
     public String getVetAdd() {
