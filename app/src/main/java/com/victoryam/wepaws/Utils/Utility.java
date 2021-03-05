@@ -3,9 +3,7 @@ package com.victoryam.wepaws.Utils;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.victoryam.wepaws.Domain.Animal;
 import com.victoryam.wepaws.Domain.Category;
-import com.victoryam.wepaws.Domain.Vet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,27 +17,27 @@ public class Utility {
         gson = new Gson();
     }
 
-    public Animal DeserializeAnimal(String json) {
-        Animal targetObject = gson.fromJson(json, Animal.class);
-        return targetObject;
-    }
-
-    public Category DeserializeCategory(String json) {
-        Category targetObject = gson.fromJson(json, Category.class);
-        return targetObject;
-    }
-
-    public Vet DeserializeVet(String json) {
-        Vet targetObject = gson.fromJson(json, Vet.class);
-        return targetObject;
-    }
+//    public Animal DeserializeAnimal(String json) {
+//        Animal targetObject = gson.fromJson(json, Animal.class);
+//        return targetObject;
+//    }
+//
+//    public Category DeserializeCategory(String json) {
+//        Category targetObject = gson.fromJson(json, Category.class);
+//        return targetObject;
+//    }
+//
+//    public Vet DeserializeVet(String json) {
+//        Vet targetObject = gson.fromJson(json, Vet.class);
+//        return targetObject;
+//    }
 
     public String SerializeObject(Object targetObject) {
         String jsonString = gson.toJson(targetObject);
         return jsonString;
     }
 
-    private static String readStream(InputStream in) {
+    public static String readStream(InputStream in) {
         BufferedReader reader = null;
         StringBuffer data = new StringBuffer("");
         try {

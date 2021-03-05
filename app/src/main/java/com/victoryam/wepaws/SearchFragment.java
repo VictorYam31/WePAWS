@@ -19,8 +19,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-public class SearchFragment extends Fragment {
+import com.victoryam.wepaws.Domain.Category;
 
+public class SearchFragment extends Fragment {
+    int CategoryId;
     Button searchBtn;
 
     @Nullable
@@ -30,15 +32,19 @@ public class SearchFragment extends Fragment {
 
         switch (getArguments().getInt("SearchFragmentArg")) {
             case R.id.home_menu_vet_btn:
+                CategoryId = 1;
                 initComponents(view, getResources().getStringArray(R.array.search_vet_component_names));
                 break;
             case R.id.home_menu_store_btn:
+                CategoryId = 2;
                 initComponents(view, getResources().getStringArray(R.array.search_store_component_names));
                 break;
             case R.id.home_menu_dining_btn:
+                CategoryId = 3;
                 initComponents(view, getResources().getStringArray(R.array.search_dining_component_names));
                 break;
             case R.id.home_menu_park_btn:
+                CategoryId = 4;
                 initComponents(view, getResources().getStringArray(R.array.search_park_component_names));
                 break;
         }
@@ -52,7 +58,10 @@ public class SearchFragment extends Fragment {
     private class onSearchButtonClicked implements  View.OnClickListener {
         @Override
         public void onClick(View v) {
-            Navigation.findNavController(v).navigate(R.id.action_SearchFragment_to_ResultFragment);
+            Bundle bundle = new Bundle();
+            bundle.putInt("CategoryId", CategoryId);
+
+            Navigation.findNavController(v).navigate(R.id.action_SearchFragment_to_ResultFragment, bundle);
         }
     }
 
@@ -93,6 +102,7 @@ public class SearchFragment extends Fragment {
             textView.setText(this.componentItems[position]);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.context, R.layout.preference_spinner_item, this.componentSpinnerItems);
             spinner.setAdapter(adapter);
+            spinner.setOnItemSelectedListener(new componentSpinnerOnItemSelected());
             return view;
 //            LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 //            View component = layoutInflater.inflate(R.layout.search_component, parent, false);
