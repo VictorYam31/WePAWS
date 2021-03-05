@@ -23,24 +23,18 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.search_by_category, container, false);
-//        Log.v("SearchFragmentArg", String.valueOf(getArguments().getInt("SearchFragmentArg")));
 
         switch (getArguments().getInt("SearchFragmentArg")) {
             case R.id.home_menu_vet_btn:
-//                Log.v("test create", "creating search vet fragment");
-                ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.home_menu_search_vet));
                 initComponents(view, getResources().getStringArray(R.array.search_vet_component_names));
                 break;
             case R.id.home_menu_store_btn:
-                ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.home_menu_search_store));
                 initComponents(view, getResources().getStringArray(R.array.search_store_component_names));
                 break;
             case R.id.home_menu_dining_btn:
-                ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.home_menu_search_dining));
                 initComponents(view, getResources().getStringArray(R.array.search_dining_component_names));
                 break;
             case R.id.home_menu_park_btn:
-                ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.home_menu_search_park));
                 initComponents(view, getResources().getStringArray(R.array.search_park_component_names));
                 break;
         }
