@@ -6,22 +6,20 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.RatingBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.victoryam.wepaws.Domain.Animal;
 import com.victoryam.wepaws.Domain.Category;
 import com.victoryam.wepaws.Domain.Vet;
-
-import org.w3c.dom.Text;
 
 public class ResultFragment extends Fragment {
 
@@ -68,6 +66,13 @@ public class ResultFragment extends Fragment {
 
     private void initResults(View view, Result[] results) {
         ListView listView = (ListView)view.findViewById(R.id.result_listview);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View v, int position, long l) {
+                Result result = (Result) adapterView.getItemAtPosition(position);
+                Navigation.findNavController(view).navigate(R.id.action_ResultFragment_to_ResultDetailFragment);
+            }
+        });
 
         ResultAdapter resultAdapter = new ResultAdapter(this.getContext(), results);
         listView.setAdapter(resultAdapter);
@@ -90,7 +95,7 @@ public class ResultFragment extends Fragment {
 
         @Override
         public Object getItem(int position) {
-            return position;
+            return results[position];
         }
 
         @Override

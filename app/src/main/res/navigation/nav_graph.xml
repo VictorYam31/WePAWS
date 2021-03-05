@@ -44,5 +44,14 @@
         android:id="@+id/ResultFragment"
         android:name="com.victoryam.wepaws.ResultFragment"
         android:label="@string/result"
-        tools:layout="@layout/result" />
+        tools:layout="@layout/result" >
+        <action
+            android:id="@+id/action_ResultFragment_to_ResultDetailFragment"
+            app:destination="@id/ResultDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ResultDetailFragment"
+        android:name="com.victoryam.wepaws.ResultDetailFragment"
+        android:label="@string/result_detail"
+        tools:layout="@layout/result_detail" />
 </navigation>

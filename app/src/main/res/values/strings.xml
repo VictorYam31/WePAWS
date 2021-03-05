@@ -33,6 +33,8 @@
     <string name="result_previous">\u003C</string>
     <string name="result_next">\u003E</string>
 
+    <string name="result_detail">Result Detail</string>
+
     <string name="animal_type_dog">Dog</string>
     <string name="animal_type_cat">Cat</string>
     <string name="animal_type_rabbit">Rabbit</string>
