@@ -31,7 +31,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="15dp"
-        android:theme="@style/Home.Button"
+        android:theme="@style/Button_Medium"
         android:text="@string/search_component_search"
         />
 

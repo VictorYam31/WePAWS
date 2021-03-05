@@ -37,9 +37,6 @@ public class MainActivity extends AppCompatActivity {
             public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
                 String title;
                 switch (destination.getId()) {
-//                    case R.id.HomeFragment:
-//                        title = getResources().getString(R.string.app_name);
-//                        break;
                     case R.id.SearchFragment:
                         switch (arguments.getInt("SearchFragmentArg")) {
                             case R.id.home_menu_vet_btn:
@@ -55,14 +52,11 @@ public class MainActivity extends AppCompatActivity {
                                 title = getResources().getString(R.string.home_menu_search_park);
                                 break;
                             default:
-                                title = getResources().getString(R.string.nav_menu_search);
+                                title = (String) destination.getLabel();
                         }
                         break;
-                    case R.id.PreferenceFragment:
-                        title = getResources().getString(R.string.nav_menu_preference);
-                        break;
                     default:
-                        title = getResources().getString(R.string.app_name);
+                        title = (String) destination.getLabel();
                 }
 
                 getSupportActionBar().setTitle(title);

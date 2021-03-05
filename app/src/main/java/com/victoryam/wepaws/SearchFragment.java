@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -16,8 +17,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 public class SearchFragment extends Fragment {
+
+    Button searchBtn;
 
     @Nullable
     @Override
@@ -39,7 +43,17 @@ public class SearchFragment extends Fragment {
                 break;
         }
 
+        searchBtn = (Button) view.findViewById(R.id.search_by_category_button);
+        searchBtn.setOnClickListener(new onSearchButtonClicked());
+
         return view;
+    }
+
+    private class onSearchButtonClicked implements  View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            Navigation.findNavController(v).navigate(R.id.action_SearchFragment_to_ResultFragment);
+        }
     }
 
     private void initComponents(View view, String[] componentNames) {

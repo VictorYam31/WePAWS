@@ -28,11 +28,10 @@
     <string name="search_component_keyword_hint">Enter keywords</string>
     <string name="search_component_search">Search</string>
 
-    <string name="fragment_home">fragment_home</string>
-    <string name="fragment_search_vet">fragment_search_vet</string>
-    <string name="fragment_search_store">fragment_search_store</string>
-    <string name="fragment_search_dining">fragment_search_dining</string>
-    <string name="fragment_search_park">fragment_search_park</string>
+    <string name="result">Result</string>
+    <string name="result_filter">Filter</string>
+    <string name="result_previous">\u003C</string>
+    <string name="result_next">\u003E</string>
 
     <string name="animal_type_dog">Dog</string>
     <string name="animal_type_cat">Cat</string>
@@ -73,6 +72,8 @@
     <string name="specialist_radiology">Radiology</string>
     <string name="specialist_orthopedics">Orthopedics</string>
     <string name="specialist_oncology">Oncology</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/home_menu_search"
-        android:theme="@style/Home.Button"
+        android:theme="@style/Button_Medium"
         android:text="@string/home_menu_vet"
         />
 
@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/home_menu_vet_btn"
-        android:theme="@style/Home.Button"
+        android:theme="@style/Button_Medium"
         android:text="@string/home_menu_store"
         />
 
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/home_menu_store_btn"
-        android:theme="@style/Home.Button"
+        android:theme="@style/Button_Medium"
         android:text="@string/home_menu_dining"
         />
 
@@ -49,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/home_menu_dining_btn"
-        android:theme="@style/Home.Button"
+        android:theme="@style/Button_Medium"
         android:text="@string/home_menu_park"
         />
 

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ResultFragment">
+
+    <Button
+        android:id="@+id/search_filter_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:theme="@style/Button_Small"
+        android:text="@string/result_filter"
+        />
+
+    <ListView
+        android:id="@+id/result_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:layout_below="@id/search_filter_btn"
+        android:layout_above="@id/result_page_bar"
+        />
+
+    <LinearLayout
+        android:id="@+id/result_page_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/result_previous_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:theme="@style/Button_Small"
+            android:text="@string/result_previous"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Page Number"
+            />
+
+        <Button
+            android:id="@+id/result_next_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:theme="@style/Button_Small"
+            android:text="@string/result_next"
+            />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
