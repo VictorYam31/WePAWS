@@ -3,7 +3,7 @@ package com.victoryam.wepaws.Domain;
 public class Category {
     private int category_id;
     private String desc;
-    private String desc_chi;
+    private String desc_cn;
 
     public int getCategoryId() {
         return category_id;
@@ -21,11 +21,11 @@ public class Category {
         this.desc = desc;
     }
 
-    public String getDescChi() {
-        return desc_chi;
+    public String getDescCN() {
+        return desc_cn;
     }
 
-    public void setDescChi(String descChi) {
-        this.desc_chi = descChi;
+    public void setDescCN(String desc_cn) {
+        this.desc_cn = desc_cn;
     }
 }
