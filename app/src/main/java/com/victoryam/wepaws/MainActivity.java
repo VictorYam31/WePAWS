@@ -4,7 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +18,7 @@ import android.view.View;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
+    NavController navController;
     Toolbar toolbar;
     BottomNavigationView navigationbar;
 
@@ -26,24 +31,33 @@ public class MainActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_main);
 
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.mainframe, new HomeFragment()).addToBackStack(getResources().getString(R.string.app_name)).commit();
+//        getSupportFragmentManager().beginTransaction().replace(R.id.mainframe, new HomeFragment()).addToBackStack(getResources().getString(R.string.app_name)).commit();
 
         navigationbar = findViewById(R.id.navigationbar);
-        navigationbar.setOnNavigationItemSelectedListener(navListener);
+        NavigationUI.setupWithNavController(navigationbar, navController);
     }
 
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
-            super.onBackPressed();
-            int index = getSupportFragmentManager().getBackStackEntryCount() - 1;
-            getSupportActionBar().setTitle(getSupportFragmentManager().getBackStackEntryAt(index).getName());
-        } else {
-            Log.v("back pressed", "top level, cannot go back");
+        if (!navController.popBackStack()) {
+            // Call finish() on your Activity
+            finish();
         }
+//        else {
+//            navController.popBackStack();
+//        }
+//        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+//            super.onBackPressed();
+//            int index = getSupportFragmentManager().getBackStackEntryCount() - 1;
+//            getSupportActionBar().setTitle(getSupportFragmentManager().getBackStackEntryAt(index).getName());
+//        } else {
+//            Log.v("back pressed", "top level, cannot go back");
+//        }
     }
 
 //    old
@@ -73,31 +87,32 @@ public class MainActivity extends AppCompatActivity {
 //        getSupportFragmentManager().beginTransaction().replace(R.id.mainframe, focus).commit();
 //    }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Fragment focus = null;
-                    String title = null;
-
-                    switch(item.getItemId()) {
-                        case R.id.nav_menu_home:
-                            title = getResources().getString(R.string.app_name);
-                            focus = new HomeFragment();
-                            break;
-                        case R.id.nav_menu_search:
-                            break;
-                        case R.id.nav_menu_preference:
-                            title = getResources().getString(R.string.nav_menu_preference);
-                            focus = new PreferenceFragment();
-                            break;
-                    }
-
-                    getSupportActionBar().setTitle(title);
-                    getSupportFragmentManager().beginTransaction().replace(R.id.mainframe, focus).addToBackStack(title).commit();
-
-                    return true;
-                }
-            };
+//    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+//            new BottomNavigationView.OnNavigationItemSelectedListener() {
+//                @Override
+//                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                    Fragment focus = null;
+//                    String title = null;
+//
+//                    switch(item.getItemId()) {
+//                        case R.id.nav_menu_home:
+//                            title = getResources().getString(R.string.app_name);
+//                            focus = new HomeFragment();
+//                            break;
+//                        case R.id.nav_menu_search:
+//                            break;
+//                        case R.id.nav_menu_preference:
+//                            title = getResources().getString(R.string.nav_menu_preference);
+//                            Navigation.findNavController(activity, R.id.nav_host_fragment).navigate(R.id.action_HomeFragment_to_PreferenceFragment);
+//                            focus = new PreferenceFragment();
+//                            break;
+//                    }
+//
+//                    getSupportActionBar().setTitle(title);
+////                    getSupportFragmentManager().beginTransaction().replace(R.id.mainframe, focus).addToBackStack(title).commit();
+//
+//                    return true;
+//                }
+//            };
 
 }

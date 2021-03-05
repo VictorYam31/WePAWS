@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="search_dining_component_names">
-        <item>@string/search_component_district</item>
-        <item>@string/search_component_opening_hours</item>
-    </string-array>
-</resources>

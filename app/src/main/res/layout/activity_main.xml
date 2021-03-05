@@ -10,12 +10,17 @@
     <include
         layout="@layout/toolbar" />
 
-    <FrameLayout
-        android:id="@+id/mainframe"
+    <fragment
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintBottom_toTopOf="@+id/navigationbar"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph"
         />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -31,3 +36,11 @@
         app:menu="@menu/bottom_nav_menu"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    <FrameLayout-->
+    <!--        android:id="@+id/mainframe"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/toolbar"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/navigationbar"-->
+    <!--        />-->

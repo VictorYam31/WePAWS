@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/HomeFragment">
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.victoryam.wepaws.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.victoryam.wepaws.HomeFragment"
+        android:label="Nav_HomeFragment"
+        tools:layout="@layout/home">
+        <action
+            android:id="@+id/action_HomeFragment_to_SearchFragment"
+            app:destination="@id/SearchFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_PreferenceFragment"
+            app:destination="@id/PreferenceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SearchFragment"
+        android:name="com.victoryam.wepaws.SearchFragment"
+        android:label="Nav_SearchFragment"
+        tools:layout="@layout/search_by_category">
+        <argument
+            android:name="SearchFragmentArg"
+            app:argType="integer"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/PreferenceFragment"
+        android:name="com.victoryam.wepaws.PreferenceFragment"
+        android:label="Nav_PreferenceFragment"
+        tools:layout="@layout/preference"
+        />
+</navigation>
