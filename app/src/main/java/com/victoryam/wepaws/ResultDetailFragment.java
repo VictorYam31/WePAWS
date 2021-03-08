@@ -79,6 +79,19 @@ public class ResultDetailFragment extends Fragment {
         }
 
         @Override
+        public boolean isEnabled(int position) {
+            if (position == 0) {
+                return false;
+            }
+            else if (position == 1) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+        @Override
         public int getCount() {
             return 3;
         }

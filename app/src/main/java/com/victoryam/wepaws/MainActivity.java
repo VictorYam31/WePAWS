@@ -11,6 +11,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -59,6 +60,12 @@ public class MainActivity extends AppCompatActivity {
                         title = (String) destination.getLabel();
                 }
 
+                if (destination.getId() == R.id.HomeFragment) {
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                }
+                else {
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                }
                 getSupportActionBar().setTitle(title);
             }
         });
@@ -68,7 +75,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    @Override
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        onBackPressed();
+        return super.onOptionsItemSelected(item);
+    }
+
+    //    @Override
 //    public void onBackPressed() {
 //        if (!navController.popBackStack()) {
 //            finish();

@@ -34,7 +34,27 @@
         <action
             android:id="@+id/action_SearchFragment_to_ResultFragment"
             app:destination="@id/ResultFragment" />
+        <action
+            android:id="@+id/action_SearchFragment_to_SearchDialog"
+            app:destination="@id/SearchDialog" />
     </fragment>
+    <dialog
+        android:id="@+id/SearchDialog"
+        android:name="com.victoryam.wepaws.SearchDialog"
+        tools:layout="@layout/search_dialog_0">
+        <argument
+            android:name="SearchDialogType"
+            app:argType="integer"
+            />
+        <argument
+            android:name="SearchDialogComponent"
+            app:argType="string"
+            />
+        <argument
+            android:name="ReturnPosition"
+            app:argType="integer"
+            />
+    </dialog>
     <fragment
         android:id="@+id/PreferenceFragment"
         android:name="com.victoryam.wepaws.PreferenceFragment"

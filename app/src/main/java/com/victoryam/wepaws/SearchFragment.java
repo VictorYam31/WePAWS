@@ -8,22 +8,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
-import com.victoryam.wepaws.Domain.Category;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchFragment extends Fragment {
-    int CategoryId;
-    Button searchBtn;
+    private int CategoryId;
+    private Button searchBtn;
+    private ComponentAdapter componentAdapter;
+
 
     @Nullable
     @Override
@@ -52,6 +60,18 @@ public class SearchFragment extends Fragment {
         searchBtn = (Button) view.findViewById(R.id.search_by_category_button);
         searchBtn.setOnClickListener(new onSearchButtonClicked());
 
+        NavController navController = NavHostFragment.findNavController(this);
+        MutableLiveData<List<String>> liveData = navController.getCurrentBackStackEntry().getSavedStateHandle().getLiveData("key");
+        liveData.observe(getViewLifecycleOwner(), new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> l) {
+                int position = Integer.parseInt(l.get(0));
+                List<String> selectedItems = new ArrayList<String>(l);
+                selectedItems.remove(0);
+                componentAdapter.updateItem(position, selectedItems.toString());
+            }
+        });
+
         return view;
     }
 
@@ -68,71 +88,106 @@ public class SearchFragment extends Fragment {
     private void initComponents(View view, String[] componentNames) {
         ListView listView = (ListView)view.findViewById(R.id.search_by_category_listview);
 
-        // Change this later ***
-        String[] spinnerItems = new String[]{"Item 1", "Item 2", "Item 3"};
-
-        ComponentAdapter componentAdapter = new ComponentAdapter(this.getContext(), componentNames, spinnerItems);
+        componentAdapter = new ComponentAdapter(this.getContext(), componentNames);
         listView.setAdapter(componentAdapter);
     }
 
-    class ComponentAdapter extends ArrayAdapter<String> {
-        Context context;
-        String[] componentItems;
-        String[] componentSpinnerItems;
+    public class ComponentAdapter extends BaseAdapter {
 
-        ComponentAdapter(Context c, String[] componentItems, String[] componentSpinnerItems) {
-            super(c, R.layout.search_component, R.id.search_component_name, componentItems);
-            this.context = c;
-            this.componentItems = componentItems;
-            this.componentSpinnerItems = componentSpinnerItems;
+        private Context mContext;
+        private String[] componentNames;
+        private String[] selectedItems;
+
+        public ComponentAdapter(Context c, String[] componentNames) {
+            this.mContext = c;
+            this.componentNames = componentNames;
+            this.selectedItems = new String[componentNames.length];
         }
 
-        @NonNull
         @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            View view = convertView;
-            if (view == null) {
-                LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                view = inflater.inflate(R.layout.search_component, null);
+        public int getItemViewType(int position) {
+            if (this.getItem(position) == getResources().getString(R.string.search_component_opening_hours)) {
+                return 1;
             }
-
-            TextView textView = (TextView) view.findViewById(R.id.search_component_name);
-            Spinner spinner = (Spinner) view.findViewById(R.id.search_component_spinner);
-
-            textView.setText(this.componentItems[position]);
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.context, R.layout.preference_spinner_item, this.componentSpinnerItems);
-            spinner.setAdapter(adapter);
-            spinner.setOnItemSelectedListener(new componentSpinnerOnItemSelected());
-            return view;
-//            LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            View component = layoutInflater.inflate(R.layout.search_component, parent, false);
-//            TextView componentName = component.findViewById(R.id.search_component_name);
-//            componentName.setText(componentItems[position]);
-//
-//            Spinner componentSpinner = component.findViewById(R.id.search_component_spinner);
-//            ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this.context, android.R.layout.simple_spinner_item, componentSpinnerItems);
-//            componentSpinner.setAdapter(spinnerAdapter);
-//            componentSpinner.setOnItemSelectedListener(new ComponentAdapter.componentSpinnerOnItemSelected());
-//
-//            Spinner componentSpinner = (Spinner) component.findViewById(R.id.search_component_spinner);
-//            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-//                    getContext(),
-//                    getResources().getStringArray(this.componentSpinnerItems),
-//                    android.R.layout.simple_spinner_item);
-//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//            spinner.setAdapter(adapter);
-//
-//            return component;
+            else {
+                return 0;
+            }
         }
 
-        private class componentSpinnerOnItemSelected implements AdapterView.OnItemSelectedListener {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.v("item", (String) parent.getItemAtPosition(position));
-//                ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.black));
+        @Override
+        public int getViewTypeCount() {
+            return 2;
+        }
+
+        @Override
+        public int getCount() {
+            return componentNames.length;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return selectedItems[position];
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View view, ViewGroup viewGroup) {
+            int type = this.getItemViewType(position);
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            if (type == 0) {
+                view = inflater.inflate(R.layout.search_component_0, null);
+                TextView componentName = (TextView) view.findViewById(R.id.search_component_0_name);
+                Button componentBtn = (Button) view.findViewById(R.id.search_component_0_btn);
+                TextView selectedItem = (TextView) view.findViewById(R.id.search_component_0_selection);
+                componentName.setText(this.componentNames[position]);
+                componentBtn.setOnClickListener(new openDialog(type, this.componentNames[position], position));
+                if (selectedItems[position] != null) {
+                    selectedItem.setText(selectedItems[position]);
+                }
+            }
+            else {
+
             }
 
-            public void onNothingSelected(AdapterView<?> parent) {
+            return view;
+        }
+
+        public void updateItem(int position, String s) {
+            this.selectedItems[position] = s;
+            notifyDataSetChanged();
+        }
+    }
+
+    private class openDialog implements View.OnClickListener {
+
+        private final int type;
+        private final String componentName;
+        private final int position;
+
+        public openDialog(int type, String componentName, int position) {
+            this.type = type;
+            this.componentName = componentName;
+            this.position = position;
+        }
+
+        @Override
+        public void onClick(View v) {
+            Bundle bundle = new Bundle();
+            switch (type) {
+                case 0:
+                    bundle.putInt("SearchDialogType", 0);
+                    bundle.putString("SearchDialogComponent", this.componentName);
+                    bundle.putInt("ReturnPosition", this.position);
+                    Navigation.findNavController(v).navigate(R.id.action_SearchFragment_to_SearchDialog, bundle);
+                    break;
+                case 1:
+                    bundle.putInt("SearchDialogType", 1);
+                    break;
             }
         }
     }

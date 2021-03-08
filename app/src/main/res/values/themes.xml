@@ -14,6 +14,14 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Toolbar.Theme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="homeAsUpIndicator">@drawable/ic_nav_back</item>
+    </style>
+
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">30sp</item>
+    </style>
+
     <style name="FontSize_Big" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">30sp</item>
     </style>
@@ -24,10 +32,6 @@
 
     <style name="FontSize_Small" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">20sp</item>
-    </style>
-
-    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">30sp</item>
     </style>
 
     <style name="Button_Medium" parent="Widget.AppCompat.Button">
