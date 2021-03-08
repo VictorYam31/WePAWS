@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/result_detail_2_reviews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/FontSize_Big"
+        android:text="@string/result_detail_reviews"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:theme="@style/FontSize_Medium">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/result_detail_2_good"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/FontSize_Medium"
+                android:text="Good"
+                />
+            <TextView
+                android:id="@+id/result_detail_2_good_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/result_detail_2_mediocre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mediocre"
+                />
+            <TextView
+                android:id="@+id/result_detail_2_mediocre_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/result_detail_2_bad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/FontSize_Medium"
+                android:text="Bad"
+                />
+            <TextView
+                android:id="@+id/result_detail_2_bad_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

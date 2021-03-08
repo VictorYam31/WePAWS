@@ -34,6 +34,8 @@
     <string name="result_next">\u003E</string>
 
     <string name="result_detail">Result Detail</string>
+    <string name="result_detail_info">Information</string>
+    <string name="result_detail_reviews">Reviews</string>
 
     <string name="animal_type_dog">Dog</string>
     <string name="animal_type_cat">Cat</string>

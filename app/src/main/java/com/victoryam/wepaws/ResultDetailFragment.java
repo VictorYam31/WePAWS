@@ -1,64 +1,123 @@
 package com.victoryam.wepaws;
 
+import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ResultDetailFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
+import org.w3c.dom.Text;
+
 public class ResultDetailFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ResultDetailFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ResultDetail.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ResultDetailFragment newInstance(String param1, String param2) {
-        ResultDetailFragment fragment = new ResultDetailFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private Result result;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        if (this.getArguments() != null) {
+            this.result = this.getArguments().getParcelable("ResultDetailFragmentArg");
+        }
+        else {
+            Log.v("empty arguments", "no results?");
         }
     }
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.result_detail, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.result_detail, container, false);
+
+        initResultDetails(view, this.result);
+
+        return view;
     }
+
+    private void initResultDetails(View view, Result result) {
+        ListView listView = (ListView)view.findViewById(R.id.result_detail_listview);
+
+        ResultDetailAdapter resultDetailAdapter = new ResultDetailAdapter(this.getContext(), result);
+        listView.setAdapter(resultDetailAdapter);
+    }
+
+    public class ResultDetailAdapter extends BaseAdapter {
+
+        private Context mContext;
+        private Result result;
+
+        public ResultDetailAdapter(Context c, Result result) {
+            this.mContext = c;
+            this.result = result;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            if (position == 0) {
+                return 0;
+            }
+            else if (position == 1) {
+                return 1;
+            }
+            else {
+                return 2;
+            }
+        }
+
+        @Override
+        public int getViewTypeCount() {
+            return 3;
+        }
+
+        @Override
+        public int getCount() {
+            return 3;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View view, ViewGroup viewGroup) {
+            int type = this.getItemViewType(position);
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            Log.v("getView", String.valueOf(type));
+
+            if (type == 0) {
+                view = inflater.inflate(R.layout.result_detail_0, null);
+                TextView resultName = (TextView) view.findViewById(R.id.result_detail_0_name);
+                TextView resultRating = (TextView) view.findViewById(R.id.result_detail_0_rating);
+                resultName.setText(this.result.getVet().getVetName());
+                resultRating.setText(Float.toString(this.result.getRating()));
+            }
+            else if (type == 1) {
+                view = inflater.inflate(R.layout.result_detail_1, null);
+                TextView resultInfo = (TextView) view.findViewById(R.id.result_detail_1_result_info);
+                resultInfo.setText(this.result.getCategory().getDesc());
+            }
+            else {
+                view = inflater.inflate(R.layout.result_detail_2, null);
+            }
+
+            return view;
+        }
+    }
+
 }

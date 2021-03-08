@@ -9,13 +9,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-<<<<<<< HEAD
 import android.widget.AdapterView;
-=======
->>>>>>> b49f8dee9d1c6551c514f026dd3ecc8d8642f229
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.RatingBar;
@@ -26,15 +24,12 @@ import com.victoryam.wepaws.Domain.PetSpecies;
 import com.victoryam.wepaws.Domain.VetMaster;
 import com.victoryam.wepaws.Utils.Utility;
 
-<<<<<<< HEAD
-=======
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
->>>>>>> b49f8dee9d1c6551c514f026dd3ecc8d8642f229
 public class ResultFragment extends Fragment {
     Utility utility;
 
@@ -81,7 +76,7 @@ public class ResultFragment extends Fragment {
         Result[] results = {result1, result2, result3};
 //
 
-        //initResults(view, results);
+        initResults(view, results);
 
         return view;
     }
@@ -92,7 +87,9 @@ public class ResultFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View v, int position, long l) {
                 Result result = (Result) adapterView.getItemAtPosition(position);
-                Navigation.findNavController(view).navigate(R.id.action_ResultFragment_to_ResultDetailFragment);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("ResultDetailFragmentArg", result);
+                Navigation.findNavController(view).navigate(R.id.action_ResultFragment_to_ResultDetailFragment, bundle);
             }
         });
 
@@ -205,8 +202,9 @@ public class ResultFragment extends Fragment {
         @Override
         protected void onPostExecute(String a) {
             ListView listView = (ListView) view.findViewById(R.id.result_listview);
-            ResultAdapter resultAdapter = new ResultAdapter(this.getContext(), results);
-            listView.setAdapter(resultAdapter);
+            // *** Uncomment these if needed ***
+//            ResultAdapter resultAdapter = new ResultAdapter(this.getContext(), results);
+//            listView.setAdapter(resultAdapter);
             super.onPostExecute(a);
         }
     }

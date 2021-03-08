@@ -53,5 +53,10 @@
         android:id="@+id/ResultDetailFragment"
         android:name="com.victoryam.wepaws.ResultDetailFragment"
         android:label="@string/result_detail"
-        tools:layout="@layout/result_detail" />
+        tools:layout="@layout/result_detail">
+        <argument
+            android:name="ResultDetailFragmentArg"
+            app:argType="com.victoryam.wepaws.Result"
+            />
+    </fragment>
 </navigation>

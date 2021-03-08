@@ -1,10 +1,13 @@
 package com.victoryam.wepaws;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.victoryam.wepaws.Domain.Category;
 import com.victoryam.wepaws.Domain.PetSpecies;
 import com.victoryam.wepaws.Domain.VetMaster;
 
-public class Result {
+public class Result implements Parcelable {
 
     private final VetMaster vet;
     private final PetSpecies animal;
@@ -33,5 +36,15 @@ public class Result {
     public float getRating() {
         return this.rating;
     };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
+    }
 
 }

@@ -6,29 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".ResultDetailFragment">
 
-    <TextView
-        android:id="@+id/result_detail_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Name here"
+    <ListView
+        android:id="@+id/result_detail_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         />
-
-    <TextView
-        android:id="@+id/result_detail_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Address here"
-        />
-
-    <TextView
-        android:id="@+id/result_detail_opening_hour"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Opening hours here"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
 </FrameLayout>
+
+<!--<TextView-->
+<!--android:id="@+id/result_detail_name"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:text="Name here"-->
+<!--    />-->
+
+<!--<TextView-->
+<!--android:id="@+id/result_detail_address"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:text="Address here"-->
+<!--    />-->
+
+<!--<TextView-->
+<!--android:id="@+id/result_detail_opening_hour"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:text="Opening hours here"-->
+<!--    />-->
+
+<!--<TextView-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"/>-->
