@@ -25,12 +25,14 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SearchFragment extends Fragment {
     private int CategoryId;
     private Button searchBtn;
     private ComponentAdapter componentAdapter;
+    private HashMap<Integer, List<String>> searchingCriteria;
 
 
     @Nullable
@@ -60,6 +62,8 @@ public class SearchFragment extends Fragment {
         searchBtn = (Button) view.findViewById(R.id.search_by_category_button);
         searchBtn.setOnClickListener(new onSearchButtonClicked());
 
+        searchingCriteria = new HashMap<>();
+
         NavController navController = NavHostFragment.findNavController(this);
         MutableLiveData<List<String>> liveData = navController.getCurrentBackStackEntry().getSavedStateHandle().getLiveData("key");
         liveData.observe(getViewLifecycleOwner(), new Observer<List<String>>() {
@@ -68,6 +72,7 @@ public class SearchFragment extends Fragment {
                 int position = Integer.parseInt(l.get(0));
                 List<String> selectedItems = new ArrayList<String>(l);
                 selectedItems.remove(0);
+                searchingCriteria.put(position, selectedItems);
                 componentAdapter.updateItem(position, selectedItems.toString());
             }
         });
@@ -80,7 +85,7 @@ public class SearchFragment extends Fragment {
         public void onClick(View v) {
             Bundle bundle = new Bundle();
             bundle.putInt("CategoryId", CategoryId);
-
+            bundle.putSerializable("SearchingCriteria",searchingCriteria);
             Navigation.findNavController(v).navigate(R.id.action_SearchFragment_to_ResultFragment, bundle);
         }
     }

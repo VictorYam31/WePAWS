@@ -29,23 +29,45 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
 
 public class ResultFragment extends Fragment {
-    Utility utility;
+    int categoryId;
+    HashMap<Integer, List<String>> searchingCriteria;
 
+    Utility utility;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.result, container, false);
         Bundle bundle = this.getArguments();
+
         if (bundle != null) {
-            String test = bundle.getString("test");
+            categoryId = bundle.getInt("CategoryId");
+            searchingCriteria = (HashMap<Integer, List<String>>) bundle.getSerializable("SearchingCriteria");
         }
 
+        String[] componentNames = new String[0];
         utility = new Utility();
 
-//        dummy
+        switch (categoryId) {
+            case 1:
+                componentNames = getResources().getStringArray(R.array.search_clinic_component_names);
+                break;
+            case 2:
+                componentNames = getResources().getStringArray(R.array.search_store_component_names);
+                break;
+            case 3:
+                componentNames = getResources().getStringArray(R.array.search_dining_component_names);
+                break;
+            case 4:
+                componentNames = getResources().getStringArray(R.array.search_park_component_names);
+                break;
+        }
+
+/*//        dummy
         VetMaster vet1 = new VetMaster();
         vet1.setVetName("Tom");
         vet1.setVetAddress(getResources().getString(R.string.hk_district_Kwun_Tong));
@@ -74,15 +96,15 @@ public class ResultFragment extends Fragment {
         Result result3 = new Result(vet3, animal3, cat3, 3.5f);
 
         Result[] results = {result1, result2, result3};
-//
+//*/
 
-        initResults(view, results);
-
+        //initResults(view, results);
+        initResults(view, componentNames);
         return view;
     }
 
-    private void initResults(View view, Result[] results) {
-        ListView listView = (ListView)view.findViewById(R.id.result_listview);
+    private void initResults(View view, String[] componentNames) {
+        ListView listView = (ListView) view.findViewById(R.id.result_listview);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View v, int position, long l) {
@@ -93,8 +115,9 @@ public class ResultFragment extends Fragment {
             }
         });
 
-        ResultAdapter resultAdapter = new ResultAdapter(this.getContext(), results);
-        listView.setAdapter(resultAdapter);
+
+        //ResultAdapter resultAdapter = new ResultAdapter(this.getContext(), componentNames);
+        //listView.setAdapter(resultAdapter);
     }
 
     public class ResultAdapter extends BaseAdapter {
@@ -145,14 +168,31 @@ public class ResultFragment extends Fragment {
         }
     }
 
-    private class initResults extends AsyncTask<String, Integer, String> {
+    private class initResultsTask extends AsyncTask<String, Integer, String> {
         View view;
-        String param;
+        int category;
+        String queryUrl;
         String data;
+        String[] componentsName;
+        HashMap<String, List<String>> searchingCriteria;
 
-        initResults(View view, String param) {
+        initResultsTask(View view, int category, String[] componentsName, HashMap<String, List<String>> searchingCriteria) {
             this.view = view;
-            this.param = param;
+            this.category = category;
+            this.componentsName = componentsName;
+            this.searchingCriteria = searchingCriteria;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            String url = "https://wepaws.azurewebsites.net/webservice1.asmx/";
+            for (int i = 0; i < componentsName.length - 1; i++) {
+                url += String.format("%s=%s", componentsName[i], searchingCriteria.get(i));
+                if(i != componentsName.length -1){
+                    url += "/";
+                }
+            }
+            queryUrl = url;
         }
 
         @Override
@@ -162,7 +202,7 @@ public class ResultFragment extends Fragment {
 
             try {
                 //Create a URL Connection object and set its parameters
-                URL url = new URL(params[0]);
+                URL url = new URL(queryUrl);
                 conn = (HttpURLConnection) url.openConnection();
                 //Set connection time out of 5 seconds
                 conn.setConnectTimeout(5000);
@@ -195,47 +235,34 @@ public class ResultFragment extends Fragment {
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-
             super.onProgressUpdate(values);
         }
 
         @Override
         protected void onPostExecute(String a) {
             ListView listView = (ListView) view.findViewById(R.id.result_listview);
+
+            switch (category) {
+/*                case 1:
+                    componentNames = getResources().getStringArray(R.array.search_clinic_component_names);
+                    break;
+                case 2:
+                    componentNames = getResources().getStringArray(R.array.search_store_component_names);
+                    break;
+                case 3:
+                    componentNames = getResources().getStringArray(R.array.search_dining_component_names);
+                    break;
+                case 4:
+                    componentNames = getResources().getStringArray(R.array.search_park_component_names);
+                    break;*/
+            }
+/*            ResultAdapter resultAdapter = new ResultAdapter(this.getContext(), componentNames);
+            listView.setAdapter(resultAdapter);*/
+
             // *** Uncomment these if needed ***
 //            ResultAdapter resultAdapter = new ResultAdapter(this.getContext(), results);
 //            listView.setAdapter(resultAdapter);
             super.onPostExecute(a);
         }
     }
-
-
-//    class ResultAdapter extends ArrayAdapter<String> {
-//        Context context;
-//        Result[] results;
-//
-//        ResultAdapter(Context c, Result[] results) {
-//            super(c, R.layout.result_display, R.id.search_component_name, componentItems);
-//            this.context = c;
-//            this.results = results;
-//        }
-//
-//        @NonNull
-//        @Override
-//        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-//            View view = convertView;
-//            if (view == null) {
-//                LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//                view = inflater.inflate(R.layout.search_component, null);
-//            }
-//
-//            TextView textView = (TextView) view.findViewById(R.id.search_component_name);
-//            Spinner spinner = (Spinner) view.findViewById(R.id.search_component_spinner);
-//
-//            textView.setText(this.componentItems[position]);
-//            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.context, R.layout.preference_spinner_item, this.componentSpinnerItems);
-//            spinner.setAdapter(adapter);
-//            return view;
-//        }
-//    }
 }
