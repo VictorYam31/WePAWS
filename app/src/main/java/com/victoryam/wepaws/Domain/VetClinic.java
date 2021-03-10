@@ -12,7 +12,10 @@ public class VetClinic {
     private String opening_hours;
     private int phone;
     private String status;
+    private List<VetMaster> vetMasterList;
     private List<PetSpecies> petSpeciesList;
+    private List<VetRating> vetRatingList;
+    private List<VetReview> vetReviewList;
 
     public int getClinicId() {
         return clinic_id;
@@ -93,4 +96,29 @@ public class VetClinic {
     public void setPetSpeciesList(List<PetSpecies> petSpeciesList) {
         this.petSpeciesList = petSpeciesList;
     }
+
+    public List<VetRating> getVetRatingList() {
+        return vetRatingList;
+    }
+
+    public void setVetRatingList(List<VetRating> vetRatingList) {
+        this.vetRatingList = vetRatingList;
+    }
+
+    public List<VetReview> getVetReviewList() {
+        return vetReviewList;
+    }
+
+    public void setVetReviewList(List<VetReview> vetReviewList) {
+        this.vetReviewList = vetReviewList;
+    }
+
+    public List<VetMaster> getVetMasterList() {
+        return vetMasterList;
+    }
+
+    public void setVetMasterList(List<VetMaster> vetMasterList) {
+        this.vetMasterList = vetMasterList;
+    }
 }
+

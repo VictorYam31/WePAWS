@@ -18,19 +18,19 @@
         />
 
     <Button
-        android:id="@+id/home_menu_vet_btn"
+        android:id="@+id/home_menu_clinic_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/home_menu_search"
         android:theme="@style/Button_Medium"
-        android:text="@string/home_menu_vet"
+        android:text="@string/home_menu_Clinic"
         />
 
     <Button
         android:id="@+id/home_menu_store_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/home_menu_vet_btn"
+        android:layout_below="@+id/home_menu_clinic_btn"
         android:theme="@style/Button_Medium"
         android:text="@string/home_menu_store"
         />

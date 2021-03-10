@@ -39,9 +39,9 @@ public class SearchFragment extends Fragment {
         View view = inflater.inflate(R.layout.search_by_category, container, false);
 
         switch (getArguments().getInt("SearchFragmentArg")) {
-            case R.id.home_menu_vet_btn:
+            case R.id.home_menu_clinic_btn:
                 CategoryId = 1;
-                initComponents(view, getResources().getStringArray(R.array.search_vet_component_names));
+                initComponents(view, getResources().getStringArray(R.array.search_clinic_component_names));
                 break;
             case R.id.home_menu_store_btn:
                 CategoryId = 2;

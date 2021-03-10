@@ -18,7 +18,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home, container, false);
 
-        Button vetButton = (Button) view.findViewById(R.id.home_menu_vet_btn);
+        Button vetButton = (Button) view.findViewById(R.id.home_menu_clinic_btn);
         vetButton.setOnClickListener(new onButtonClicked());
 
         Button storeButton = (Button) view.findViewById(R.id.home_menu_store_btn);

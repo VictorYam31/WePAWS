@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (destination.getId()) {
                     case R.id.SearchFragment:
                         switch (arguments.getInt("SearchFragmentArg")) {
-                            case R.id.home_menu_vet_btn:
+                            case R.id.home_menu_clinic_btn:
                                 title = getResources().getString(R.string.home_menu_search_vet);
                                 break;
                             case R.id.home_menu_store_btn:

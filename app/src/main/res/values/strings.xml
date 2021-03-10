@@ -6,8 +6,8 @@
     <string name="nav_menu_preference">Preference</string>
 
     <string name="home_menu_search_hint">Search</string>
-    <string name="home_menu_vet">Vet</string>
-    <string name="home_menu_search_vet">Search Vet</string>
+    <string name="home_menu_Clinic">Clinic</string>
+    <string name="home_menu_search_vet">Search Clinic</string>
     <string name="home_menu_store">Store</string>
     <string name="home_menu_search_store">Search Store</string>
     <string name="home_menu_dining">Dining</string>
