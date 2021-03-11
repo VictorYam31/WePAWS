@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/result_detail_2_reviews"
-        android:layout_width="wrap_content"
+        android:id="@+id/result_detail_2_review_summary"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/FontSize_Big"
-        android:text="@string/result_detail_reviews"
+        android:theme="@style/Result.Detail.Title"
+        android:text="@string/result_detail_review_summary"
         />
 
     <LinearLayout
@@ -28,10 +29,18 @@
             android:orientation="vertical">
             <TextView
                 android:id="@+id/result_detail_2_good"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/FontSize_Medium"
-                android:text="Good"
+                android:gravity="center"
+                android:background="@color/good"
+                android:text="@string/result_detail_good"
+                />
+            <ImageView
+                android:id="@+id/result_detail_2_good_image"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:tint="@color/good"
+                android:src="@drawable/review_good"
                 />
             <TextView
                 android:id="@+id/result_detail_2_good_number"
@@ -49,9 +58,18 @@
             android:orientation="vertical">
             <TextView
                 android:id="@+id/result_detail_2_mediocre"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Mediocre"
+                android:gravity="center"
+                android:background="@color/mediocre"
+                android:text="@string/result_detail_mediocre"
+                />
+            <ImageView
+                android:id="@+id/result_detail_2_mediocre_image"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:tint="@color/mediocre"
+                android:src="@drawable/review_good"
                 />
             <TextView
                 android:id="@+id/result_detail_2_mediocre_number"
@@ -69,10 +87,18 @@
             android:orientation="vertical">
             <TextView
                 android:id="@+id/result_detail_2_bad"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/FontSize_Medium"
-                android:text="Bad"
+                android:gravity="center"
+                android:background="@color/bad"
+                android:text="@string/result_detail_bad"
+                />
+            <ImageView
+                android:id="@+id/result_detail_2_bad_image"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:tint="@color/bad"
+                android:src="@drawable/review_good"
                 />
             <TextView
                 android:id="@+id/result_detail_2_bad_number"
