@@ -14,8 +14,6 @@ public class VetClinic {
     private String status;
     private List<VetMaster> vetMasterList;
     private List<PetSpecies> petSpeciesList;
-    private List<VetRating> vetRatingList;
-    private List<VetReview> vetReviewList;
 
     public int getClinicId() {
         return clinic_id;
@@ -97,21 +95,10 @@ public class VetClinic {
         this.petSpeciesList = petSpeciesList;
     }
 
-    public List<VetRating> getVetRatingList() {
-        return vetRatingList;
-    }
 
-    public void setVetRatingList(List<VetRating> vetRatingList) {
-        this.vetRatingList = vetRatingList;
-    }
+    //Clinic Review
 
-    public List<VetReview> getVetReviewList() {
-        return vetReviewList;
-    }
-
-    public void setVetReviewList(List<VetReview> vetReviewList) {
-        this.vetReviewList = vetReviewList;
-    }
+    //Clinic Rating
 
     public List<VetMaster> getVetMasterList() {
         return vetMasterList;
