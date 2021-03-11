@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -37,10 +38,15 @@ public class SearchDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         NavController navController = NavHostFragment.findNavController(this);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = getActivity().getLayoutInflater();
         View view;
+        TextView searchDialogTitle;
+
+        Log.v("dialog type", String.valueOf(this.type));
 
         switch (this.type) {
             case 0:
+                // Multiple Choices Dialog
                 String[] items = this.findComponentArray(this.componentName);
                 boolean[] selection = new boolean[items.length];
                 builder.setMultiChoiceItems(items, selection, new DialogInterface.OnMultiChoiceClickListener() {
@@ -51,16 +57,14 @@ public class SearchDialog extends DialogFragment {
                     }
                 });
 
-                LayoutInflater inflater = requireActivity().getLayoutInflater();
                 view = inflater.inflate(R.layout.search_dialog_0, null);
-                TextView searchDialogTitle = (TextView) view.findViewById(R.id.search_dialog_0_title);
+                searchDialogTitle = (TextView) view.findViewById(R.id.search_dialog_0_title);
                 searchDialogTitle.setText(getResources().getString(R.string.search_component_select) + " " + this.componentName);
 
                 builder.setCustomTitle(view)
                         .setPositiveButton(getResources().getString(R.string.search_dialog_ok), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
-                                Log.v("Positive", "clicked");
                                 int position = 0;
                                 List<String> selectedItems = new ArrayList<>();
                                 for (boolean b : selection) {
@@ -75,11 +79,33 @@ public class SearchDialog extends DialogFragment {
                         })
                         .setNegativeButton(getResources().getString(R.string.search_dialog_cancel), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Log.v("Negative", "clicked");
                             }
                         });
                 break;
             case 1:
+                // TimePicker Dialog
+                view = inflater.inflate(R.layout.search_dialog_1, null);
+                TimePicker openTimePicker = (TimePicker) view.findViewById(R.id.search_dialog_1_timepicker_open);
+                TimePicker closeTimePicker = (TimePicker) view.findViewById(R.id.search_dialog_1_timepicker_close);
+
+                builder.setCustomTitle(view)
+                        .setPositiveButton(getResources().getString(R.string.search_dialog_ok), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                int openHour = openTimePicker.getCurrentHour();
+                                int openMinute = openTimePicker.getCurrentMinute();
+                                int closeHour = closeTimePicker.getCurrentHour();
+                                int closeMinute = closeTimePicker.getCurrentMinute();
+
+                                // Maybe change later
+                                List<String> selectedTimes = new ArrayList<>(Arrays.asList(String.valueOf(returnPosition), String.valueOf(openHour), String.valueOf(openMinute), String.valueOf(closeHour), String.valueOf(closeMinute)));
+                                navController.getPreviousBackStackEntry().getSavedStateHandle().set("key", selectedTimes);
+                            }
+                        })
+                        .setNegativeButton(getResources().getString(R.string.search_dialog_cancel), new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                            }
+                        });
                 break;
         }
 

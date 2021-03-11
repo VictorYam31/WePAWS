@@ -31,6 +31,9 @@
 
     <string name="search_dialog_ok">Ok</string>
     <string name="search_dialog_cancel">Cancel</string>
+    <string name="search_dialog_select_opening_hours">Select Opening Hours</string>
+    <string name="search_dialog_select_from">From:</string>
+    <string name="search_dialog_select_to">To:</string>
 
     <string name="result">Result</string>
     <string name="result_filter">Filter</string>

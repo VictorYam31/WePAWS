@@ -111,7 +111,7 @@ public class SearchFragment extends Fragment {
 
         @Override
         public int getItemViewType(int position) {
-            if (this.getItem(position) == getResources().getString(R.string.search_component_opening_hours)) {
+            if (componentNames[position].equals(getResources().getString(R.string.search_component_opening_hours))) {
                 return 1;
             }
             else {
@@ -144,19 +144,14 @@ public class SearchFragment extends Fragment {
             int type = this.getItemViewType(position);
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            if (type == 0) {
-                view = inflater.inflate(R.layout.search_component_0, null);
-                TextView componentName = (TextView) view.findViewById(R.id.search_component_0_name);
-                Button componentBtn = (Button) view.findViewById(R.id.search_component_0_btn);
-                TextView selectedItem = (TextView) view.findViewById(R.id.search_component_0_selection);
-                componentName.setText(this.componentNames[position]);
-                componentBtn.setOnClickListener(new openDialog(type, this.componentNames[position], position));
-                if (selectedItems[position] != null) {
-                    selectedItem.setText(selectedItems[position]);
-                }
-            }
-            else {
-
+            view = inflater.inflate(R.layout.search_component_0, null);
+            TextView componentName = (TextView) view.findViewById(R.id.search_component_0_name);
+            Button componentBtn = (Button) view.findViewById(R.id.search_component_0_btn);
+            TextView selectedItem = (TextView) view.findViewById(R.id.search_component_0_selection);
+            componentName.setText(this.componentNames[position]);
+            componentBtn.setOnClickListener(new openDialog(type, this.componentNames[position], position));
+            if (selectedItems[position] != null) {
+                selectedItem.setText(selectedItems[position]);
             }
 
             return view;
@@ -183,17 +178,18 @@ public class SearchFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Bundle bundle = new Bundle();
+            bundle.putString("SearchDialogComponent", this.componentName);      // Used by dialog to figure out which string array to show
+            bundle.putInt("ReturnPosition", this.position);     // Used to update component at a specific position when something is returned from the dialog
             switch (type) {
                 case 0:
-                    bundle.putInt("SearchDialogType", 0);
-                    bundle.putString("SearchDialogComponent", this.componentName);
-                    bundle.putInt("ReturnPosition", this.position);
-                    Navigation.findNavController(v).navigate(R.id.action_SearchFragment_to_SearchDialog, bundle);
+                    bundle.putInt("SearchDialogType", 0);   //  Normal -> Multiple Choices Dialog
                     break;
                 case 1:
-                    bundle.putInt("SearchDialogType", 1);
+                    bundle.putInt("SearchDialogType", 1);   //  Opening Hours -> TimePicker Dialog
                     break;
             }
+
+            Navigation.findNavController(v).navigate(R.id.action_SearchFragment_to_SearchDialog, bundle);
         }
     }
 
