@@ -1,19 +1,26 @@
 package com.victoryam.wepaws.Domain;
 
+import android.media.Rating;
+
+import com.victoryam.wepaws.Utils.IResult;
+
 import java.util.List;
 
-public class VetClinic {
+public class Clinic implements IResult {
     private int clinic_id;
     private String clinic_name;
     private String clinic_name_cn;
     private String clinic_address;
     private String clinic_address_cn;
     private String district;
-    private String opening_hours;
+    private String description;
+    private Boolean overnight;
     private int phone;
     private String status;
     private List<VetMaster> vetMasterList;
-    private List<PetSpecies> petSpeciesList;
+    private List<Species> speciesList;
+    private List<Rating> ratingList;
+    private List<Review> reviewList;
 
     public int getClinicId() {
         return clinic_id;
@@ -63,12 +70,20 @@ public class VetClinic {
         this.district = district;
     }
 
-    public String getOpeningHours() {
-        return opening_hours;
+    public String getDescription() {
+        return description;
     }
 
-    public void setOpeningHours(String opening_hours) {
-        this.opening_hours = opening_hours;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Boolean getOvernight() {
+        return overnight;
+    }
+
+    public void setOvernight(Boolean overnight) {
+        this.overnight = overnight;
     }
 
     public int getPhone() {
@@ -87,18 +102,13 @@ public class VetClinic {
         this.status = status;
     }
 
-    public List<PetSpecies> getPetSpeciesList() {
-        return petSpeciesList;
+    public List<Species> getSpeciesList() {
+        return speciesList;
     }
 
-    public void setPetSpeciesList(List<PetSpecies> petSpeciesList) {
-        this.petSpeciesList = petSpeciesList;
+    public void setSpeciesList(List<Species> speciesList) {
+        this.speciesList = speciesList;
     }
-
-
-    //Clinic Review
-
-    //Clinic Rating
 
     public List<VetMaster> getVetMasterList() {
         return vetMasterList;
@@ -106,6 +116,47 @@ public class VetClinic {
 
     public void setVetMasterList(List<VetMaster> vetMasterList) {
         this.vetMasterList = vetMasterList;
+    }
+
+    public List<Rating> getRatingList() {
+        return ratingList;
+    }
+
+    public void setRatingList(List<Rating> ratingList) {
+        this.ratingList = ratingList;
+    }
+
+    public List<Review> getReviewList() {
+        return reviewList;
+    }
+
+    public void setReviewList(List<Review> reviewList) {
+        this.reviewList = reviewList;
+    }
+
+    @Override
+    public String getNameForResult() {
+        return getClinicName();
+    }
+
+    @Override
+    public String getAddressForResult() {
+        return getClinicAddress();
+    }
+
+    @Override
+    public String getSpeciesForResult() {
+        return getSpeciesList().toString();
+    }
+
+    @Override
+    public String getDescriptionForResult() {
+        return getDescription();
+    }
+
+    @Override
+    public String getRatingForResult() {
+        return getRatingList().toString();
     }
 }
 

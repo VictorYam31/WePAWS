@@ -24,45 +24,44 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.victoryam.wepaws.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class SearchFragment extends Fragment {
-    private int CategoryId;
-    private Button searchBtn;
     private ComponentAdapter componentAdapter;
-    private HashMap<Integer, List<String>> searchingCriteria;
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.search_by_category, container, false);
+        int categoryId = -1;
+        String[] componentsName ={};
+        HashMap<Integer, List<String>> searchingCriteria = new HashMap<>();
 
         switch (getArguments().getInt("SearchFragmentArg")) {
             case R.id.home_menu_clinic_btn:
-                CategoryId = 1;
-                initComponents(view, getResources().getStringArray(R.array.search_clinic_component_names));
+                categoryId = 1;
+                componentsName = getResources().getStringArray(R.array.search_clinic_component_names);
                 break;
             case R.id.home_menu_store_btn:
-                CategoryId = 2;
-                initComponents(view, getResources().getStringArray(R.array.search_store_component_names));
+                categoryId = 2;
+                componentsName = getResources().getStringArray(R.array.search_store_component_names);
                 break;
             case R.id.home_menu_dining_btn:
-                CategoryId = 3;
-                initComponents(view, getResources().getStringArray(R.array.search_dining_component_names));
+                categoryId = 3;
+                componentsName = getResources().getStringArray(R.array.search_dining_component_names);
                 break;
             case R.id.home_menu_park_btn:
-                CategoryId = 4;
-                initComponents(view, getResources().getStringArray(R.array.search_park_component_names));
+                categoryId = 4;
+                componentsName = getResources().getStringArray(R.array.search_park_component_names);
                 break;
         }
 
-        searchBtn = (Button) view.findViewById(R.id.search_by_category_button);
-        searchBtn.setOnClickListener(new onSearchButtonClicked());
-
-        searchingCriteria = new HashMap<>();
+        initComponents(view, categoryId, componentsName);
+        Button searchBtn = (Button) view.findViewById(R.id.search_by_category_button);
+        searchBtn.setOnClickListener(new onSearchButtonClicked(categoryId, searchingCriteria));
 
         NavController navController = NavHostFragment.findNavController(this);
         MutableLiveData<List<String>> liveData = navController.getCurrentBackStackEntry().getSavedStateHandle().getLiveData("key");
@@ -81,47 +80,56 @@ public class SearchFragment extends Fragment {
     }
 
     private class onSearchButtonClicked implements  View.OnClickListener {
+        private int categoryId;
+        private HashMap<Integer, List<String>> searchingCriteria;
+
+        private onSearchButtonClicked(int categoryId, HashMap<Integer, List<String>> searchingCriteria){
+            this.categoryId = categoryId;
+            this.searchingCriteria = searchingCriteria;
+        }
+
         @Override
         public void onClick(View v) {
             Bundle bundle = new Bundle();
-            bundle.putInt("CategoryId", CategoryId);
+            bundle.putInt("CategoryId", categoryId);
             bundle.putSerializable("SearchingCriteria",searchingCriteria);
             Navigation.findNavController(v).navigate(R.id.action_SearchFragment_to_ResultFragment, bundle);
         }
     }
 
-    private void initComponents(View view, String[] componentNames) {
+    private void initComponents(View view, int categoryId, String[] componentNames) {
         ListView listView = (ListView)view.findViewById(R.id.search_by_category_listview);
-
-        componentAdapter = new ComponentAdapter(this.getContext(), componentNames);
+        componentAdapter = new ComponentAdapter(this.getContext(), categoryId, componentNames);
         listView.setAdapter(componentAdapter);
     }
 
     public class ComponentAdapter extends BaseAdapter {
 
         private Context mContext;
+        private int categoryId;
         private String[] componentNames;
         private String[] selectedItems;
 
-        public ComponentAdapter(Context c, String[] componentNames) {
+        public ComponentAdapter(Context c, int categoryId, String[] componentNames) {
             this.mContext = c;
+            this.categoryId = categoryId;
             this.componentNames = componentNames;
             this.selectedItems = new String[componentNames.length];
         }
 
         @Override
         public int getItemViewType(int position) {
-            if (componentNames[position].equals(getResources().getString(R.string.search_component_opening_hours))) {
-                return 1;
-            }
-            else {
-                return 0;
-            }
+            // if (componentNames[position].equals(getResources().getString(R.string.search_component_opening_hours))) {
+            //     return 1;
+            // }
+            // else {
+            return 0;
+            //}
         }
 
         @Override
         public int getViewTypeCount() {
-            return 2;
+            return 1;
         }
 
         @Override
@@ -184,9 +192,9 @@ public class SearchFragment extends Fragment {
                 case 0:
                     bundle.putInt("SearchDialogType", 0);   //  Normal -> Multiple Choices Dialog
                     break;
-                case 1:
-                    bundle.putInt("SearchDialogType", 1);   //  Opening Hours -> TimePicker Dialog
-                    break;
+                // case 1:
+                //     bundle.putInt("SearchDialogType", 1);   //  Opening Hours -> TimePicker Dialog
+                //     break;
             }
 
             Navigation.findNavController(v).navigate(R.id.action_SearchFragment_to_SearchDialog, bundle);

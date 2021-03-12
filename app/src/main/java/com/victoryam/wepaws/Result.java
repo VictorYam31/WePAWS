@@ -4,17 +4,17 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.victoryam.wepaws.Domain.Category;
-import com.victoryam.wepaws.Domain.PetSpecies;
+import com.victoryam.wepaws.Domain.Species;
 import com.victoryam.wepaws.Domain.VetMaster;
 
 public class Result implements Parcelable {
 
     private final VetMaster vet;
-    private final PetSpecies animal;
+    private final Species animal;
     private final Category category;
     private final float rating;
 
-    public Result(VetMaster vet, PetSpecies animal, Category category, float rating) {
+    public Result(VetMaster vet, Species animal, Category category, float rating) {
         this.vet = vet;
         this.animal = animal;
         this.category = category;
@@ -25,7 +25,7 @@ public class Result implements Parcelable {
       return this.vet;
     };
 
-    public PetSpecies getAnimal() {
+    public Species getAnimal() {
         return this.animal;
     };
 

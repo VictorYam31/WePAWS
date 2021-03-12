@@ -1,6 +1,6 @@
 package com.victoryam.wepaws.Domain;
 
-public class PetSpecies {
+public class Species {
     private int species_id;
     private String species_name;
     private String species_name_cn;
