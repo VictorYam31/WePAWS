@@ -156,6 +156,21 @@ public class ResultFragment extends Fragment {
                 OutputStream os = conn.getOutputStream();
                 DataOutputStream writer = new DataOutputStream(os);
                 String jsonString = utility.SerializeObject(searchingCriteriaForGson);
+//                String a = "clinic_name";
+//                List<String> b = new LinkedList<>();
+//                b.add("null");
+//                String c = "district";
+//                List<String> d = new LinkedList<>();
+//                d.add("6");
+//                String e = "overnight";
+//                List<String> f = new LinkedList<>();
+//                f.add("N");
+//                HashMap<String, List<String>> g = new  HashMap<String, List<String>>();
+//                g.put(a, b);
+//                g.put(c,d);
+//                g.put(e,f);
+//
+//                String jsonString = utility.SerializeObject(g);
                 writer.writeBytes(jsonString);
                 writer.flush();
                 writer.close();
@@ -180,8 +195,12 @@ public class ResultFragment extends Fragment {
         @Override
         protected void onPostExecute(String a) {
             ListView listView = (ListView) view.findViewById(R.id.result_listview);
-
             List<IResult> iResultList = new ArrayList<>();
+
+            if(data == null){
+                return;
+            }
+
             switch (categoryId) {
                 case 1:
                     iResultList = new ArrayList<>(utility.DeserializeClinic(data));
