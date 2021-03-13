@@ -78,13 +78,5 @@
             android:name="ResultDetailFragmentArg"
             app:argType="com.victoryam.wepaws.Result"
             />
-        <action
-            android:id="@+id/action_ResultDetailFragment_to_ReviewSummaryFragment"
-            app:destination="@id/ReviewSummaryFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/ReviewSummaryFragment"
-        android:name="com.victoryam.wepaws.ReviewSummaryFragment"
-        android:label="@string/review_summary"
-        tools:layout="@layout/ReviewSummaryFragment" />
 </navigation>

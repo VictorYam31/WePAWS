@@ -9,28 +9,28 @@
         android:id="@+id/result_display_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:theme="@style/FontSize_Big"
+        android:theme="@style/Result.Display"
         />
 
     <TextView
         android:id="@+id/result_display_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:theme="@style/FontSize_Small"
+        android:theme="@style/Result.Display"
         />
 
     <TextView
         android:id="@+id/result_animal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:theme="@style/FontSize_Small"
+        android:theme="@style/Result.Display"
         />
 
     <TextView
         android:id="@+id/result_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:theme="@style/FontSize_Small"
+        android:theme="@style/Result.Display"
         />
 
     <RatingBar
@@ -38,7 +38,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:isIndicator="true"
-        android:theme="@style/RatingBar"
         />
 
 </LinearLayout>

@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:id="@+id/result_detail_0_name"
@@ -14,7 +11,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:theme="@style/FontSize_Big"
-        android:text="Name here"
         />
 
     <TextView
@@ -24,9 +20,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:theme="@style/FontSize_Big"
-        android:drawableLeft="@drawable/review_star"
-        android:drawableTint="@color/orange_dark"
-        android:text="Rating here"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
