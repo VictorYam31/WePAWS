@@ -47,6 +47,7 @@ public class WebServiceManager {
     //parameter @review - "" or any text
     //parameter @rating - "" or "-1" or "0" or "1"
     //
+    //
     public String add_clinic_review(String clinic_id, String login, String review, String rating) throws ExecutionException, InterruptedException {
         ExecutorService executor = Executors.newCachedThreadPool();
         AddClinicReviewRatingTask task = new AddClinicReviewRatingTask(clinic_id, login, review, rating);
