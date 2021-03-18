@@ -1,8 +1,11 @@
 package com.victoryam.wepaws;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -135,9 +138,9 @@ public class ResultFragment extends Fragment {
                     String flattenCriteria = "";
                     for (int n = 0; n < searchingCriteriaList.size(); n++) {
                         if (n != searchingCriteriaList.size() - 1) {
-                            if(componentName == "District"){
+                            if (componentName == "District") {
                                 flattenCriteria += new District().GetNumberbyDistrict(searchingCriteriaList.get(n)) + ", ";
-                            }else{
+                            } else {
                                 flattenCriteria += searchingCriteriaList.get(n) + ", ";
                             }
                         } else {
@@ -187,6 +190,7 @@ public class ResultFragment extends Fragment {
         protected void onPostExecute(String a) {
             ResultAdapter resultAdapter = new ResultAdapter(view.getContext(), iResultList);
             listView.setAdapter(resultAdapter);
+            listView.setOnItemClickListener(new openDetailResultFragment(categoryId, iResultList));
         }
     }
 
@@ -237,6 +241,26 @@ public class ResultFragment extends Fragment {
             //Set Invisible txtView.setVisibility(View.INVISIBLE)
 
             return view;
+        }
+    }
+
+    private class openDetailResultFragment implements AdapterView.OnItemClickListener {
+        int categoryId;
+        List<IResult> iResultList;
+
+        public openDetailResultFragment(int categoryId, List<IResult> iResultList) {
+            this.categoryId = categoryId;
+            this.iResultList = iResultList;
+        }
+
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
+            IResult iResult = iResultList.get(index);
+
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("IResult", iResult);
+
+            Navigation.findNavController(view).navigate(R.id.action_ResultFragment_to_ResultDetailFragment, bundle);
         }
     }
 }

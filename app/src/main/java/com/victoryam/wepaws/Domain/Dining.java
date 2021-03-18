@@ -6,7 +6,7 @@ import com.victoryam.wepaws.Utils.IResult;
 
 import java.util.List;
 
-public class Dining implements IResult {
+public class Dining  {
     private int dining_id;
     private String dining_name;
     private String dining_name_cn;
@@ -126,28 +126,28 @@ public class Dining implements IResult {
         this.reviewList = reviewList;
     }
 
-    @Override
-    public String getNameForResult() {
-        return getDiningName();
-    }
-
-    @Override
-    public String getAddressForResult() {
-        return getDiningAddress();
-    }
-
-    @Override
-    public String getSpeciesForResult() {
-        return getSpeciesList().toString();
-    }
-
-    @Override
-    public String getDescriptionForResult() {
-        return getDescription();
-    }
-
-    @Override
-    public String getRatingForResult() {
-        return getRatingList().toString();
-    }
+//    @Override
+//    public String getNameForResult() {
+//        return getDiningName();
+//    }
+//
+//    @Override
+//    public String getAddressForResult() {
+//        return getDiningAddress();
+//    }
+//
+//    @Override
+//    public String getSpeciesForResult() {
+//        return getSpeciesList().toString();
+//    }
+//
+//    @Override
+//    public String getDescriptionForResult() {
+//        return getDescription();
+//    }
+//
+//    @Override
+//    public String getRatingForResult() {
+//        return getRatingList().toString();
+//    }
 }

@@ -1,6 +1,8 @@
 package com.victoryam.wepaws.WebService.Model;
 
 import android.media.Rating;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.victoryam.wepaws.Domain.Species;
 import com.victoryam.wepaws.Utils.IResult;
@@ -10,7 +12,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-public class ClinicMasterModel implements IResult {
+public class ClinicMasterModel implements IResult, Parcelable {
     int clinic_id;
     String clinic_name;
     String clinic_name_cn;
@@ -43,11 +45,9 @@ public class ClinicMasterModel implements IResult {
         }
     }
 
-
     public String getClinicName() {
         return clinic_name;
     }
-
 
     public String getClinicAddress() {
         return clinic_address;
@@ -87,4 +87,52 @@ public class ClinicMasterModel implements IResult {
     public String getRatingForResult() {
         return String.valueOf(getRating());
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    protected ClinicMasterModel(Parcel in) {
+        clinic_id = in.readInt();
+        clinic_name = in.readString();
+        clinic_name_cn = in.readString();
+        clinic_address = in.readString();
+        clinic_address_cn = in.readString();
+        district = in.readInt();
+        phone = in.readString();
+        overnight = in.readString();
+        negative_count = in.readInt();
+        neutral_count = in.readInt();
+        positive_count = in.readInt();
+        review_count = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(clinic_id);
+        parcel.writeString(clinic_name);
+        parcel.writeString(clinic_name_cn);
+        parcel.writeString(clinic_address);
+        parcel.writeString(clinic_address_cn);
+        parcel.writeInt(district);
+        parcel.writeString(phone);
+        parcel.writeString(overnight);
+        parcel.writeInt(negative_count);
+        parcel.writeInt(neutral_count);
+        parcel.writeInt(positive_count);
+        parcel.writeInt(review_count);
+    }
+
+    public static final Creator<ClinicMasterModel> CREATOR = new Creator<ClinicMasterModel>() {
+        @Override
+        public ClinicMasterModel createFromParcel(Parcel in) {
+            return new ClinicMasterModel(in);
+        }
+
+        @Override
+        public ClinicMasterModel[] newArray(int size) {
+            return new ClinicMasterModel[size];
+        }
+    };
 }
