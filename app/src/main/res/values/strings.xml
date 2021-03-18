@@ -21,6 +21,8 @@
     <string name="preference_save">Save</string>
 
     <string name="search_component_select">Select</string>
+    <string name="search_component_name">Name</string>
+    <string name="search_component_overnight">Overnight</string>
     <string name="search_component_animal">Animal</string>
     <string name="search_component_district">District</string>
     <string name="search_component_opening_hours">Opening Hours</string>
@@ -62,18 +64,17 @@
     <string name="animal_type_reptiles">Reptiles</string>
     <string name="animal_type_insect">Insect</string>
 
-    <string name="hk_district_Hong_Kong_Island">-Hong Kong Island-</string>
+
+
     <string name="hk_district_Central_and_Western">Central and Western</string>
     <string name="hk_district_Eastern">Eastern</string>
     <string name="hk_district_Southern">Southern</string>
     <string name="hk_district_Wan_Chai">Wan Chai</string>
-    <string name="hk_district_Kowloon">-Kowloon-</string>
     <string name="hk_district_Sham_Shui_Po">Sham Shui Po</string>
     <string name="hk_district_Kowloon_City">Kowloon City</string>
     <string name="hk_district_Kwun_Tong">Kwun Tong</string>
     <string name="hk_district_Wong_Tai_Sin">Wong Tai Sin</string>
     <string name="hk_district_Yau_Tsim_Mong">Yau Tsim Mong</string>
-    <string name="hk_district_New_Territories">-New Territories-</string>
     <string name="hk_district_Islands">Islands</string>
     <string name="hk_district_Kwai_Tsing">Kwai Tsing</string>
     <string name="hk_district_North">North</string>
@@ -93,6 +94,5 @@
     <string name="specialist_oncology">Oncology</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
 
 </resources>
