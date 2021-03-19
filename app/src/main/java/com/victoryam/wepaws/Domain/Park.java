@@ -6,7 +6,7 @@ import com.victoryam.wepaws.Utils.IResult;
 
 import java.util.List;
 
-public class Park implements IResult {
+public class Park  {
     private int park_id;
     private String park_name;
     private String park_name_cn;
@@ -125,28 +125,28 @@ public class Park implements IResult {
         this.reviewList = reviewList;
     }
 
-    @Override
-    public String getNameForResult() {
-        return getParkName();
-    }
-
-    @Override
-    public String getAddressForResult() {
-        return getParkAddress();
-    }
-
-    @Override
-    public String getSpeciesForResult() {
-        return getSpeciesList().toString();
-    }
-
-    @Override
-    public String getDescriptionForResult() {
-        return getDescription();
-    }
-
-    @Override
-    public String getRatingForResult() {
-        return getRatingList().toString();
-    }
+//    @Override
+//    public String getNameForResult() {
+//        return getParkName();
+//    }
+//
+//    @Override
+//    public String getAddressForResult() {
+//        return getParkAddress();
+//    }
+//
+//    @Override
+//    public String getSpeciesForResult() {
+//        return getSpeciesList().toString();
+//    }
+//
+//    @Override
+//    public String getDescriptionForResult() {
+//        return getDescription();
+//    }
+//
+//    @Override
+//    public String getRatingForResult() {
+//        return getRatingList().toString();
+//    }
 }

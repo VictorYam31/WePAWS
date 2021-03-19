@@ -12,8 +12,10 @@ import androidx.navigation.ui.NavigationUI;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.victoryam.wepaws.WebService.Test.WildSearchActivity;
 
 public class MainActivity extends AppCompatActivity {
     private NavController navController;
@@ -79,6 +81,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         onBackPressed();
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void test1(View view) {
+        Intent intent = new Intent(this, WildSearchActivity.class);
+        startActivity(intent);
     }
 
     //    @Override

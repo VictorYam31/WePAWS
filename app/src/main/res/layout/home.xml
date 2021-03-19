@@ -53,4 +53,14 @@
         android:text="@string/home_menu_park"
         />
 
+    <Button
+        android:id="@+id/test_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/home_menu_park_btn"
+        android:theme="@style/Button_Medium"
+        android:text="Web Service Test"
+        android:onClick="test1"
+        />
+
 </RelativeLayout>

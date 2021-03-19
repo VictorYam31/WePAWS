@@ -8,7 +8,7 @@ import com.victoryam.wepaws.Utils.IResult;
 
 import java.util.List;
 
-public class Hotel implements IResult {
+public class Hotel {
     private int hotel_id;
     private String hotel_name;
     private String hotel_name_cn;
@@ -127,28 +127,28 @@ public class Hotel implements IResult {
         this.reviewList = reviewList;
     }
 
-    @Override
-    public String getNameForResult() {
-        return getHotelName();
-    }
-
-    @Override
-    public String getAddressForResult() {
-        return getHotelAddress();
-    }
-
-    @Override
-    public String getSpeciesForResult() {
-        return getSpeciesList().toString();
-    }
-
-    @Override
-    public String getDescriptionForResult() {
-        return getDescription();
-    }
-
-    @Override
-    public String getRatingForResult() {
-        return getRatingList().toString();
-    }
+//    @Override
+//    public String getNameForResult() {
+//        return getHotelName();
+//    }
+//
+//    @Override
+//    public String getAddressForResult() {
+//        return getHotelAddress();
+//    }
+//
+//    @Override
+//    public String getSpeciesForResult() {
+//        return getSpeciesList().toString();
+//    }
+//
+//    @Override
+//    public String getDescriptionForResult() {
+//        return getDescription();
+//    }
+//
+//    @Override
+//    public String getRatingForResult() {
+//        return getRatingList().toString();
+//    }
 }

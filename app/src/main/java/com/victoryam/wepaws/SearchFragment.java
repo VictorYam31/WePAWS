@@ -166,6 +166,9 @@ public class SearchFragment extends Fragment {
         }
 
         public void updateItem(int position, String s) {
+            if(s == "[]"){
+                s = null;
+            }
             this.selectedItems[position] = s;
             notifyDataSetChanged();
         }
