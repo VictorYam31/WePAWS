@@ -43,8 +43,16 @@
     <string name="result_next">\u003E</string>
 
     <string name="result_detail">Result Detail</string>
-    <string name="result_detail_info">Information</string>
-    <string name="result_detail_reviews">Reviews</string>
+    <string name="result_detail_info"><u>Information</u></string>
+    <string name="result_detail_review_summary"><u>Review Summary</u></string>
+    <string name="result_detail_good">Good</string>
+    <string name="result_detail_mediocre">Mediocre</string>
+    <string name="result_detail_bad">Bad</string>
+    
+    <string name="review_summary">Review Summary</string>
+    <string name="review_summary_title">Showing reviews for\u0020</string>
+    <string name="review_summary_previous">\u003C</string>
+    <string name="review_summary_next">\u003E</string>
 
     <string name="animal_type_dog">Dog</string>
     <string name="animal_type_cat">Cat</string>

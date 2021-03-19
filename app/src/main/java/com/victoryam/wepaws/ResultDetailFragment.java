@@ -126,8 +126,6 @@ public class ResultDetailFragment extends Fragment {
             int type = this.getItemViewType(position);
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            Log.v("getView", String.valueOf(type));
-
             if (type == 0) {
                 view = inflater.inflate(R.layout.result_detail_0, null);
                 TextView resultName = (TextView) view.findViewById(R.id.result_detail_0_name);
@@ -142,9 +140,19 @@ public class ResultDetailFragment extends Fragment {
             }
             else {
                 view = inflater.inflate(R.layout.result_detail_2, null);
+                view.setOnClickListener(new openReview());
             }
 
             return view;
+        }
+    }
+
+    private class openReview implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Bundle bundle = new Bundle();
+            bundle.putString("name", result.getVet().getVetName());
+            Navigation.findNavController(view).navigate(R.id.action_ResultDetailFragment_to_ReviewSummaryFragment, bundle);
         }
     }
 
