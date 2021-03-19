@@ -41,19 +41,19 @@ public class SearchFragment extends Fragment {
         HashMap<Integer, List<String>> searchingCriteria = new HashMap<>();
 
         switch (getArguments().getInt("SearchFragmentArg")) {
-            case R.id.home_menu_clinic_btn:
+            case 0:
                 categoryId = 1;
                 componentsName = getResources().getStringArray(R.array.search_clinic_component_names);
                 break;
-            case R.id.home_menu_store_btn:
+            case 1:
                 categoryId = 2;
                 componentsName = getResources().getStringArray(R.array.search_store_component_names);
                 break;
-            case R.id.home_menu_dining_btn:
+            case 2:
                 categoryId = 3;
                 componentsName = getResources().getStringArray(R.array.search_dining_component_names);
                 break;
-            case R.id.home_menu_park_btn:
+            case 3:
                 categoryId = 4;
                 componentsName = getResources().getStringArray(R.array.search_park_component_names);
                 break;

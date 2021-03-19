@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     
@@ -17,13 +19,22 @@
         android:queryHint="@string/home_menu_search_hint"
         />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/homeRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/home_menu_search"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp" />
+
     <Button
         android:id="@+id/home_menu_clinic_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/home_menu_search"
         android:theme="@style/Button_Medium"
-        android:text="@string/home_menu_Clinic"
+        android:text="@string/home_menu_clinic"
+        android:visibility="gone"
         />
 
     <Button
@@ -33,6 +44,7 @@
         android:layout_below="@+id/home_menu_clinic_btn"
         android:theme="@style/Button_Medium"
         android:text="@string/home_menu_store"
+        android:visibility="gone"
         />
 
     <Button
@@ -42,6 +54,7 @@
         android:layout_below="@id/home_menu_store_btn"
         android:theme="@style/Button_Medium"
         android:text="@string/home_menu_dining"
+        android:visibility="gone"
         />
 
     <Button
@@ -51,13 +64,14 @@
         android:layout_below="@id/home_menu_dining_btn"
         android:theme="@style/Button_Medium"
         android:text="@string/home_menu_park"
+        android:visibility="gone"
         />
 
     <Button
         android:id="@+id/test_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/home_menu_park_btn"
+        android:layout_alignParentBottom="true"
         android:theme="@style/Button_Medium"
         android:text="Web Service Test"
         android:onClick="test1"

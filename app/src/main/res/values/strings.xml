@@ -6,7 +6,7 @@
     <string name="nav_menu_preference">Preference</string>
 
     <string name="home_menu_search_hint">Search</string>
-    <string name="home_menu_Clinic">Clinic</string>
+    <string name="home_menu_clinic">Clinic</string>
     <string name="home_menu_search_vet">Search Clinic</string>
     <string name="home_menu_store">Store</string>
     <string name="home_menu_search_store">Search Store</string>
@@ -14,6 +14,19 @@
     <string name="home_menu_search_dining">Search Dining</string>
     <string name="home_menu_park">Park</string>
     <string name="home_menu_search_park">Search Park</string>
+
+    <string-array name="home_menu_items">
+        <item>@string/home_menu_clinic</item>
+        <item>@string/home_menu_store</item>
+        <item>@string/home_menu_dining</item>
+        <item>@string/home_menu_park</item>
+    </string-array>
+    <integer-array name="home_menu_item_images">
+        <item>@drawable/baseline_local_hospital_24</item>
+        <item>@drawable/baseline_store_24</item>
+        <item>@drawable/baseline_dining_24</item>
+        <item>@drawable/baseline_park_24</item>
+    </integer-array>
 
     <string name="preference_language">Language</string>
     <string name="preference_language_en">English</string>
