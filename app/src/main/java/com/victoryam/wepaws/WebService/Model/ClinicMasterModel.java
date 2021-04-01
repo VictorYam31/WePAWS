@@ -18,6 +18,7 @@ public class ClinicMasterModel implements IResult, Parcelable {
     String clinic_name_cn;
     String clinic_address;
     String clinic_address_cn;
+    String clinic_desc;
     int district;
     String phone;
     String overnight;
@@ -33,7 +34,8 @@ public class ClinicMasterModel implements IResult, Parcelable {
             clinic_name_cn = jsonObject.getString("clinic_name_cn");
             clinic_address = jsonObject.getString("clinic_address");
             clinic_address_cn = jsonObject.getString("clinic_address_cn");
-            district = jsonObject.getInt("district");
+            clinic_desc = jsonObject.getString("clinic_desc");
+            district = jsonObject.getInt("district_id");
             phone = jsonObject.getString("phone");
             overnight = jsonObject.getString("overnight");
             negative_count = jsonObject.getInt("negative_count");
@@ -51,6 +53,16 @@ public class ClinicMasterModel implements IResult, Parcelable {
 
     public String getClinicAddress() {
         return clinic_address;
+    }
+
+    public String getPhone() {
+
+        System.out.println(phone);
+        return phone;
+    }
+
+    public String getClinicDesc() {
+        return clinic_desc;
     }
 
     public int getRating() {

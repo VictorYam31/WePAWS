@@ -13,30 +13,33 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.victoryam.wepaws.R;
+import com.victoryam.wepaws.WebService.Model.ClinicMasterModel;
 import com.victoryam.wepaws.WebService.Model.WildSearchModel;
 import com.victoryam.wepaws.WebService.WebServiceManager;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class WildSearchActivity extends AppCompatActivity {
+public class ClinicMasterActivity extends AppCompatActivity {
 
     private ConnectivityManager mConnMgr;
 
     private RecyclerView mRecyclerView;
     //private MyAdapterTest myAdapter;
 
-    private EditText mInput;
+    private EditText mClinicName,mDistrictID,mOvernight;
     private TextView mTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wild_search);
+        setContentView(R.layout.activity_clinic_master);
 
         mConnMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        mInput = (EditText) findViewById(R.id.editTextInput);
+        mClinicName = (EditText) findViewById(R.id.clinicNameET);
+        mDistrictID = (EditText)findViewById(R.id.districtET);
+        mOvernight = (EditText)findViewById(R.id.overnightET) ;
         mTextView = (TextView) findViewById(R.id.textView);
     }
 
@@ -51,12 +54,15 @@ public class WildSearchActivity extends AppCompatActivity {
         return false;
     }
 
-    public void wild_search(View v) throws ExecutionException, InterruptedException {
-        String input;
-        List<WildSearchModel> wildSearchList;
+    public void search_clinic_master(View v) throws ExecutionException, InterruptedException {
+        String clinicName,districtID,overnight;
+        List<ClinicMasterModel> clinicMasterList;
 
-        System.out.println("ABC");
-        input = mInput.getText().toString();
+        clinicName = mClinicName.getText().toString();
+        districtID = mDistrictID.getText().toString();
+        overnight = mOvernight.getText().toString();
+
+
 
         if (is_network_available()) {
            /* ExecutorService executor = Executors.newCachedThreadPool();
@@ -70,18 +76,19 @@ public class WildSearchActivity extends AppCompatActivity {
                 result.append(wildSearchList.get(i).getClinic_name());
                 result.append(" Phone: " + wildSearchList.get(i).getPhone() + '\n');*/
 
-            System.out.println(input);
-            wildSearchList = new WebServiceManager().wild_search(input);
-            System.out.println(wildSearchList.size());
+
+            clinicMasterList = new WebServiceManager().get_clinic_master(clinicName,districtID,overnight);
+            System.out.println(clinicMasterList.size());
             StringBuilder result = new StringBuilder();
-            for (int i = 0; i < wildSearchList.size(); i++) {
-                result.append("Clinic Name: " + wildSearchList.get(i).getClinic_name() + '\n');
-                result.append(" Phone: " + wildSearchList.get(i).getPhone() + '\n');
-                result.append(" Review: " + wildSearchList.get(i).getReview() + '\n');
+            for (int i = 0; i < clinicMasterList.size(); i++) {
+                result.append("Clinic Name: " + clinicMasterList.get(i).getClinicName() + '\n');
+                result.append(" Address: " + clinicMasterList.get(i).getClinicAddress() + '\n');
+                result.append(" Phone: " + clinicMasterList.get(i).getPhone() + '\n');
+                result.append(" Desc: " + clinicMasterList.get(i).getClinicDesc() + '\n');
+
             }
             //mTextView.setText(result.toString());
             mTextView.setText(result);
         }
     }
-
 }
