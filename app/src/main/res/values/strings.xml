@@ -61,7 +61,7 @@
     <string name="result_detail_good">Good</string>
     <string name="result_detail_mediocre">Mediocre</string>
     <string name="result_detail_bad">Bad</string>
-    
+
     <string name="review_summary">Review Summary</string>
     <string name="review_summary_title">Showing reviews for\u0020</string>
     <string name="review_summary_previous">\u003C</string>
@@ -76,7 +76,6 @@
     <string name="animal_type_amphibian">Amphibian</string>
     <string name="animal_type_reptiles">Reptiles</string>
     <string name="animal_type_insect">Insect</string>
-
 
 
     <string name="hk_district_Central_and_Western">Central and Western</string>

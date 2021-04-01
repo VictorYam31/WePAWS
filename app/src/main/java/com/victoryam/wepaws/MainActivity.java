@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.victoryam.wepaws.WebService.Test.ClinicMasterActivity;
 import com.victoryam.wepaws.WebService.Test.WildSearchActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -84,8 +85,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void test1(View view) {
+    public void test2(View view) {
         Intent intent = new Intent(this, WildSearchActivity.class);
+        startActivity(intent);
+    }
+
+    public void test1(View view) {
+        Intent intent = new Intent(this, ClinicMasterActivity.class);
         startActivity(intent);
     }
 
