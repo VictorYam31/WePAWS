@@ -7,11 +7,20 @@
     android:layout_height="match_parent"
     >
 
+    <ExpandableListView
+        android:id="@+id/search_by_category_expandablelistview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/search_by_category_keywords"
+        android:visibility="visible"
+        />
+
     <ListView
         android:id="@+id/search_by_category_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/search_by_category_keywords"
+        android:visibility="gone"
         />
 
     <EditText

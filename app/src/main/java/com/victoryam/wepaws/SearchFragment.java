@@ -2,17 +2,14 @@ package com.victoryam.wepaws;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
-import android.widget.RatingBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,10 +21,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.victoryam.wepaws.R;
-
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class SearchFragment extends Fragment {
@@ -59,7 +55,8 @@ public class SearchFragment extends Fragment {
                 break;
         }
 
-        initComponents(view, categoryId, componentsName);
+//        initComponents(view, categoryId, componentsName);
+        initExpandableComponents(view, categoryId, componentsName);
         Button searchBtn = (Button) view.findViewById(R.id.search_by_category_button);
         searchBtn.setOnClickListener(new onSearchButtonClicked(categoryId, searchingCriteria));
 
@@ -101,6 +98,206 @@ public class SearchFragment extends Fragment {
         ListView listView = (ListView)view.findViewById(R.id.search_by_category_listview);
         componentAdapter = new ComponentAdapter(this.getContext(), categoryId, componentNames);
         listView.setAdapter(componentAdapter);
+    }
+
+    private void initExpandableComponents(View view, int categoryId, String[] firstLevel) {
+        ExpandableListView expandableListView = (ExpandableListView) view.findViewById(R.id.search_by_category_expandablelistview);
+        List<String[]> secondLevel = new ArrayList<>();
+        secondLevel.add(new String[]{"a", "b", "c"});
+        secondLevel.add(getResources().getStringArray(R.array.hk_districts));
+        secondLevel.add(new String[]{"1", "2", "3"});
+        List<LinkedHashMap<String, String[]>> thirdLevel = new ArrayList<>();
+        thirdLevel.add(null);
+        LinkedHashMap<String, String[]> thirdLevelData = new LinkedHashMap<>();
+        thirdLevelData.put(getResources().getString(R.string.hk_district_Hong_Kong_Island), getResources().getStringArray(R.array.hk_district_Hong_Kong_Island));
+        thirdLevelData.put(getResources().getString(R.string.hk_district_Kowloon), getResources().getStringArray(R.array.hk_district_Kowloon));
+        thirdLevelData.put(getResources().getString(R.string.hk_district_New_Territories), getResources().getStringArray(R.array.hk_district_New_Territories));
+        thirdLevel.add(thirdLevelData);
+        thirdLevel.add(null);
+        ExpandableComponentAdapter expandableComponentAdapter = new ExpandableComponentAdapter(this.getContext(), firstLevel, secondLevel, thirdLevel);
+        expandableListView.setAdapter(expandableComponentAdapter);
+    }
+
+    public class ExpandableComponentAdapter extends BaseExpandableListAdapter {
+
+        private Context mContext;
+        private String[] firstLevel;    // [Name, District, Overnight]
+        private List<String[]> secondLevel;     // [], [HK Island, Kowloon, NT], []
+        private List<LinkedHashMap<String, String[]>> thirdLevel;       // null, Key: HK Island, Value: [Central, Sha Tin, ...], null
+
+        public ExpandableComponentAdapter(Context c, String[] firstLevel, List<String[]> secondLevel, List<LinkedHashMap<String, String[]>> thirdLevel) {
+            this.mContext = c;
+            this.firstLevel = firstLevel;
+            this.secondLevel = secondLevel;
+            this.thirdLevel = thirdLevel;
+        }
+
+        @Override
+        public int getGroupCount() {
+            return firstLevel.length;
+        }
+
+        @Override
+        public int getChildrenCount(int i) {
+            return 1;
+        }
+
+        @Override
+        public Object getGroup(int i) {
+            return secondLevel.get(i);
+        }
+
+        @Override
+        public Object getChild(int i, int i1) {
+            return thirdLevel.get(i).get(i1);
+        }
+
+        @Override
+        public long getGroupId(int i) {
+            return i;
+        }
+
+        @Override
+        public long getChildId(int i, int i1) {
+            return i1;
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            return true;
+        }
+
+        @Override
+        public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.first_level, null);
+            TextView firstLevelTextView = (TextView) view.findViewById(R.id.first_level_textview);
+            firstLevelTextView.setText(this.firstLevel[i]);
+            return view;
+        }
+
+        @Override
+        public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
+            final SecondLevelExpandableListView secondLevelELV = new SecondLevelExpandableListView(mContext);
+
+            String[] headers = secondLevel.get(i);
+
+            List<String[]> thirdLevelData = new ArrayList<>();
+            HashMap<String, String[]> secondLevelData = thirdLevel.get(i);
+
+            for(String key : secondLevelData.keySet()) {
+                thirdLevelData.add(secondLevelData.get(key));
+            }
+
+            secondLevelELV.setAdapter(new SecondLevelComponentAdapter(mContext, headers, thirdLevelData));
+
+            secondLevelELV.setGroupIndicator(null);
+
+            secondLevelELV.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+                int previousGroup = -1;
+
+                @Override
+                public void onGroupExpand(int groupPosition) {
+                    if(groupPosition != previousGroup)
+                        secondLevelELV.collapseGroup(previousGroup);
+                    previousGroup = groupPosition;
+                }
+            });
+
+
+            return secondLevelELV;
+        }
+
+        @Override
+        public boolean isChildSelectable(int i, int i1) {
+            return true;
+        }
+    }
+
+    public class SecondLevelExpandableListView extends ExpandableListView {
+
+        public SecondLevelExpandableListView(Context c) {
+            super(c);
+        }
+
+        protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+            heightMeasureSpec = MeasureSpec.makeMeasureSpec(999999, MeasureSpec.AT_MOST);
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        }
+    }
+
+    public class SecondLevelComponentAdapter extends BaseExpandableListAdapter {
+
+        private Context mContext;
+        String[] headers;
+        List<String[]> data;
+
+        public SecondLevelComponentAdapter(Context c, String[] headers, List<String[]> data) {
+            this.mContext = c;
+            this.headers = headers;
+            this.data = data;
+        }
+
+        @Override
+        public int getGroupCount() {
+            return headers.length;
+        }
+
+        @Override
+        public int getChildrenCount(int i) {
+            return data.get(i).length;
+        }
+
+        @Override
+        public Object getGroup(int i) {
+            return headers[i];
+        }
+
+        @Override
+        public Object getChild(int i, int i1) {
+            return data.get(i)[i1];
+        }
+
+        @Override
+        public long getGroupId(int i) {
+            return i;
+        }
+
+        @Override
+        public long getChildId(int i, int i1) {
+            return i1;
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            return true;
+        }
+
+        @Override
+        public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.second_level, null);
+            TextView secondLevelTextView = (TextView) view.findViewById(R.id.second_level_textview);
+            String groupText = getGroup(i).toString();
+            secondLevelTextView.setText(groupText);
+            return view;
+        }
+
+        @Override
+        public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.third_level, null);
+            TextView thirdLevelTextView = (TextView) view.findViewById(R.id.third_level_textview);
+            String[] childArray = data.get(i);
+            String text = childArray[i1];
+            thirdLevelTextView.setText(text);
+            return view;
+        }
+
+        @Override
+        public boolean isChildSelectable(int i, int i1) {
+            return true;
+        }
     }
 
     public class ComponentAdapter extends BaseAdapter {

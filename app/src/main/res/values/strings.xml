@@ -78,16 +78,20 @@
     <string name="animal_type_insect">Insect</string>
 
 
-
+    <string name="hk_district_Hong_Kong_Island">Hong Kong Island</string>
     <string name="hk_district_Central_and_Western">Central and Western</string>
     <string name="hk_district_Eastern">Eastern</string>
     <string name="hk_district_Southern">Southern</string>
     <string name="hk_district_Wan_Chai">Wan Chai</string>
+
+    <string name="hk_district_Kowloon">Kowloon</string>
     <string name="hk_district_Sham_Shui_Po">Sham Shui Po</string>
     <string name="hk_district_Kowloon_City">Kowloon City</string>
     <string name="hk_district_Kwun_Tong">Kwun Tong</string>
     <string name="hk_district_Wong_Tai_Sin">Wong Tai Sin</string>
     <string name="hk_district_Yau_Tsim_Mong">Yau Tsim Mong</string>
+
+    <string name="hk_district_New_Territories">New Territories</string>
     <string name="hk_district_Islands">Islands</string>
     <string name="hk_district_Kwai_Tsing">Kwai Tsing</string>
     <string name="hk_district_North">North</string>
