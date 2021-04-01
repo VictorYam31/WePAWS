@@ -2,12 +2,14 @@ package com.victoryam.wepaws;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,6 +24,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -102,18 +105,23 @@ public class SearchFragment extends Fragment {
 
     private void initExpandableComponents(View view, int categoryId, String[] firstLevel) {
         ExpandableListView expandableListView = (ExpandableListView) view.findViewById(R.id.search_by_category_expandablelistview);
+        expandableListView.setGroupIndicator(null);
         List<String[]> secondLevel = new ArrayList<>();
-        secondLevel.add(new String[]{"a", "b", "c"});
-        secondLevel.add(getResources().getStringArray(R.array.hk_districts));
-        secondLevel.add(new String[]{"1", "2", "3"});
         List<LinkedHashMap<String, String[]>> thirdLevel = new ArrayList<>();
-        thirdLevel.add(null);
-        LinkedHashMap<String, String[]> thirdLevelData = new LinkedHashMap<>();
-        thirdLevelData.put(getResources().getString(R.string.hk_district_Hong_Kong_Island), getResources().getStringArray(R.array.hk_district_Hong_Kong_Island));
-        thirdLevelData.put(getResources().getString(R.string.hk_district_Kowloon), getResources().getStringArray(R.array.hk_district_Kowloon));
-        thirdLevelData.put(getResources().getString(R.string.hk_district_New_Territories), getResources().getStringArray(R.array.hk_district_New_Territories));
-        thirdLevel.add(thirdLevelData);
-        thirdLevel.add(null);
+        for (String firstLevelComponent : firstLevel) {
+            if (firstLevelComponent.equals(getResources().getString(R.string.search_component_district))) {
+                secondLevel.add(getResources().getStringArray(R.array.hk_districts));
+                LinkedHashMap<String, String[]> thirdLevelData = new LinkedHashMap<>();
+                thirdLevelData.put(getResources().getString(R.string.hk_district_Hong_Kong_Island), getResources().getStringArray(R.array.hk_district_Hong_Kong_Island));
+                thirdLevelData.put(getResources().getString(R.string.hk_district_Kowloon), getResources().getStringArray(R.array.hk_district_Kowloon));
+                thirdLevelData.put(getResources().getString(R.string.hk_district_New_Territories), getResources().getStringArray(R.array.hk_district_New_Territories));
+                thirdLevel.add(thirdLevelData);
+            }
+            else {
+                secondLevel.add(null);
+                thirdLevel.add(null);
+            }
+        }
         ExpandableComponentAdapter expandableComponentAdapter = new ExpandableComponentAdapter(this.getContext(), firstLevel, secondLevel, thirdLevel);
         expandableListView.setAdapter(expandableComponentAdapter);
     }
@@ -170,42 +178,47 @@ public class SearchFragment extends Fragment {
         @Override
         public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.first_level, null);
-            TextView firstLevelTextView = (TextView) view.findViewById(R.id.first_level_textview);
-            firstLevelTextView.setText(this.firstLevel[i]);
+            // maybe separate into different layouts, maybe not
+            if (firstLevel[i].equals(getResources().getString(R.string.search_component_district))) {
+                view = inflater.inflate(R.layout.search_component_1, null);
+                TextView componentName = (TextView) view.findViewById(R.id.search_component_1_name);
+                CheckBox checkBox = (CheckBox) view.findViewById(R.id.search_component_1_checkbox); // add listener
+                componentName.setText(firstLevel[i]);
+                checkBox.setVisibility(View.INVISIBLE);
+                checkBox.setFocusable(false);
+            }
+            else {
+                view = inflater.inflate(R.layout.search_component_1, null);
+                TextView componentName = (TextView) view.findViewById(R.id.search_component_1_name);
+                componentName.setText(firstLevel[i]);
+            }
             return view;
         }
 
         @Override
         public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
-            final SecondLevelExpandableListView secondLevelELV = new SecondLevelExpandableListView(mContext);
-
-            String[] headers = secondLevel.get(i);
-
+            final SecondLevelExpandableListView secondLevelExpandableListView = new SecondLevelExpandableListView(mContext);
+            String[] secondLevelComponents = secondLevel.get(i);
             List<String[]> thirdLevelData = new ArrayList<>();
-            HashMap<String, String[]> secondLevelData = thirdLevel.get(i);
-
-            for(String key : secondLevelData.keySet()) {
-                thirdLevelData.add(secondLevelData.get(key));
+            HashMap<String, String[]> secondToThirdLevelMap = thirdLevel.get(i);
+            for(String key : secondToThirdLevelMap.keySet()) {
+                thirdLevelData.add(secondToThirdLevelMap.get(key));
             }
-
-            secondLevelELV.setAdapter(new SecondLevelComponentAdapter(mContext, headers, thirdLevelData));
-
-            secondLevelELV.setGroupIndicator(null);
-
-            secondLevelELV.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            secondLevelExpandableListView.setAdapter(new SecondLevelComponentAdapter(mContext, secondLevelComponents, thirdLevelData));
+            secondLevelExpandableListView.setGroupIndicator(null);
+            secondLevelExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
                 int previousGroup = -1;
 
                 @Override
                 public void onGroupExpand(int groupPosition) {
                     if(groupPosition != previousGroup)
-                        secondLevelELV.collapseGroup(previousGroup);
+                        secondLevelExpandableListView.collapseGroup(previousGroup);
                     previousGroup = groupPosition;
                 }
             });
 
 
-            return secondLevelELV;
+            return secondLevelExpandableListView;
         }
 
         @Override
@@ -278,19 +291,20 @@ public class SearchFragment extends Fragment {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.second_level, null);
             TextView secondLevelTextView = (TextView) view.findViewById(R.id.second_level_textview);
-            String groupText = getGroup(i).toString();
-            secondLevelTextView.setText(groupText);
+            secondLevelTextView.setText(getGroup(i).toString());
             return view;
         }
 
         @Override
         public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.third_level, null);
-            TextView thirdLevelTextView = (TextView) view.findViewById(R.id.third_level_textview);
+            view = inflater.inflate(R.layout.search_component_1, null);
+            TextView thirdLevelTextView = (TextView) view.findViewById(R.id.search_component_1_name);
+            CheckBox thirdLevelCheckBox = (CheckBox) view.findViewById(R.id.search_component_1_checkbox);
             String[] childArray = data.get(i);
-            String text = childArray[i1];
-            thirdLevelTextView.setText(text);
+            thirdLevelTextView.setText(childArray[i1]);
+            thirdLevelTextView.setTextSize(15);
+            thirdLevelTextView.setPadding(50, 0, 0, 0);
             return view;
         }
 
