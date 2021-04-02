@@ -10,5 +10,6 @@ public interface IResult extends Parcelable {
     public int getNegativeCountForResult();
     public int getNeutralCountForResult();
     public int getPositiveCountForResult();
-
+    public boolean getIsOvernightForResult();
+    public String getPhoneNumberForResult();
 }

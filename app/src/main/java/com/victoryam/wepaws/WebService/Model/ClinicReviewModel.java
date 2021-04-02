@@ -9,6 +9,10 @@ public class ClinicReviewModel {
     String review;
     String status;
 
+    public String getReview(){
+        return review;
+    }
+
     public ClinicReviewModel(JSONObject jsonObject){
         try {
             clinic_id = jsonObject.getInt("clinic_id");
