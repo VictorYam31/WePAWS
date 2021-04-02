@@ -6,8 +6,10 @@ import org.json.JSONObject;
 public class ClinicReviewModel {
     int clinic_id;
     String login;
+    int rate;
     String review;
-    String status;
+    String created_datetime;
+    String updated_datetime;
 
     public String getReview(){
         return review;
@@ -16,8 +18,11 @@ public class ClinicReviewModel {
     public ClinicReviewModel(JSONObject jsonObject){
         try {
             clinic_id = jsonObject.getInt("clinic_id");
+            login = jsonObject.getString("login");
+            rate = jsonObject.getInt("rate");
             review = jsonObject.getString("review");
-            status = jsonObject.getString("status");
+            created_datetime = jsonObject.getString("created_datetime");
+            updated_datetime = jsonObject.getString("updated_datetime");
         }
         catch(JSONException e){
             e.printStackTrace();
