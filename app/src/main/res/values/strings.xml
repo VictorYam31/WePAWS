@@ -35,7 +35,10 @@
 
     <string name="search_component_select">Select</string>
     <string name="search_component_name">Name</string>
+    <string name="search_component_name_hint">Enter name</string>
     <string name="search_component_overnight">Overnight</string>
+    <string name="search_component_overnight_yes">Yes</string>
+    <string name="search_component_overnight_no">No</string>
     <string name="search_component_animal">Animal</string>
     <string name="search_component_district">District</string>
     <string name="search_component_opening_hours">Opening Hours</string>
@@ -58,6 +61,7 @@
     <string name="result_detail">Result Detail</string>
     <string name="result_detail_info"><u>Information</u></string>
     <string name="result_detail_review_summary"><u>Review Summary</u></string>
+    <string name="result_detail_view_all">View All</string>
     <string name="result_detail_good">Good</string>
     <string name="result_detail_mediocre">Mediocre</string>
     <string name="result_detail_bad">Bad</string>

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:orientation="vertical"
     >
 
     <TextView
         android:id="@+id/result_detail_0_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:theme="@style/FontSize_Big"
+        android:textStyle="bold"
+        android:theme="@style/FontSize_Medium"
         android:text="Name here"
         />
 
@@ -21,12 +21,60 @@
         android:id="@+id/result_detail_0_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:theme="@style/FontSize_Big"
         android:drawableLeft="@drawable/review_star"
         android:drawableTint="@color/orange_dark"
         android:text="Rating here"
+        android:visibility="gone"
         />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/result_detail_0_phone_call"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:theme="@style/Button_Medium"
+                android:src="@drawable/phone_call"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/result_detail_0_bookmark"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:theme="@style/Button_Medium"
+                android:src="@drawable/bookmark"
+                />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/result_detail_0_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/FontSize_Small"
+        android:text="Address here"
+        />
+
+</LinearLayout>

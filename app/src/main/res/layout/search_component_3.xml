@@ -3,8 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -13,7 +11,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/search_component_1_name"
+            android:id="@+id/search_component_3_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -23,21 +21,13 @@
             android:text="Component"
             />
 
-        <Switch
-            android:id="@+id/search_component_1_switch"
+        <CheckBox
+            android:id="@+id/search_component_3_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
             android:layout_marginRight="25dp"
-            android:thumbTint="@color/orange_dark"
-            android:trackTint="@color/orange_dark"
-            android:scaleX="1.5"
-            android:scaleY="1.5"
-            android:showText="true"
-            android:switchTextAppearance="@style/Search.Component.Switch"
-            android:textOff="@string/search_component_overnight_no"
-            android:textOn="@string/search_component_overnight_yes"
             />
 
 

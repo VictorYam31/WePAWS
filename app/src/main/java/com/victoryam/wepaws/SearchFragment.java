@@ -10,8 +10,10 @@ import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,7 +26,6 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -56,6 +57,11 @@ public class SearchFragment extends Fragment {
                 categoryId = 4;
                 componentsName = getResources().getStringArray(R.array.search_park_component_names);
                 break;
+        }
+
+        EditText searchByCategoryKeywords = (EditText) view.findViewById(R.id.search_by_category_keywords);
+        if (categoryId != -1) {
+            searchByCategoryKeywords.setVisibility(View.GONE);
         }
 
 //        initComponents(view, categoryId, componentsName);
@@ -133,6 +139,8 @@ public class SearchFragment extends Fragment {
         private List<String[]> secondLevel;     // [], [HK Island, Kowloon, NT], []
         private List<LinkedHashMap<String, String[]>> thirdLevel;       // null, Key: HK Island, Value: [Central, Sha Tin, ...], null
 
+        private String input;
+
         public ExpandableComponentAdapter(Context c, String[] firstLevel, List<String[]> secondLevel, List<LinkedHashMap<String, String[]>> thirdLevel) {
             this.mContext = c;
             this.firstLevel = firstLevel;
@@ -182,10 +190,28 @@ public class SearchFragment extends Fragment {
             if (firstLevel[i].equals(getResources().getString(R.string.search_component_district))) {
                 view = inflater.inflate(R.layout.search_component_1, null);
                 TextView componentName = (TextView) view.findViewById(R.id.search_component_1_name);
-                CheckBox checkBox = (CheckBox) view.findViewById(R.id.search_component_1_checkbox); // add listener
+                Switch switchButton = (Switch) view.findViewById(R.id.search_component_1_switch);
                 componentName.setText(firstLevel[i]);
-                checkBox.setVisibility(View.INVISIBLE);
-                checkBox.setFocusable(false);
+                switchButton.setVisibility(View.INVISIBLE);
+                switchButton.setFocusable(false);
+            }
+            else if (firstLevel[i].equals(getResources().getString(R.string.search_component_name))) {
+                view = inflater.inflate(R.layout.search_component_2, null);
+                EditText editText = (EditText) view.findViewById(R.id.search_component_2_edittext);
+                if (input != null) {
+                    editText.setText(input);
+                }
+                editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View view, boolean b) {
+                        if(!b) {
+                            Log.v("edittext is", String.valueOf(editText.getText()));
+                            input = String.valueOf(editText.getText());
+                            editText.setText(input);
+                            Log.v("input is", input);
+                        }
+                    }
+                });
             }
             else {
                 view = inflater.inflate(R.layout.search_component_1, null);
@@ -298,13 +324,13 @@ public class SearchFragment extends Fragment {
         @Override
         public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.search_component_1, null);
-            TextView thirdLevelTextView = (TextView) view.findViewById(R.id.search_component_1_name);
-            CheckBox thirdLevelCheckBox = (CheckBox) view.findViewById(R.id.search_component_1_checkbox);
+            view = inflater.inflate(R.layout.search_component_3, null);
+            TextView thirdLevelTextView = (TextView) view.findViewById(R.id.search_component_3_name);
+            CheckBox thirdLevelCheckBox = (CheckBox) view.findViewById(R.id.search_component_3_checkbox);
             String[] childArray = data.get(i);
             thirdLevelTextView.setText(childArray[i1]);
             thirdLevelTextView.setTextSize(15);
-            thirdLevelTextView.setPadding(50, 0, 0, 0);
+            thirdLevelTextView.setPadding(100, 0, 0, 0);
             return view;
         }
 

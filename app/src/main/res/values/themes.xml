@@ -68,6 +68,11 @@
         <item name="android:textSize">25sp</item>
     </style>
 
+    <style name="Search.Component.Switch" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
     <style name="Result.Display" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">25sp</item>
     </style>

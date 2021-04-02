@@ -6,13 +6,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/result_detail_2_review_summary"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Result.Detail.Title"
-        android:text="@string/result_detail_review_summary"
-        />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/result_detail_2_review_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:theme="@style/Result.Detail.Title"
+            android:text="@string/result_detail_review_summary"
+            />
+
+        <TextView
+            android:id="@+id/result_detail_2_view_all"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="end"
+            android:theme="@style/Result.Detail.Title"
+            android:text="@string/result_detail_view_all"
+            />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,13 +51,14 @@
                 android:gravity="center"
                 android:background="@color/good"
                 android:text="@string/result_detail_good"
+                android:visibility="gone"
                 />
             <ImageView
                 android:id="@+id/result_detail_2_good_image"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 app:tint="@color/good"
-                android:src="@drawable/review_good"
+                android:src="@drawable/outline_sentiment_very_satisfied_24"
                 />
             <TextView
                 android:id="@+id/result_detail_2_good_number"
@@ -63,13 +81,14 @@
                 android:gravity="center"
                 android:background="@color/mediocre"
                 android:text="@string/result_detail_mediocre"
+                android:visibility="gone"
                 />
             <ImageView
                 android:id="@+id/result_detail_2_mediocre_image"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 app:tint="@color/mediocre"
-                android:src="@drawable/review_good"
+                android:src="@drawable/outline_sentiment_satisfied_24"
                 />
             <TextView
                 android:id="@+id/result_detail_2_mediocre_number"
@@ -92,13 +111,14 @@
                 android:gravity="center"
                 android:background="@color/bad"
                 android:text="@string/result_detail_bad"
+                android:visibility="gone"
                 />
             <ImageView
                 android:id="@+id/result_detail_2_bad_image"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 app:tint="@color/bad"
-                android:src="@drawable/review_good"
+                android:src="@drawable/outline_sentiment_dissatisfied_24"
                 />
             <TextView
                 android:id="@+id/result_detail_2_bad_number"

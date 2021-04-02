@@ -26,7 +26,7 @@ import java.util.List;
 
 public class ResultDetailFragment extends Fragment {
 
-    private Result result;
+//    private Result result;
     private IResult iResult;
 
     @Override
@@ -129,8 +129,10 @@ public class ResultDetailFragment extends Fragment {
             if (type == 0) {
                 view = inflater.inflate(R.layout.result_detail_0, null);
                 TextView resultName = (TextView) view.findViewById(R.id.result_detail_0_name);
+                TextView resultAddress = (TextView) view.findViewById(R.id.result_detail_0_address);
                 TextView resultRating = (TextView) view.findViewById(R.id.result_detail_0_rating);
                 resultName.setText(this.result.getNameForResult());
+                resultAddress.setText(this.result.getAddressForResult());
                 resultRating.setText(this.result.getRatingForResult());
             }
             else if (type == 1) {
@@ -140,7 +142,8 @@ public class ResultDetailFragment extends Fragment {
             }
             else {
                 view = inflater.inflate(R.layout.result_detail_2, null);
-                view.setOnClickListener(new openReview());
+                TextView viewAll = (TextView) view.findViewById(R.id.result_detail_2_view_all);
+                viewAll.setOnClickListener(new openReview());
             }
 
             return view;
@@ -151,7 +154,7 @@ public class ResultDetailFragment extends Fragment {
         @Override
         public void onClick(View view) {
             Bundle bundle = new Bundle();
-            bundle.putString("name", result.getVet().getVetName());
+            bundle.putString("name", iResult.getNameForResult());
             Navigation.findNavController(view).navigate(R.id.action_ResultDetailFragment_to_ReviewSummaryFragment, bundle);
         }
     }
