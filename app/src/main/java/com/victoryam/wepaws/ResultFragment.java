@@ -138,13 +138,17 @@ public class ResultFragment extends Fragment {
                     String flattenCriteria = "";
                     for (int n = 0; n < searchingCriteriaList.size(); n++) {
                         if (n != searchingCriteriaList.size() - 1) {
-                            if (componentName == "District") {
+                            if (componentName.equals("District")) {
                                 flattenCriteria += new District().GetNumberbyDistrict(searchingCriteriaList.get(n)) + ", ";
                             } else {
                                 flattenCriteria += searchingCriteriaList.get(n) + ", ";
                             }
                         } else {
-                            flattenCriteria += searchingCriteriaList.get(n);
+                            if (componentName.equals("District")) {
+                                flattenCriteria += new District().GetNumberbyDistrict(searchingCriteriaList.get(n));
+                            } else {
+                                flattenCriteria += searchingCriteriaList.get(n);
+                            }
                         }
                     }
 
@@ -176,9 +180,7 @@ public class ResultFragment extends Fragment {
                     case 4:
                         break;
                 }
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
+            } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
 
@@ -230,13 +232,10 @@ public class ResultFragment extends Fragment {
             TextView resultAddress = (TextView) view.findViewById(R.id.result_display_address);
             TextView resultAnimal = (TextView) view.findViewById(R.id.result_animal);
             TextView resultCategory = (TextView) view.findViewById(R.id.result_category);
-            RatingBar resultRating = (RatingBar) view.findViewById(R.id.result_rating);
 
             resultName.setText(this.iResultList.get(position).getNameForResult());
             resultAddress.setText(this.iResultList.get(position).getAddressForResult());
-            resultAnimal.setText(this.iResultList.get(position).getSpeciesForResult());
             resultCategory.setText(this.iResultList.get(position).getDescriptionForResult());
-            resultRating.setRating(Float.parseFloat(this.iResultList.get(position).getRatingForResult()));
 
             //Set Invisible txtView.setVisibility(View.INVISIBLE)
 

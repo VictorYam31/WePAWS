@@ -4,9 +4,11 @@ import android.media.Rating;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.victoryam.wepaws.Domain.Clinic;
 import com.victoryam.wepaws.Domain.Species;
 import com.victoryam.wepaws.Utils.IResult;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,7 +29,7 @@ public class ClinicMasterModel implements IResult, Parcelable {
     int positive_count;
     int review_count;
 
-    public ClinicMasterModel(JSONObject jsonObject) {
+    public ClinicMasterModel(@NotNull JSONObject jsonObject) {
         try {
             clinic_id = jsonObject.getInt("clinic_id");
             clinic_name = jsonObject.getString("clinic_name");
@@ -45,6 +47,10 @@ public class ClinicMasterModel implements IResult, Parcelable {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public int getClinicId() {
+        return clinic_id;
     }
 
     public String getClinicName() {
@@ -65,15 +71,22 @@ public class ClinicMasterModel implements IResult, Parcelable {
         return clinic_desc;
     }
 
-    public int getRating() {
-        int totalRating = negative_count + positive_count;
-        if (totalRating > 0) {
-            return totalRating;
-        } else {
-            return 0;
-        }
+    public int getNegativeCount() {
+        return negative_count;
     }
 
+    public int getNeutralCount() {
+        return neutral_count;
+    }
+
+    public int getPositiveCount() {
+        return positive_count;
+    }
+
+    @Override
+    public int getIDForResult() {
+        return getClinicId();
+    }
 
     @Override
     public String getNameForResult() {
@@ -86,18 +99,23 @@ public class ClinicMasterModel implements IResult, Parcelable {
     }
 
     @Override
-    public String getSpeciesForResult() {
-        return "";
-    }
-
-    @Override
     public String getDescriptionForResult() {
         return "";
     }
 
     @Override
-    public String getRatingForResult() {
-        return String.valueOf(getRating());
+    public int getNegativeCountForResult() {
+        return getNegativeCount();
+    }
+
+    @Override
+    public int getNeutralCountForResult() {
+        return getNeutralCount();
+    }
+
+    @Override
+    public int getPositiveCountForResult() {
+        return getPositiveCount();
     }
 
     @Override

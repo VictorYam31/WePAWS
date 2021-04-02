@@ -143,11 +143,8 @@ public class ResultDetailFragment extends Fragment {
             if (type == 0) {
                 view = inflater.inflate(R.layout.result_detail_0, null);
                 TextView resultName = (TextView) view.findViewById(R.id.result_detail_0_name);
-//                TextView resultAddress = (TextView) view.findViewById(R.id.result_detail_0_address);
                 TextView resultRating = (TextView) view.findViewById(R.id.result_detail_0_rating);
                 resultName.setText(this.result.getNameForResult());
-//                resultAddress.setText(this.result.getAddressForResult());
-                resultRating.setText(this.result.getRatingForResult());
             }
             else if (type == 1) {
                 view = inflater.inflate(R.layout.result_detail_1, null);
