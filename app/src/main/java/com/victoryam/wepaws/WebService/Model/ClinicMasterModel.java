@@ -67,6 +67,15 @@ public class ClinicMasterModel implements IResult, Parcelable {
         return phone;
     }
 
+
+    public boolean getIsOvernight() {
+        if (overnight.equals("Y")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public String getClinicDesc() {
         return clinic_desc;
     }
@@ -100,7 +109,7 @@ public class ClinicMasterModel implements IResult, Parcelable {
 
     @Override
     public String getDescriptionForResult() {
-        return "";
+        return getClinicDesc();
     }
 
     @Override
@@ -117,6 +126,12 @@ public class ClinicMasterModel implements IResult, Parcelable {
     public int getPositiveCountForResult() {
         return getPositiveCount();
     }
+
+    @Override
+    public boolean getIsOvernightForResult() { return getIsOvernight();}
+
+    @Override
+    public String getPhoneNumberForResult() { return getPhone();}
 
     @Override
     public int describeContents() {

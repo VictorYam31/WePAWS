@@ -31,15 +31,6 @@
             android:layout_gravity="center_vertical"
             android:text="Status here"/>
 
-        <TextView
-            android:id="@+id/result_detail_1_opening_hours"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:layout_column="2"
-            android:layout_gravity="center_vertical"
-            android:text="Opening hours here"/>
-
         <ImageView
             android:id="@+id/result_detail_1_phone_image"
             android:layout_width="wrap_content"
@@ -57,15 +48,6 @@
             android:layout_gravity="center_vertical"
             android:text="@string/result_detail_phone"/>
 
-        <TextView
-            android:id="@+id/result_detail_1_phone_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:layout_column="2"
-            android:layout_gravity="center_vertical"
-            android:text="Phone No. here"/>
-
         <ImageView
             android:id="@+id/result_detail_1_address_image"
             android:layout_width="wrap_content"
@@ -82,15 +64,6 @@
             android:layout_column="1"
             android:layout_gravity="center_vertical"
             android:text="@string/result_detail_address"/>
-
-        <TextView
-            android:id="@+id/result_detail_1_address_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:layout_column="2"
-            android:layout_gravity="center_vertical"
-            android:text="Address here"/>
 
     </GridLayout>
 
