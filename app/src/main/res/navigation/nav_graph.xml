@@ -81,10 +81,27 @@
         <action
             android:id="@+id/action_ResultDetailFragment_to_ReviewSummaryFragment"
             app:destination="@id/ReviewSummaryFragment" />
+        <action
+            android:id="@+id/action_ResultDetailFragment_to_writeReviewFragment"
+            app:destination="@id/WriteReviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/ReviewSummaryFragment"
         android:name="com.victoryam.wepaws.ReviewSummaryFragment"
         android:label="@string/review_summary"
-        tools:layout="@layout/ReviewSummaryFragment" />
+        tools:layout="@layout/review_summary" >
+        <action
+            android:id="@+id/action_ReviewSummaryFragment_to_writeReviewFragment"
+            app:destination="@id/WriteReviewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/WriteReviewFragment"
+        android:name="com.victoryam.wepaws.WriteReviewFragment"
+        android:label="@string/write_review"
+        tools:layout="@layout/write_review">
+        <argument
+            android:name="WriteReviewFragmentArg"
+            app:argType="string"
+            />
+    </fragment>
 </navigation>

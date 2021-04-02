@@ -74,6 +74,9 @@
     <string name="review_summary_previous">\u003C</string>
     <string name="review_summary_next">\u003E</string>
 
+    <string name="write_review">Write Review</string>
+    <string name="write_review_title">Write a review for\u0020</string>
+
     <string name="animal_type_dog">Dog</string>
     <string name="animal_type_cat">Cat</string>
     <string name="animal_type_rabbit">Rabbit</string>
