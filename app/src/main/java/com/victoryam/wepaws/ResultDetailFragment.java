@@ -6,8 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,13 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.victoryam.wepaws.Domain.VetReview;
 import com.victoryam.wepaws.Utils.IResult;
-import com.victoryam.wepaws.Utils.Utility;
-
-import org.w3c.dom.Text;
-
-import java.util.HashMap;
-import java.util.List;
 
 public class ResultDetailFragment extends Fragment {
 
@@ -61,7 +56,17 @@ public class ResultDetailFragment extends Fragment {
     private void initResultDetails(View view, IResult result) {
         ListView listView = (ListView)view.findViewById(R.id.result_detail_listview);
 
-        ResultDetailAdapter resultDetailAdapter = new ResultDetailAdapter(this.getContext(), result);
+        //        dummy reviews
+        VetReview r1 = new VetReview();
+        r1.setReview("Good doctor");
+        VetReview r2 = new VetReview();
+        r2.setReview("Too expensive");
+        VetReview r3 = new VetReview();
+        r3.setReview("Unprofessional");
+        VetReview[] shortReviews = {r1, r2, r3};
+        //
+
+        ResultDetailAdapter resultDetailAdapter = new ResultDetailAdapter(this.getContext(), result, shortReviews);
         listView.setAdapter(resultDetailAdapter);
     }
 
@@ -69,10 +74,14 @@ public class ResultDetailFragment extends Fragment {
 
         private Context mContext;
         private IResult result;
+        private VetReview[] shortReviews;
+        private int reviewPointer;
 
-        public ResultDetailAdapter(Context c, IResult result) {
+        public ResultDetailAdapter(Context c, IResult result, VetReview[] shortReviews) {
             this.mContext = c;
             this.result = result;
+            this.shortReviews = shortReviews;
+            this.reviewPointer = 0;
         }
 
         @Override
@@ -83,32 +92,36 @@ public class ResultDetailFragment extends Fragment {
             else if (position == 1) {
                 return 1;
             }
-            else {
+            else if (position == 2){
                 return 2;
+            }
+            else {
+                return 3;
             }
         }
 
         @Override
         public int getViewTypeCount() {
-            return 3;
+            return 4;
         }
 
         @Override
         public boolean isEnabled(int position) {
-            if (position == 0) {
-                return false;
-            }
-            else if (position == 1) {
-                return false;
-            }
-            else {
-                return true;
-            }
+            return false;
+//            if (position == 0) {
+//                return false;
+//            }
+//            else if (position == 1) {
+//                return false;
+//            }
+//            else {
+//                return true;
+//            }
         }
 
         @Override
         public int getCount() {
-            return 3;
+            return 3 + this.shortReviews.length;
         }
 
         @Override
@@ -123,27 +136,45 @@ public class ResultDetailFragment extends Fragment {
 
         @Override
         public View getView(int position, View view, ViewGroup viewGroup) {
+            Log.v("calling", String.valueOf(position));
             int type = this.getItemViewType(position);
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             if (type == 0) {
                 view = inflater.inflate(R.layout.result_detail_0, null);
                 TextView resultName = (TextView) view.findViewById(R.id.result_detail_0_name);
-                TextView resultAddress = (TextView) view.findViewById(R.id.result_detail_0_address);
+//                TextView resultAddress = (TextView) view.findViewById(R.id.result_detail_0_address);
                 TextView resultRating = (TextView) view.findViewById(R.id.result_detail_0_rating);
                 resultName.setText(this.result.getNameForResult());
-                resultAddress.setText(this.result.getAddressForResult());
+//                resultAddress.setText(this.result.getAddressForResult());
                 resultRating.setText(this.result.getRatingForResult());
             }
             else if (type == 1) {
                 view = inflater.inflate(R.layout.result_detail_1, null);
-                TextView resultInfo = (TextView) view.findViewById(R.id.result_detail_1_result_info);
-                resultInfo.setText(this.result.getDescriptionForResult());
+//                TextView resultInfo = (TextView) view.findViewById(R.id.result_detail_1_result_info);
+//                resultInfo.setText(this.result.getDescriptionForResult());
             }
-            else {
+            else if (type == 2){
                 view = inflater.inflate(R.layout.result_detail_2, null);
                 TextView viewAll = (TextView) view.findViewById(R.id.result_detail_2_view_all);
                 viewAll.setOnClickListener(new openReview());
+            }
+            else {
+                Log.v("position", String.valueOf(position));
+                Log.v("reviewPointer", String.valueOf(reviewPointer));
+                view = inflater.inflate(R.layout.review_display, null);
+
+                TextView comment = (TextView) view.findViewById(R.id.review_display_comment);
+                ImageView image = (ImageView) view.findViewById(R.id.review_display_image);
+                comment.setText(this.shortReviews[reviewPointer].getReview());
+                if (reviewPointer < this.shortReviews.length - 1) {
+                    reviewPointer++;
+                }
+                else {
+                    reviewPointer = 0;
+                }
+//            Need a way to know if a review is: Good, Mediocre, Bad
+//            image.setImageResource();
             }
 
             return view;

@@ -59,6 +59,8 @@
     <string name="result_next">\u003E</string>
 
     <string name="result_detail">Result Detail</string>
+    <string name="result_detail_phone">Phone No.</string>
+    <string name="result_detail_address">Address</string>
     <string name="result_detail_info"><u>Information</u></string>
     <string name="result_detail_review_summary"><u>Review Summary</u></string>
     <string name="result_detail_view_all">View All</string>

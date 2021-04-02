@@ -66,7 +66,7 @@ public class SearchFragment extends Fragment {
 
 //        initComponents(view, categoryId, componentsName);
         initExpandableComponents(view, categoryId, componentsName);
-        Button searchBtn = (Button) view.findViewById(R.id.search_by_category_button);
+        TextView searchBtn = (TextView) view.findViewById(R.id.search_by_category_button);
         searchBtn.setOnClickListener(new onSearchButtonClicked(categoryId, searchingCriteria));
 
         NavController navController = NavHostFragment.findNavController(this);

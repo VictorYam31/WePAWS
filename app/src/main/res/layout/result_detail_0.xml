@@ -41,7 +41,7 @@
 
             <ImageView
                 android:id="@+id/result_detail_0_phone_call"
-                android:layout_width="50dp"
+                android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:theme="@style/Button_Medium"
                 android:src="@drawable/phone_call"
@@ -57,7 +57,7 @@
 
             <ImageView
                 android:id="@+id/result_detail_0_bookmark"
-                android:layout_width="50dp"
+                android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:theme="@style/Button_Medium"
                 android:src="@drawable/bookmark"
@@ -68,13 +68,5 @@
 
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/result_detail_0_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:theme="@style/FontSize_Small"
-        android:text="Address here"
-        />
 
 </LinearLayout>

@@ -33,23 +33,26 @@
         android:hint="@string/search_component_keyword_hint"
         />
 
-    <Button
+    <TextView
         android:id="@+id/search_by_category_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_margin="15dp"
-        android:theme="@style/Button_Medium"
+        android:layout_margin="30dp"
+        android:theme="@style/FontSize_Medium"
+        android:textColor="@color/orange_dark"
+        android:textStyle="bold"
+        android:textAllCaps="true"
         android:text="@string/search_component_search"
         />
 
 </RelativeLayout>
 
-<!--<Button-->
-<!--android:id="@+id/dialog_test_button"-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:layout_alignParentBottom="true"-->
-<!--android:text="Dialog"-->
-<!--    />-->
+    <!--<Button-->
+    <!--android:id="@+id/dialog_test_button"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:text="Dialog"-->
+    <!--    />-->
