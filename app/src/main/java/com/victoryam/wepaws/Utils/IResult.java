@@ -7,5 +7,8 @@ public interface IResult extends Parcelable {
     public String getAddressForResult();
     public String getSpeciesForResult();
     public String getDescriptionForResult();
-    public String getRatingForResult();
+    public int getNegativeCountForResult();
+    public int getNeutralCountForResult();
+    public int getPositiveCountForResult();
+
 }

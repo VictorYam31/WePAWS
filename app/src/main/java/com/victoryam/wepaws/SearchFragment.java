@@ -1,6 +1,7 @@
 package com.victoryam.wepaws;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
@@ -31,14 +33,16 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 public class SearchFragment extends Fragment {
-    private ComponentAdapter componentAdapter;
+    //private ComponentAdapter componentAdapter;
+    private HashMap<Integer, List<String>> searchingCriteria;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.search_by_category, container, false);
         int categoryId = -1;
-        String[] componentsName ={};
-        HashMap<Integer, List<String>> searchingCriteria = new HashMap<>();
+        String[] componentsName = {};
+        searchingCriteria = new HashMap<>();
 
         switch (getArguments().getInt("SearchFragmentArg")) {
             case 0:
@@ -69,27 +73,27 @@ public class SearchFragment extends Fragment {
         Button searchBtn = (Button) view.findViewById(R.id.search_by_category_button);
         searchBtn.setOnClickListener(new onSearchButtonClicked(categoryId, searchingCriteria));
 
-        NavController navController = NavHostFragment.findNavController(this);
-        MutableLiveData<List<String>> liveData = navController.getCurrentBackStackEntry().getSavedStateHandle().getLiveData("key");
-        liveData.observe(getViewLifecycleOwner(), new Observer<List<String>>() {
-            @Override
-            public void onChanged(List<String> l) {
-                int position = Integer.parseInt(l.get(0));
-                List<String> selectedItems = new ArrayList<String>(l);
-                selectedItems.remove(0);
-                searchingCriteria.put(position, selectedItems);
-                componentAdapter.updateItem(position, selectedItems.toString());
-            }
-        });
+//        NavController navController = NavHostFragment.findNavController(this);
+//        MutableLiveData<List<String>> liveData = navController.getCurrentBackStackEntry().getSavedStateHandle().getLiveData("key");
+//        liveData.observe(getViewLifecycleOwner(), new Observer<List<String>>() {
+//            @Override
+//            public void onChanged(List<String> l) {
+//                int position = Integer.parseInt(l.get(0));
+//                List<String> selectedItems = new ArrayList<String>(l);
+//                selectedItems.remove(0);
+//                searchingCriteria.put(position, selectedItems);
+//                componentAdapter.updateItem(position, selectedItems.toString());
+//            }
+//        });
 
         return view;
     }
 
-    private class onSearchButtonClicked implements  View.OnClickListener {
+    private class onSearchButtonClicked implements View.OnClickListener {
         private int categoryId;
         private HashMap<Integer, List<String>> searchingCriteria;
 
-        private onSearchButtonClicked(int categoryId, HashMap<Integer, List<String>> searchingCriteria){
+        private onSearchButtonClicked(int categoryId, HashMap<Integer, List<String>> searchingCriteria) {
             this.categoryId = categoryId;
             this.searchingCriteria = searchingCriteria;
         }
@@ -98,15 +102,9 @@ public class SearchFragment extends Fragment {
         public void onClick(View v) {
             Bundle bundle = new Bundle();
             bundle.putInt("CategoryId", categoryId);
-            bundle.putSerializable("SearchingCriteria",searchingCriteria);
+            bundle.putSerializable("SearchingCriteria", searchingCriteria);
             Navigation.findNavController(v).navigate(R.id.action_SearchFragment_to_ResultFragment, bundle);
         }
-    }
-
-    private void initComponents(View view, int categoryId, String[] componentNames) {
-        ListView listView = (ListView)view.findViewById(R.id.search_by_category_listview);
-        componentAdapter = new ComponentAdapter(this.getContext(), categoryId, componentNames);
-        listView.setAdapter(componentAdapter);
     }
 
     private void initExpandableComponents(View view, int categoryId, String[] firstLevel) {
@@ -122,8 +120,7 @@ public class SearchFragment extends Fragment {
                 thirdLevelData.put(getResources().getString(R.string.hk_district_Kowloon), getResources().getStringArray(R.array.hk_district_Kowloon));
                 thirdLevelData.put(getResources().getString(R.string.hk_district_New_Territories), getResources().getStringArray(R.array.hk_district_New_Territories));
                 thirdLevel.add(thirdLevelData);
-            }
-            else {
+            } else {
                 secondLevel.add(null);
                 thirdLevel.add(null);
             }
@@ -138,6 +135,7 @@ public class SearchFragment extends Fragment {
         private String[] firstLevel;    // [Name, District, Overnight]
         private List<String[]> secondLevel;     // [], [HK Island, Kowloon, NT], []
         private List<LinkedHashMap<String, String[]>> thirdLevel;       // null, Key: HK Island, Value: [Central, Sha Tin, ...], null
+        private List<String> checkboxOptions;
 
         private String input;
 
@@ -146,6 +144,7 @@ public class SearchFragment extends Fragment {
             this.firstLevel = firstLevel;
             this.secondLevel = secondLevel;
             this.thirdLevel = thirdLevel;
+            checkboxOptions = new ArrayList();
         }
 
         @Override
@@ -194,8 +193,7 @@ public class SearchFragment extends Fragment {
                 componentName.setText(firstLevel[i]);
                 switchButton.setVisibility(View.INVISIBLE);
                 switchButton.setFocusable(false);
-            }
-            else if (firstLevel[i].equals(getResources().getString(R.string.search_component_name))) {
+            } else if (firstLevel[i].equals(getResources().getString(R.string.search_component_name))) {
                 view = inflater.inflate(R.layout.search_component_2, null);
                 EditText editText = (EditText) view.findViewById(R.id.search_component_2_edittext);
                 if (input != null) {
@@ -204,18 +202,34 @@ public class SearchFragment extends Fragment {
                 editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     @Override
                     public void onFocusChange(View view, boolean b) {
-                        if(!b) {
+                        if (!b) {
                             Log.v("edittext is", String.valueOf(editText.getText()));
                             input = String.valueOf(editText.getText());
                             editText.setText(input);
                             Log.v("input is", input);
+                            searchingCriteria.put(i, new ArrayList() {{
+                                add(input);
+                            }});
                         }
                     }
                 });
-            }
-            else {
+            } else {
                 view = inflater.inflate(R.layout.search_component_1, null);
                 TextView componentName = (TextView) view.findViewById(R.id.search_component_1_name);
+                Switch componentSwitch = (Switch) view.findViewById(R.id.search_component_1_switch);
+                componentSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            searchingCriteria.put(i, new ArrayList() {{
+                                add("Y");
+                            }});
+                        } else {
+                            searchingCriteria.put(i, new ArrayList() {{
+                                add("N");
+                            }});
+                        }
+                    }
+                });
                 componentName.setText(firstLevel[i]);
             }
             return view;
@@ -227,17 +241,17 @@ public class SearchFragment extends Fragment {
             String[] secondLevelComponents = secondLevel.get(i);
             List<String[]> thirdLevelData = new ArrayList<>();
             HashMap<String, String[]> secondToThirdLevelMap = thirdLevel.get(i);
-            for(String key : secondToThirdLevelMap.keySet()) {
+            for (String key : secondToThirdLevelMap.keySet()) {
                 thirdLevelData.add(secondToThirdLevelMap.get(key));
             }
-            secondLevelExpandableListView.setAdapter(new SecondLevelComponentAdapter(mContext, secondLevelComponents, thirdLevelData));
+            secondLevelExpandableListView.setAdapter(new SecondLevelComponentAdapter(mContext, i, checkboxOptions, secondLevelComponents, thirdLevelData));
             secondLevelExpandableListView.setGroupIndicator(null);
             secondLevelExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
                 int previousGroup = -1;
 
                 @Override
                 public void onGroupExpand(int groupPosition) {
-                    if(groupPosition != previousGroup)
+                    if (groupPosition != previousGroup)
                         secondLevelExpandableListView.collapseGroup(previousGroup);
                     previousGroup = groupPosition;
                 }
@@ -268,13 +282,17 @@ public class SearchFragment extends Fragment {
     public class SecondLevelComponentAdapter extends BaseExpandableListAdapter {
 
         private Context mContext;
+        int parentGroupPosition;
         String[] headers;
         List<String[]> data;
+        List<String> checkboxOptions;
 
-        public SecondLevelComponentAdapter(Context c, String[] headers, List<String[]> data) {
+        public SecondLevelComponentAdapter(Context c, int parentGroupPosition, List<String> checkboxOptions, String[] headers, List<String[]> data) {
             this.mContext = c;
             this.headers = headers;
             this.data = data;
+            this.parentGroupPosition = parentGroupPosition;
+            this.checkboxOptions = checkboxOptions;
         }
 
         @Override
@@ -325,9 +343,35 @@ public class SearchFragment extends Fragment {
         public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.search_component_3, null);
-            TextView thirdLevelTextView = (TextView) view.findViewById(R.id.search_component_3_name);
-            CheckBox thirdLevelCheckBox = (CheckBox) view.findViewById(R.id.search_component_3_checkbox);
             String[] childArray = data.get(i);
+
+            TextView thirdLevelTextView = (TextView) view.findViewById(R.id.search_component_3_name);
+            final CheckBox thirdLevelCheckBox = (CheckBox) view.findViewById(R.id.search_component_3_checkbox);
+            thirdLevelCheckBox.setChecked(checkboxOptions.contains(childArray[i1]) ? true : false);
+            thirdLevelCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (thirdLevelCheckBox.isChecked()) {
+                        checkboxOptions.add(childArray[i1]);
+                        if (searchingCriteria.containsKey(parentGroupPosition)) {
+                            if (searchingCriteria.get(parentGroupPosition).contains(childArray[i1])) {
+                                return;
+                            } else {
+                                searchingCriteria.get(parentGroupPosition).add(childArray[i1]);
+                            }
+                        } else {
+                            searchingCriteria.put(parentGroupPosition, new ArrayList() {{
+                                add(childArray[i1]);
+                            }});
+                        }
+                    } else {
+                        checkboxOptions.remove(childArray[i1]);
+                        if (searchingCriteria.containsKey(parentGroupPosition)) {
+                            searchingCriteria.get(parentGroupPosition).remove(childArray[i1]);
+                        }
+                    }
+                }
+            });
             thirdLevelTextView.setText(childArray[i1]);
             thirdLevelTextView.setTextSize(15);
             thirdLevelTextView.setPadding(100, 0, 0, 0);
@@ -339,106 +383,4 @@ public class SearchFragment extends Fragment {
             return true;
         }
     }
-
-    public class ComponentAdapter extends BaseAdapter {
-
-        private Context mContext;
-        private int categoryId;
-        private String[] componentNames;
-        private String[] selectedItems;
-
-        public ComponentAdapter(Context c, int categoryId, String[] componentNames) {
-            this.mContext = c;
-            this.categoryId = categoryId;
-            this.componentNames = componentNames;
-            this.selectedItems = new String[componentNames.length];
-        }
-
-        @Override
-        public int getItemViewType(int position) {
-            // if (componentNames[position].equals(getResources().getString(R.string.search_component_opening_hours))) {
-            //     return 1;
-            // }
-            // else {
-            return 0;
-            //}
-        }
-
-        @Override
-        public int getViewTypeCount() {
-            return 1;
-        }
-
-        @Override
-        public int getCount() {
-            return componentNames.length;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return selectedItems[position];
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View view, ViewGroup viewGroup) {
-            int type = this.getItemViewType(position);
-            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            view = inflater.inflate(R.layout.search_component_0, null);
-            TextView componentName = (TextView) view.findViewById(R.id.search_component_0_name);
-            Button componentBtn = (Button) view.findViewById(R.id.search_component_0_btn);
-            TextView selectedItem = (TextView) view.findViewById(R.id.search_component_0_selection);
-            componentName.setText(this.componentNames[position]);
-            componentBtn.setOnClickListener(new openDialog(type, this.componentNames[position], position));
-            if (selectedItems[position] != null) {
-                selectedItem.setText(selectedItems[position]);
-            }
-
-            return view;
-        }
-
-        public void updateItem(int position, String s) {
-            if(s == "[]"){
-                s = null;
-            }
-            this.selectedItems[position] = s;
-            notifyDataSetChanged();
-        }
-    }
-
-    private class openDialog implements View.OnClickListener {
-
-        private final int type;
-        private final String componentName;
-        private final int position;
-
-        public openDialog(int type, String componentName, int position) {
-            this.type = type;
-            this.componentName = componentName;
-            this.position = position;
-        }
-
-        @Override
-        public void onClick(View v) {
-            Bundle bundle = new Bundle();
-            bundle.putString("SearchDialogComponent", this.componentName);      // Used by dialog to figure out which string array to show
-            bundle.putInt("ReturnPosition", this.position);     // Used to update component at a specific position when something is returned from the dialog
-            switch (type) {
-                case 0:
-                    bundle.putInt("SearchDialogType", 0);   //  Normal -> Multiple Choices Dialog
-                    break;
-                // case 1:
-                //     bundle.putInt("SearchDialogType", 1);   //  Opening Hours -> TimePicker Dialog
-                //     break;
-            }
-
-            Navigation.findNavController(v).navigate(R.id.action_SearchFragment_to_SearchDialog, bundle);
-        }
-    }
-
 }

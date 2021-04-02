@@ -133,7 +133,6 @@ public class ResultDetailFragment extends Fragment {
                 TextView resultRating = (TextView) view.findViewById(R.id.result_detail_0_rating);
                 resultName.setText(this.result.getNameForResult());
                 resultAddress.setText(this.result.getAddressForResult());
-                resultRating.setText(this.result.getRatingForResult());
             }
             else if (type == 1) {
                 view = inflater.inflate(R.layout.result_detail_1, null);
