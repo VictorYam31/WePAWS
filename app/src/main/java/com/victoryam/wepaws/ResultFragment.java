@@ -235,7 +235,6 @@ public class ResultFragment extends Fragment {
 
             resultName.setText(this.iResultList.get(position).getNameForResult());
             resultAddress.setText(this.iResultList.get(position).getAddressForResult());
-            resultAnimal.setText(this.iResultList.get(position).getSpeciesForResult());
             resultCategory.setText(this.iResultList.get(position).getDescriptionForResult());
 
             //Set Invisible txtView.setVisibility(View.INVISIBLE)

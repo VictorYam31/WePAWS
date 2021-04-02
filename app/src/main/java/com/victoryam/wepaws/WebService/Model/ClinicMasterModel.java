@@ -4,6 +4,7 @@ import android.media.Rating;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.victoryam.wepaws.Domain.Clinic;
 import com.victoryam.wepaws.Domain.Species;
 import com.victoryam.wepaws.Utils.IResult;
 
@@ -48,6 +49,10 @@ public class ClinicMasterModel implements IResult, Parcelable {
         }
     }
 
+    public int getClinicId() {
+        return clinic_id;
+    }
+
     public String getClinicName() {
         return clinic_name;
     }
@@ -79,6 +84,11 @@ public class ClinicMasterModel implements IResult, Parcelable {
     }
 
     @Override
+    public int getIDForResult() {
+        return getClinicId();
+    }
+
+    @Override
     public String getNameForResult() {
         return getClinicName();
     }
@@ -86,11 +96,6 @@ public class ClinicMasterModel implements IResult, Parcelable {
     @Override
     public String getAddressForResult() {
         return getClinicAddress();
-    }
-
-    @Override
-    public String getSpeciesForResult() {
-        return "";
     }
 
     @Override
