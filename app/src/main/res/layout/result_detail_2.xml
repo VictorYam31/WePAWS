@@ -27,6 +27,7 @@
             android:gravity="end"
             android:theme="@style/Result.Detail.Title"
             android:text="@string/result_detail_view_all"
+            android:visibility="gone"
             />
 
     </LinearLayout>
@@ -36,7 +37,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
-        android:theme="@style/FontSize_Small">
+        android:theme="@style/FontSize_Small"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="wrap_content"

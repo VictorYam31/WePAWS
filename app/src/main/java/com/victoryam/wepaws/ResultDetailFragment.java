@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -95,6 +96,9 @@ public class ResultDetailFragment extends Fragment {
             else if (position == 2){
                 return 2;
             }
+            else if (position == (getCount() - 1)) {
+                return 4;
+            }
             else {
                 return 3;
             }
@@ -102,7 +106,7 @@ public class ResultDetailFragment extends Fragment {
 
         @Override
         public int getViewTypeCount() {
-            return 4;
+            return 5;
         }
 
         @Override
@@ -121,7 +125,7 @@ public class ResultDetailFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return 3 + this.shortReviews.length;
+            return 3 + this.shortReviews.length + 1;
         }
 
         @Override
@@ -156,11 +160,8 @@ public class ResultDetailFragment extends Fragment {
                 TextView viewAll = (TextView) view.findViewById(R.id.result_detail_2_view_all);
                 viewAll.setOnClickListener(new openReview());
             }
-            else {
-                Log.v("position", String.valueOf(position));
-                Log.v("reviewPointer", String.valueOf(reviewPointer));
+            else if (type == 3){
                 view = inflater.inflate(R.layout.review_display, null);
-
                 TextView comment = (TextView) view.findViewById(R.id.review_display_comment);
                 ImageView image = (ImageView) view.findViewById(R.id.review_display_image);
                 comment.setText(this.shortReviews[reviewPointer].getReview());
@@ -172,6 +173,12 @@ public class ResultDetailFragment extends Fragment {
                 }
 //            Need a way to know if a review is: Good, Mediocre, Bad
 //            image.setImageResource();
+            }
+            else {
+                view = inflater.inflate(R.layout.result_detail_3, null);
+                TextView viewAll = (TextView) view.findViewById(R.id.result_detail_3_view_all);
+                Button writeReview = (Button) view.findViewById(R.id.result_detail_3_write_review);
+                viewAll.setOnClickListener(new openReview());
             }
 
             return view;

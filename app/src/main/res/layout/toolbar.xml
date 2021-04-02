@@ -13,8 +13,8 @@
 
     <ImageView
         android:id="@+id/test_icon"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="right"
         android:src="@drawable/test_icon"/>
 

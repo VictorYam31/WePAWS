@@ -37,11 +37,104 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/result_detail_0_good"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@color/good"
+                android:text="@string/result_detail_good"
+                android:visibility="gone"
+                />
+            <ImageView
+                android:id="@+id/result_detail_0_good_image"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:tint="@color/good"
+                android:src="@drawable/outline_sentiment_very_satisfied_24"
+                />
+            <TextView
+                android:id="@+id/result_detail_0_good_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:text="0"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/result_detail_0_mediocre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@color/mediocre"
+                android:text="@string/result_detail_mediocre"
+                android:visibility="gone"
+                />
+            <ImageView
+                android:id="@+id/result_detail_0_mediocre_image"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:tint="@color/mediocre"
+                android:src="@drawable/outline_sentiment_satisfied_24"
+                />
+            <TextView
+                android:id="@+id/result_detail_0_mediocre_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:text="0"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/result_detail_0_bad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@color/bad"
+                android:text="@string/result_detail_bad"
+                android:visibility="gone"
+                />
+            <ImageView
+                android:id="@+id/result_detail_0_bad_image"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:tint="@color/bad"
+                android:src="@drawable/outline_sentiment_dissatisfied_24"
+                />
+            <TextView
+                android:id="@+id/result_detail_0_bad_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:text="0"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center">
 
             <ImageView
                 android:id="@+id/result_detail_0_phone_call"
-                android:layout_width="100dp"
+                android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:theme="@style/Button_Medium"
                 android:src="@drawable/phone_call"
@@ -57,7 +150,7 @@
 
             <ImageView
                 android:id="@+id/result_detail_0_bookmark"
-                android:layout_width="100dp"
+                android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:theme="@style/Button_Medium"
                 android:src="@drawable/bookmark"
