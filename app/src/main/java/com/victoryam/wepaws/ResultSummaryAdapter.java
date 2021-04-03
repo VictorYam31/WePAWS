@@ -56,12 +56,15 @@ public class ResultSummaryAdapter extends BaseAdapter {
         switch (this.reviewList.get(position).getRateForReview()) {
             case 1:
                 image.setImageResource(R.drawable.outline_sentiment_very_satisfied_24);
+                image.setColorFilter(mContext.getResources().getColor(R.color.good));
                 break;
             case 0:
                 image.setImageResource(R.drawable.outline_sentiment_satisfied_24);
+                image.setColorFilter(mContext.getResources().getColor(R.color.mediocre));
                 break;
             case -1:
                 image.setImageResource(R.drawable.outline_sentiment_dissatisfied_24);
+                image.setColorFilter(mContext.getResources().getColor(R.color.bad));
                 break;
         }
         return view;

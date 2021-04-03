@@ -1,6 +1,10 @@
 package com.victoryam.wepaws;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +18,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -41,7 +47,6 @@ public class ResultDetailFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = this.getArguments();
-        String name = "";
 
         if (bundle != null) {
             iResult = bundle.getParcelable("IResult");
@@ -148,7 +153,6 @@ public class ResultDetailFragment extends Fragment {
 
         @Override
         public View getView(int position, View view, ViewGroup viewGroup) {
-            Log.v("calling", String.valueOf(position));
             int type = this.getItemViewType(position);
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -166,6 +170,9 @@ public class ResultDetailFragment extends Fragment {
 
                 TextView badRating = (TextView) view.findViewById(R.id.result_detail_0_bad_number);
                 badRating.setText(String.valueOf(this.result.getNegativeCountForResult()));
+
+                ImageView callImage = (ImageView) view.findViewById(R.id.result_detail_0_phone_call);
+                callImage.setOnClickListener(new makePhoneCall(mContext, this.result.getPhoneNumberForResult()));
             } else if (type == 1) {
                 view = inflater.inflate(R.layout.result_detail_1, null);
 
@@ -174,18 +181,22 @@ public class ResultDetailFragment extends Fragment {
 
                 String status = "";
                 boolean isOverNight = this.result.getIsOvernightForResult();
+                TextView openingHoursStatus = (TextView) view.findViewById(R.id.result_detail_1_opening_hours_status);
+
 
                 if (isOverNight) {
-                    status = "Open   24 Hours";
+                    status = "Open  24 Hours";
+                    openingHoursStatus.setTextColor(getResources().getColor(R.color.light_green));
                 } else {
                     if (currentHour > 21 || currentHour < 9) {
-                        status = "Close   9:00 - 21:00";
+                        status = "Close  9:00 - 21:00";
+                        openingHoursStatus.setTextColor(getResources().getColor(R.color.light_red));
                     } else {
-                        status = "Open   9:00 - 21:00";
+                        status = "Open  9:00 - 21:00";
+                        openingHoursStatus.setTextColor(getResources().getColor(R.color.light_green));
                     }
                 }
 
-                TextView openingHoursStatus = (TextView) view.findViewById(R.id.result_detail_1_opening_hours_status);
                 openingHoursStatus.setText(status);
 
                 TextView phoneText = (TextView) view.findViewById(R.id.result_detail_1_phone);
@@ -206,7 +217,7 @@ public class ResultDetailFragment extends Fragment {
 
                 TextView comment = (TextView) view.findViewById(R.id.review_display_comment);
                 String review = this.reviewList.get(reviewPointer).getReviewForReview();
-                if(review.length() > 30){
+                if (review.length() > 30) {
                     review = review.substring(0, 30) + "...";
                 }
                 comment.setText(review);
@@ -221,12 +232,15 @@ public class ResultDetailFragment extends Fragment {
                 switch (this.reviewList.get(reviewPointer).getRateForReview()) {
                     case 1:
                         image.setImageResource(R.drawable.outline_sentiment_very_satisfied_24);
+                        image.setColorFilter(getContext().getResources().getColor(R.color.good));
                         break;
                     case 0:
                         image.setImageResource(R.drawable.outline_sentiment_satisfied_24);
+                        image.setColorFilter(getContext().getResources().getColor(R.color.mediocre));
                         break;
                     case -1:
                         image.setImageResource(R.drawable.outline_sentiment_dissatisfied_24);
+                        image.setColorFilter(getContext().getResources().getColor(R.color.bad));
                         break;
                 }
 
@@ -262,7 +276,7 @@ public class ResultDetailFragment extends Fragment {
         private ArrayList<IReview> reviewList;
 
         private openReview(List<IReview> reviewList) {
-            this.reviewList =  new ArrayList<IReview>(reviewList);
+            this.reviewList = new ArrayList<IReview>(reviewList);
         }
 
         @Override
@@ -271,6 +285,23 @@ public class ResultDetailFragment extends Fragment {
             bundle.putString("Name", iResult.getNameForResult());
             bundle.putParcelableArrayList("ReviewList", reviewList);
             Navigation.findNavController(view).navigate(R.id.action_ResultDetailFragment_to_ReviewSummaryFragment, bundle);
+        }
+    }
+
+    private class makePhoneCall implements View.OnClickListener {
+        private String phoneNumber;
+        private Context mContext;
+
+        private makePhoneCall(Context mContext, String phoneNumber) {
+            this.mContext = mContext;
+            this.phoneNumber = phoneNumber.replaceAll("\\s+", "");
+        }
+
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:" + phoneNumber));
+            startActivity(intent);
         }
     }
 }
