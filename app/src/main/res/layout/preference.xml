@@ -5,19 +5,43 @@
     android:layout_height="match_parent"
     android:layout_margin="10dp">
 
-    <TextView
-        android:id="@+id/profile_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="15dp"
-        android:text="Guest"
-        android:theme="@style/FontSize_Medium" />
+    <RelativeLayout
+        android:id="@+id/profile_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/profile_user_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/outline_person_outline_24"/>
+
+        <TextView
+            android:id="@+id/profile_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/profile_user_icon"
+            android:text="Guest"
+            android:theme="@style/FontSize_Medium" />
+
+        <Button
+            android:id="@+id/profile_logout_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:theme="@style/Button_Tiny"
+            android:text="@string/profile_logout"
+            android:visibility="invisible"/>
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/profile_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/profile_username"
+        android:layout_below="@id/profile_relative_layout"
         android:orientation="vertical">
 
         <TextView
