@@ -19,6 +19,7 @@ import androidx.navigation.Navigation;
 
 import com.victoryam.wepaws.Domain.VetReview;
 import com.victoryam.wepaws.Utils.IResult;
+import com.victoryam.wepaws.Utils.IReview;
 import com.victoryam.wepaws.WebService.Model.ClinicReviewModel;
 import com.victoryam.wepaws.WebService.WebServiceManager;
 
@@ -36,77 +37,69 @@ public class ResultDetailFragment extends Fragment {
 
     //    private Result result;
     private IResult iResult;
+    private int categoryId;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = this.getArguments();
-        int categoryId = -1;
         String name = "";
 
         if (bundle != null) {
             iResult = bundle.getParcelable("IResult");
+            categoryId = bundle.getInt("CategoryId");
         }
-
-//        if (this.getArguments() != null) {
-//            this.result = this.getArguments().getParcelable("ResultDetailFragmentArg");
-//        }
-//        else {
-//            Log.v("empty arguments", "no results?");
-//        }
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.result_detail, container, false);
-
-        initResultDetails(view, this.iResult);
+        initResultDetails(view, categoryId, this.iResult);
 
         return view;
     }
 
-    private void initResultDetails(View view, IResult result) {
+    private void initResultDetails(View view, int categoryId, IResult result) {
         ListView listView = (ListView) view.findViewById(R.id.result_detail_listview);
-
-//        //        dummy reviews
-//        VetReview r1 = new VetReview();
-//        r1.setReview("Good doctor");
-//        VetReview r2 = new VetReview();
-//        r2.setReview("Too expensive");
-//        VetReview r3 = new VetReview();
-//        r3.setReview("Unprofessional");
-//        VetReview[] shortReviews = {r1, r2, r3};
-//        //
-
-        List<ClinicReviewModel> clinicReviewModelList = new ArrayList<ClinicReviewModel>();
+        List<IReview> reviewList = new ArrayList<>();
 
         try {
             WebServiceManager webServiceManager = new WebServiceManager();
-            clinicReviewModelList =
-                    new ArrayList<ClinicReviewModel>(webServiceManager.get_clinic_review(String.valueOf(this.iResult.getIDForResult())));
+            switch (categoryId) {
+                case 1:
+                    reviewList =
+                            new ArrayList<IReview>(webServiceManager.get_clinic_review(String.valueOf(this.iResult.getIDForResult())));
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+            }
+
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
 
-
-        ResultDetailAdapter resultDetailAdapter = new ResultDetailAdapter(this.getContext(), result, clinicReviewModelList);
+        ResultDetailAdapter resultDetailAdapter = new ResultDetailAdapter(this.getContext(), result, reviewList);
         listView.setAdapter(resultDetailAdapter);
     }
 
     public class ResultDetailAdapter extends BaseAdapter {
-
         private Context mContext;
         private IResult result;
         private int reviewPointer;
-        private List<ClinicReviewModel> clinicReviewModelList;
-        private final int reviewCount = 3;
+        private List<IReview> reviewList;
+        private int reviewCount;
 
-        public ResultDetailAdapter(Context c, IResult result, List<ClinicReviewModel> clinicReviewModelList) {
+        public ResultDetailAdapter(Context c, IResult result, List<IReview> reviewList) {
             this.mContext = c;
             this.result = result;
-            this.clinicReviewModelList = clinicReviewModelList;
+            this.reviewList = reviewList;
             this.reviewPointer = 0;
+            this.reviewCount = 0;
         }
 
         @Override
@@ -132,20 +125,16 @@ public class ResultDetailFragment extends Fragment {
         @Override
         public boolean isEnabled(int position) {
             return false;
-//            if (position == 0) {
-//                return false;
-//            }
-//            else if (position == 1) {
-//                return false;
-//            }
-//            else {
-//                return true;
-//            }
         }
 
         @Override
         public int getCount() {
-            return 3 + reviewCount + 1;
+            if (reviewList.size() > 3) {
+                reviewCount = 3;
+            } else {
+                reviewCount = reviewList.size();
+            }
+            return 3 + reviewCount + 1;  //3 + 1 is a must
         }
 
         @Override
@@ -166,27 +155,25 @@ public class ResultDetailFragment extends Fragment {
 
             if (type == 0) {
                 view = inflater.inflate(R.layout.result_detail_0, null);
+
                 TextView resultName = (TextView) view.findViewById(R.id.result_detail_0_name);
                 resultName.setText(String.valueOf(this.result.getNameForResult()));
 
-                String a = String.valueOf(this.result.getPositiveCountForResult());
                 TextView goodRating = (TextView) view.findViewById(R.id.result_detail_0_good_number);
                 goodRating.setText(String.valueOf(this.result.getPositiveCountForResult()));
 
-                String b = String.valueOf(this.result.getNeutralCountForResult());
                 TextView mediocreRating = (TextView) view.findViewById(R.id.result_detail_0_mediocre_number);
                 mediocreRating.setText(String.valueOf(this.result.getNeutralCountForResult()));
 
-                String c = String.valueOf(this.result.getNegativeCountForResult());
                 TextView badRating = (TextView) view.findViewById(R.id.result_detail_0_bad_number);
                 badRating.setText(String.valueOf(this.result.getNegativeCountForResult()));
-
             } else if (type == 1) {
                 view = inflater.inflate(R.layout.result_detail_1, null);
+
                 Calendar rightNow = Calendar.getInstance();
                 int currentHour = rightNow.get(Calendar.HOUR_OF_DAY);
+
                 String status = "";
-                String openingHours = "";
                 boolean isOverNight = this.result.getIsOvernightForResult();
 
                 if (isOverNight) {
@@ -202,43 +189,60 @@ public class ResultDetailFragment extends Fragment {
                 TextView openingHoursStatus = (TextView) view.findViewById(R.id.result_detail_1_opening_hours_status);
                 openingHoursStatus.setText(status);
 
-                String a = this.result.getPhoneNumberForResult();
                 TextView phoneText = (TextView) view.findViewById(R.id.result_detail_1_phone);
                 phoneText.setText(this.result.getPhoneNumberForResult());
 
-                String b = this.result.getAddressForResult();
                 TextView addressText = (TextView) view.findViewById(R.id.result_detail_1_address);
                 addressText.setText(this.result.getAddressForResult());
 
-                String c = this.result.getDescriptionForResult();
                 TextView descriptionText = (TextView) view.findViewById(R.id.result_detail_1_description);
                 descriptionText.setText(this.result.getDescriptionForResult());
-
             } else if (type == 2) {
                 view = inflater.inflate(R.layout.result_detail_2, null);
+
                 TextView viewAll = (TextView) view.findViewById(R.id.result_detail_2_view_all);
                 viewAll.setOnClickListener(new openReview());
             } else if (type == 3) {
                 view = inflater.inflate(R.layout.review_display, null);
+
                 TextView comment = (TextView) view.findViewById(R.id.review_display_comment);
-                comment.setText(this.clinicReviewModelList.get(reviewPointer).getReview());
-                if (reviewPointer < this.reviewCount) {
+                comment.setText(this.reviewList.get(reviewPointer).getReviewForReview());
+
+                TextView userName = (TextView) view.findViewById(R.id.review_display_username);
+                userName.setText(this.reviewList.get(reviewPointer).getLoginIDForReview());
+
+                TextView dateText = (TextView) view.findViewById(R.id.review_display_date);
+                dateText.setText(this.reviewList.get(reviewPointer).gerCreateDateForReview());
+
+                ImageView image = (ImageView) view.findViewById(R.id.review_display_image);
+                switch (this.reviewList.get(reviewPointer).getRateForReview()) {
+                    case 1:
+                        image.setImageResource(R.drawable.outline_sentiment_very_satisfied_24);
+                        break;
+                    case 0:
+                        image.setImageResource(R.drawable.outline_sentiment_satisfied_24);
+                        break;
+                    case -1:
+                        image.setImageResource(R.drawable.outline_sentiment_dissatisfied_24);
+                        break;
+                }
+
+                if (reviewPointer < this.reviewCount - 1) {
                     reviewPointer++;
                 } else {
                     reviewPointer = 0;
                 }
-                TextView userName = (TextView) view.findViewById(R.id.review_display_username);
-                userName.setText("Guest");
-                TextView dateText = (TextView) view.findViewById(R.id.review_display_date);
-                userName.setText("2021-1-1 09:00");
-                ImageView image = (ImageView) view.findViewById(R.id.review_display_image);
+
 //            Need a way to know if a review is: Good, Mediocre, Bad
 //            image.setImageResource();
             } else {
                 view = inflater.inflate(R.layout.result_detail_3, null);
+
                 TextView viewAll = (TextView) view.findViewById(R.id.result_detail_3_view_all);
-                viewAll.setText("View " + this.clinicReviewModelList.size() + " reviews");
+                viewAll.setText("View " + this.reviewList.size() + " reviews");
+
                 Button writeReview = (Button) view.findViewById(R.id.result_detail_3_write_review);
+
                 viewAll.setOnClickListener(new openReview());
                 writeReview.setOnClickListener(new View.OnClickListener() {
                     @Override

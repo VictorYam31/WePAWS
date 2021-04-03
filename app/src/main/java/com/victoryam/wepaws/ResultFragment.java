@@ -94,16 +94,17 @@ public class ResultFragment extends Fragment {
     }
 
     private void initResults(View view, int categoryId, String[] componentNames, HashMap<Integer, List<String>> searchingCriteria) {
-        ListView listView = (ListView) view.findViewById(R.id.result_listview);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View v, int position, long l) {
-                Result result = (Result) adapterView.getItemAtPosition(position);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("ResultDetailFragmentArg", result);
-                Navigation.findNavController(view).navigate(R.id.action_ResultFragment_to_ResultDetailFragment, bundle);
-            }
-        });
+        //ListView listView = (ListView) view.findViewById(R.id.result_listview);
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View v, int position, long l) {
+//                Result result = (Result) adapterView.getItemAtPosition(position);
+//                Bundle bundle = new Bundle();
+//                bundle.putInt("CategoryId", categoryId);
+//                bundle.putParcelable("ResultDetailFragmentArg", result);
+//                Navigation.findNavController(view).navigate(R.id.action_ResultFragment_to_ResultDetailFragment, bundle);
+//            }
+//        });
 
         new initResultsTask(view, categoryId, componentNames, searchingCriteria).execute("");
     }
@@ -262,6 +263,7 @@ public class ResultFragment extends Fragment {
 
             Bundle bundle = new Bundle();
             bundle.putParcelable("IResult", iResult);
+            bundle.putInt("CategoryId", categoryId);
 
             Navigation.findNavController(view).navigate(R.id.action_ResultFragment_to_ResultDetailFragment, bundle);
         }
