@@ -14,5 +14,7 @@
     <color name="good">#4CAF50</color>]
     <color name="mediocre">#FF9800</color>
     <color name="bad">#F44336</color>
+    <color name="light_green">#4DE18B</color>
+    <color name="light_red">#D84965</color>
 
 </resources>
