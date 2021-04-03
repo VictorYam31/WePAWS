@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,8 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="15dp"
-        android:theme="@style/FontSize_Medium"
-        android:text="Username here"/>
+        android:text="Guest"
+        android:theme="@style/FontSize_Medium" />
 
     <LinearLayout
         android:id="@+id/profile_linear_layout"
@@ -25,46 +24,51 @@
             android:id="@+id/profile_username_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/profile_username"/>
+            android:text="@string/profile_username" />
 
         <EditText
             android:id="@+id/profile_username_edittext"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/profile_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/profile_password"/>
+            android:text="@string/profile_password" />
 
         <EditText
             android:id="@+id/profile_password_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            />
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/profile_login_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/Button_Tiny"
-            android:text="@string/profile_login"/>
+            android:text="@string/profile_login"
+            android:theme="@style/Button_Tiny" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="end">
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/profile_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
 
             <TextView
                 android:id="@+id/profile_create_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/profile_create_account"/>
+                android:layout_alignParentEnd="true"
+                android:text="@string/profile_create_account" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </LinearLayout>
 
@@ -79,25 +83,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:theme="@style/FontSize_Small"
             android:text="@string/preference_language"
-            />
+            android:theme="@style/FontSize_Small" />
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/preference_language_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            />
+            android:layout_gravity="center_vertical" />
 
         <Button
             android:id="@+id/preference_save_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/preference_save"
             android:backgroundTint="@color/orange_dark"
+            android:text="@string/preference_save"
             android:theme="@style/Preference.FontSize"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
     </LinearLayout>
 
