@@ -6,18 +6,25 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -34,6 +41,31 @@ public class HomeFragment extends Fragment {
         homeAdapter = new HomeAdapter(this.getContext(), this.getHomeItems());
         homeRecyclerView.setAdapter(homeAdapter);
 
+        SearchView searchView = (SearchView) view.findViewById(R.id.home_menu_search);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Bundle bundle = new Bundle();
+                int categoryId = 0;
+                HashMap<Integer, List<String>> searchingCriteria = new HashMap<>();
+                searchingCriteria.put(0, new ArrayList() {{
+                    add(query);
+                }});
+
+                bundle.putInt("CategoryId", categoryId);
+                bundle.putSerializable("SearchingCriteria", searchingCriteria);
+
+                Navigation.findNavController(view).navigate(R.id.action_HomeFragment_to_ResultFragment, bundle);
+                return false;
+            }
+
+        });
+
         /*Button vetButton = (Button) view.findViewById(R.id.home_menu_clinic_btn);
         vetButton.setOnClickListener(new onButtonClicked());
 
@@ -45,9 +77,16 @@ public class HomeFragment extends Fragment {
 
         Button parkButton = (Button) view.findViewById(R.id.home_menu_park_btn);
         parkButton.setOnClickListener(new onButtonClicked());*/
-
         return view;
     }
+
+//    @Override
+//    public void onResume(){
+//        super.onResume();
+//        ((AppCompatActivity)getActivity()).getWindow().setSoftInputMode(
+//                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+//        );
+//    }
 
     private class onButtonClicked implements  View.OnClickListener {
         int position;

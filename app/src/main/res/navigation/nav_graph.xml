@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_HomeFragment_to_PreferenceFragment"
             app:destination="@id/PreferenceFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_ResultFragment"
+            app:destination="@id/ResultFragment" />
     </fragment>
     <fragment
         android:id="@+id/SearchFragment"
@@ -59,7 +62,11 @@
         android:id="@+id/PreferenceFragment"
         android:name="com.victoryam.wepaws.PreferenceFragment"
         android:label="@string/nav_menu_preference"
-        tools:layout="@layout/preference" />
+        tools:layout="@layout/preference" >
+        <action
+            android:id="@+id/action_PreferenceFragment_to_CreateAccountFragment"
+            app:destination="@id/CreateAccountFragment" />
+    </fragment>
     <fragment
         android:id="@+id/ResultFragment"
         android:name="com.victoryam.wepaws.ResultFragment"
@@ -104,4 +111,9 @@
             app:argType="string"
             />
     </fragment>
+    <fragment
+        android:id="@+id/CreateAccountFragment"
+        android:name="com.victoryam.wepaws.CreateAccountFragment"
+        android:label="@string/create_account"
+        tools:layout="@layout/create_account" />
 </navigation>

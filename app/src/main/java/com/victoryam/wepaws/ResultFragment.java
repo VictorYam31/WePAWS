@@ -30,6 +30,8 @@ import com.victoryam.wepaws.Domain.District;
 import com.victoryam.wepaws.Utils.IResult;
 import com.victoryam.wepaws.Utils.Utility;
 import com.victoryam.wepaws.WebService.Model.ClinicMasterModel;
+import com.victoryam.wepaws.WebService.Model.WildSearchModel;
+import com.victoryam.wepaws.WebService.Task.WildSearchTask;
 import com.victoryam.wepaws.WebService.WebServiceManager;
 
 import org.json.JSONException;
@@ -78,6 +80,9 @@ public class ResultFragment extends Fragment {
         }
 
         switch (categoryId) {
+            case 0:
+                componentNames =  getResources().getStringArray(R.array.wild_search_names);
+                break;
             case 1:
                 componentNames = getResources().getStringArray(R.array.search_clinic_component_names);
                 break;
@@ -155,6 +160,9 @@ public class ResultFragment extends Fragment {
 
             try {
                 switch (categoryId) {
+                    case 0:
+                        String name = searchingCriteriaForWebService.get("Name");
+                        iResultList = new ArrayList<IResult>(webServiceManager.wild_search(name));
                     case 1:
                         String clinic_name = searchingCriteriaForWebService.get("Name");
                         String district_id = searchingCriteriaForWebService.get("District");

@@ -1,9 +1,14 @@
 package com.victoryam.wepaws.WebService.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.victoryam.wepaws.Utils.IResult;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class WildSearchModel {
+public class WildSearchModel implements IResult, Parcelable {
     private String category;
     private int clinic_id;
     private String clinic_name;
@@ -31,15 +36,39 @@ public class WildSearchModel {
         }
     }
 
+    protected WildSearchModel(Parcel in) {
+        category = in.readString();
+        clinic_id = in.readInt();
+        clinic_name = in.readString();
+        clinic_name_cn = in.readString();
+        clinic_address = in.readString();
+        clinic_address_cn = in.readString();
+        phone = in.readString();
+        overnight = in.readString();
+        review = in.readString();
+    }
+
+    public static final Creator<WildSearchModel> CREATOR = new Creator<WildSearchModel>() {
+        @Override
+        public WildSearchModel createFromParcel(Parcel in) {
+            return new WildSearchModel(in);
+        }
+
+        @Override
+        public WildSearchModel[] newArray(int size) {
+            return new WildSearchModel[size];
+        }
+    };
+
     public String getCategory() {
         return category;
     }
 
-    public int getClinic_id() {
+    public int getClinicId() {
         return clinic_id;
     }
 
-    public String getClinic_name() {
+    public String getClinicName() {
         return clinic_name;
     }
 
@@ -47,7 +76,7 @@ public class WildSearchModel {
         return clinic_name_cn;
     }
 
-    public String getClinic_address() {
+    public String getClinicAddress() {
         return clinic_address;
     }
 
@@ -65,5 +94,78 @@ public class WildSearchModel {
 
     public String getReview() {
         return review;
+    }
+
+    @Override
+    public int getIDForResult() {
+        return getClinicId();
+    }
+
+    @Override
+    public String getNameForResult() {
+        return getClinicName();
+    }
+
+    @Override
+    public String getAddressForResult() {
+        return getClinicAddress();
+    }
+
+    @Override
+    public String getDescriptionForResult() {
+//        return getClinicDesc();
+        return "";
+    }
+
+    @Override
+    public int getNegativeCountForResult() {
+//        return getNegativeCount();
+        return 0;
+    }
+
+    @Override
+    public int getNeutralCountForResult() {
+//        return getNeutralCount();
+        return 0;
+    }
+
+    @Override
+    public int getPositiveCountForResult() {
+//        return getPositiveCount();
+        return 0;
+    }
+
+    @Override
+    public boolean getIsOvernightForResult() {
+//        return getIsOvernight();
+        return false;
+    }
+
+    @Override
+    public String getPhoneNumberForResult() {
+        return getPhone();
+    }
+
+    @Override
+    public int getCategoryForResult() {
+        return 0;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(category);
+        parcel.writeInt(clinic_id);
+        parcel.writeString(clinic_name);
+        parcel.writeString(clinic_name_cn);
+        parcel.writeString(clinic_address);
+        parcel.writeString(clinic_address_cn);
+        parcel.writeString(phone);
+        parcel.writeString(overnight);
+        parcel.writeString(review);
     }
 }
