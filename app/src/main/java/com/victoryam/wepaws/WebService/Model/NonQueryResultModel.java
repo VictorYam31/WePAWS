@@ -7,6 +7,9 @@ public class NonQueryResultModel {
     int isSuccess;
     int info;
 
+    public NonQueryResultModel(){
+    }
+
     //isSuccess = 0 Fail
     //isSuccess = 1 Success
     public NonQueryResultModel(JSONObject jsonObject){
