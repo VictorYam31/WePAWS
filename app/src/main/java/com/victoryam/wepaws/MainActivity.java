@@ -75,6 +75,25 @@ public class MainActivity extends AppCompatActivity {
 
         navigationBar = findViewById(R.id.navigationbar);
         NavigationUI.setupWithNavController(navigationBar, navController);
+        navigationBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.HomeFragment:
+                        navController.navigate(R.id.HomeFragment);
+                        break;
+                    case R.id.SearchFragment:
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("SearchFragmentArg", -1);
+                        navController.navigate(R.id.SearchFragment, bundle);
+                        break;
+                    case R.id.PreferenceFragment:
+                        navController.navigate(R.id.PreferenceFragment);
+                        break;
+                }
+                return false;
+            }
+        });
 
     }
 
