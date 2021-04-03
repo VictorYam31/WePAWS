@@ -1,5 +1,7 @@
 package com.victoryam.wepaws.WebService.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.PrecomputedText;
 
 import com.victoryam.wepaws.Utils.IReview;
@@ -7,13 +9,34 @@ import com.victoryam.wepaws.Utils.IReview;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ClinicReviewModel implements IReview {
+public class ClinicReviewModel implements IReview, Parcelable {
     int clinic_id;
     String login;
     int rate;
     String review;
     String created_datetime;
     String updated_datetime;
+
+    protected ClinicReviewModel(Parcel in) {
+        clinic_id = in.readInt();
+        login = in.readString();
+        rate = in.readInt();
+        review = in.readString();
+        created_datetime = in.readString();
+        updated_datetime = in.readString();
+    }
+
+    public static final Creator<ClinicReviewModel> CREATOR = new Creator<ClinicReviewModel>() {
+        @Override
+        public ClinicReviewModel createFromParcel(Parcel in) {
+            return new ClinicReviewModel(in);
+        }
+
+        @Override
+        public ClinicReviewModel[] newArray(int size) {
+            return new ClinicReviewModel[size];
+        }
+    };
 
     public int getClinicID() {
         return clinic_id;
@@ -74,6 +97,21 @@ public class ClinicReviewModel implements IReview {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(clinic_id);
+        parcel.writeString(login);
+        parcel.writeInt(rate);
+        parcel.writeString(review);
+        parcel.writeString(created_datetime);
+        parcel.writeString(updated_datetime);
     }
 }
 

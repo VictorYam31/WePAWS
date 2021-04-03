@@ -1,6 +1,8 @@
 package com.victoryam.wepaws.Utils;
 
-public interface IReview {
+import android.os.Parcelable;
+
+public interface IReview extends Parcelable {
     public int getIDForReview();
     public String getLoginIDForReview();
     public int getRateForReview();

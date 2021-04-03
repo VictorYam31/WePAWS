@@ -9,25 +9,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.victoryam.wepaws.Domain.VetReview;
+import com.victoryam.wepaws.Utils.IReview;
+
+import java.util.List;
 
 public class ResultSummaryAdapter extends BaseAdapter {
 
     private Context mContext;
-    private VetReview[] reviews;
+    private List<IReview> reviewList;
 
-    public ResultSummaryAdapter(Context mContext, VetReview[] reviews) {
+    public ResultSummaryAdapter(Context mContext, List<IReview> reviewList) {
         this.mContext = mContext;
-        this.reviews = reviews;
+        this.reviewList = reviewList;
     }
 
     @Override
     public int getCount() {
-        return reviews.length;
+        return reviewList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return reviews[position];
+        return reviewList.get(position);
     }
 
     @Override
@@ -41,11 +44,26 @@ public class ResultSummaryAdapter extends BaseAdapter {
         view = inflater.inflate(R.layout.review_display, null);
 
         TextView comment = (TextView) view.findViewById(R.id.review_display_comment);
-        ImageView image = (ImageView) view.findViewById(R.id.review_display_image);
-        comment.setText(reviews[position].getReview());
-//            Need a way to know if a review is: Good, Mediocre, Bad
-//            image.setImageResource();
+        comment.setText(this.reviewList.get(position).getReviewForReview());
 
+        TextView userName = (TextView) view.findViewById(R.id.review_display_username);
+        userName.setText(this.reviewList.get(position).getLoginIDForReview());
+
+        TextView dateText = (TextView) view.findViewById(R.id.review_display_date);
+        dateText.setText(this.reviewList.get(position).gerCreateDateForReview());
+
+        ImageView image = (ImageView) view.findViewById(R.id.review_display_image);
+        switch (this.reviewList.get(position).getRateForReview()) {
+            case 1:
+                image.setImageResource(R.drawable.outline_sentiment_very_satisfied_24);
+                break;
+            case 0:
+                image.setImageResource(R.drawable.outline_sentiment_satisfied_24);
+                break;
+            case -1:
+                image.setImageResource(R.drawable.outline_sentiment_dissatisfied_24);
+                break;
+        }
         return view;
     }
 }

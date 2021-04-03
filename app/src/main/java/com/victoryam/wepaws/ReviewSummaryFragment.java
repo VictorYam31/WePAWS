@@ -16,19 +16,21 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.victoryam.wepaws.Domain.VetReview;
+import com.victoryam.wepaws.Utils.IReview;
+
+import java.util.List;
 
 public class ReviewSummaryFragment extends Fragment {
 
     private String name;
+    private List<IReview> reviewList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (this.getArguments() != null) {
-            this.name = this.getArguments().getString("name");
-        }
-        else {
-            Log.v("empty arguments", "no name?");
+            this.name = this.getArguments().getString("Name");
+            this.reviewList = this.getArguments().getParcelableArrayList("ReviewList");
         }
     }
 
@@ -49,25 +51,14 @@ public class ReviewSummaryFragment extends Fragment {
             }
         });
 
-//        dummy reviews
-        VetReview r1 = new VetReview();
-        r1.setReview("Good doctor");
-        VetReview r2 = new VetReview();
-        r2.setReview("Too expensive");
-        VetReview r3 = new VetReview();
-        r3.setReview("Unprofessional");
-        VetReview[] reviews = {r1, r2, r3};
-//
-        initReviews(view, reviews);
-
+        initReviews(view, reviewList);
         return view;
     }
 
-    private void initReviews(View view, VetReview[] reviews) {
+    private void initReviews(View view, List<IReview> reviewList) {
         ListView listView = (ListView)view.findViewById(R.id.review_sumamry_listview);
 
-        ResultSummaryAdapter resultDetailAdapter = new ResultSummaryAdapter(this.getContext(), reviews);
+        ResultSummaryAdapter resultDetailAdapter = new ResultSummaryAdapter(this.getContext(), reviewList);
         listView.setAdapter(resultDetailAdapter);
     }
-
 }

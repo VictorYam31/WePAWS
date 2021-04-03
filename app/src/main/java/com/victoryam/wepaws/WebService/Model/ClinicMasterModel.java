@@ -128,10 +128,19 @@ public class ClinicMasterModel implements IResult, Parcelable {
     }
 
     @Override
-    public boolean getIsOvernightForResult() { return getIsOvernight();}
+    public boolean getIsOvernightForResult() {
+        return getIsOvernight();
+    }
 
     @Override
-    public String getPhoneNumberForResult() { return getPhone();}
+    public String getPhoneNumberForResult() {
+        return getPhone();
+    }
+
+    @Override
+    public int getCategoryForResult() {
+        return 0;
+    }
 
     @Override
     public int describeContents() {
