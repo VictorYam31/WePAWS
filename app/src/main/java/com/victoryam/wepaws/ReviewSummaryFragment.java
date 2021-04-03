@@ -41,7 +41,7 @@ public class ReviewSummaryFragment extends Fragment {
 
         TextView reviewSummaryTitle = (TextView) view.findViewById(R.id.review_summary_title);
         Button writeReview = (Button) view.findViewById(R.id.result_summary_write_review);
-        reviewSummaryTitle.setText(getResources().getString(R.string.review_summary_title) + this.name);
+        reviewSummaryTitle.setText(this.name);
         writeReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

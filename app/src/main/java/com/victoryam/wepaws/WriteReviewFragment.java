@@ -32,7 +32,7 @@ public class WriteReviewFragment extends Fragment {
         View view = inflater.inflate(R.layout.write_review, container, false);
 
         TextView title = (TextView) view.findViewById(R.id.write_review_title);
-        title.setText(getResources().getString(R.string.write_review_title) + this.name);
+        title.setText(this.name);
 
         TextView submit = (TextView) view.findViewById(R.id.write_review_submit);
         submit.setOnClickListener(new View.OnClickListener() {

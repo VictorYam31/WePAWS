@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_HomeFragment_to_PreferenceFragment"
             app:destination="@id/PreferenceFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_ResultFragment"
+            app:destination="@id/ResultFragment" />
     </fragment>
     <fragment
         android:id="@+id/SearchFragment"

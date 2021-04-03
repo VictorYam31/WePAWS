@@ -29,4 +29,8 @@
         <item>@string/search_component_opening_hours</item>
     </string-array>
 
+    <string-array name="wild_search_names">
+        <item>@string/search_component_name</item>
+    </string-array>
+
 </resources>
