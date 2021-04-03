@@ -75,7 +75,7 @@ public class WildSearchActivity extends AppCompatActivity {
             System.out.println(wildSearchList.size());
             StringBuilder result = new StringBuilder();
             for (int i = 0; i < wildSearchList.size(); i++) {
-                result.append("Clinic Name: " + wildSearchList.get(i).getClinic_name() + '\n');
+                result.append("Clinic Name: " + wildSearchList.get(i).getClinicName() + '\n');
                 result.append(" Phone: " + wildSearchList.get(i).getPhone() + '\n');
                 result.append(" Review: " + wildSearchList.get(i).getReview() + '\n');
             }
