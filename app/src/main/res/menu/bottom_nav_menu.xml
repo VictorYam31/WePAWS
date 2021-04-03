@@ -11,5 +11,5 @@
     <item
         android:id="@id/PreferenceFragment"
         android:title="@string/nav_menu_preference"
-        android:icon="@drawable/nav_menu_preference"/>
+        android:icon="@drawable/outline_person_outline_24"/>
 </menu>
