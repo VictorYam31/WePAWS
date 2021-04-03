@@ -34,8 +34,6 @@ import java.util.concurrent.ExecutionException;
 import kotlin.collections.ArrayDeque;
 
 public class ResultDetailFragment extends Fragment {
-
-    //    private Result result;
     private IResult iResult;
     private int categoryId;
 
@@ -88,18 +86,19 @@ public class ResultDetailFragment extends Fragment {
     }
 
     public class ResultDetailAdapter extends BaseAdapter {
-        private Context mContext;
-        private IResult result;
         private int reviewPointer;
-        private List<IReview> reviewList;
         private int reviewCount;
 
+        private Context mContext;
+        private IResult result;
+        private List<IReview> reviewList;
+
         public ResultDetailAdapter(Context c, IResult result, List<IReview> reviewList) {
+            this.reviewPointer = 0;
+            this.reviewCount = 0;
             this.mContext = c;
             this.result = result;
             this.reviewList = reviewList;
-            this.reviewPointer = 0;
-            this.reviewCount = 0;
         }
 
         @Override
@@ -201,12 +200,16 @@ public class ResultDetailFragment extends Fragment {
                 view = inflater.inflate(R.layout.result_detail_2, null);
 
                 TextView viewAll = (TextView) view.findViewById(R.id.result_detail_2_view_all);
-                viewAll.setOnClickListener(new openReview());
+                viewAll.setOnClickListener(new openReview(reviewList));
             } else if (type == 3) {
                 view = inflater.inflate(R.layout.review_display, null);
 
                 TextView comment = (TextView) view.findViewById(R.id.review_display_comment);
-                comment.setText(this.reviewList.get(reviewPointer).getReviewForReview());
+                String review = this.reviewList.get(reviewPointer).getReviewForReview();
+                if(review.length() > 30){
+                    review = review.substring(0, 30) + "...";
+                }
+                comment.setText(review);
 
                 TextView userName = (TextView) view.findViewById(R.id.review_display_username);
                 userName.setText(this.reviewList.get(reviewPointer).getLoginIDForReview());
@@ -232,9 +235,6 @@ public class ResultDetailFragment extends Fragment {
                 } else {
                     reviewPointer = 0;
                 }
-
-//            Need a way to know if a review is: Good, Mediocre, Bad
-//            image.setImageResource();
             } else {
                 view = inflater.inflate(R.layout.result_detail_3, null);
 
@@ -243,7 +243,7 @@ public class ResultDetailFragment extends Fragment {
 
                 Button writeReview = (Button) view.findViewById(R.id.result_detail_3_write_review);
 
-                viewAll.setOnClickListener(new openReview());
+                viewAll.setOnClickListener(new openReview(reviewList));
                 writeReview.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -259,12 +259,18 @@ public class ResultDetailFragment extends Fragment {
     }
 
     private class openReview implements View.OnClickListener {
+        private ArrayList<IReview> reviewList;
+
+        private openReview(List<IReview> reviewList) {
+            this.reviewList =  new ArrayList<IReview>(reviewList);
+        }
+
         @Override
         public void onClick(View view) {
             Bundle bundle = new Bundle();
-            bundle.putString("name", iResult.getNameForResult());
+            bundle.putString("Name", iResult.getNameForResult());
+            bundle.putParcelableArrayList("ReviewList", reviewList);
             Navigation.findNavController(view).navigate(R.id.action_ResultDetailFragment_to_ReviewSummaryFragment, bundle);
         }
     }
-
 }

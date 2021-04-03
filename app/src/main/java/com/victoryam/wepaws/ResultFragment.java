@@ -3,6 +3,8 @@ package com.victoryam.wepaws;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StyleableRes;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -89,24 +92,8 @@ public class ResultFragment extends Fragment {
                 break;
         }
 
-        initResults(view, categoryId, componentNames, searchingCriteria);
-        return view;
-    }
-
-    private void initResults(View view, int categoryId, String[] componentNames, HashMap<Integer, List<String>> searchingCriteria) {
-        //ListView listView = (ListView) view.findViewById(R.id.result_listview);
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View v, int position, long l) {
-//                Result result = (Result) adapterView.getItemAtPosition(position);
-//                Bundle bundle = new Bundle();
-//                bundle.putInt("CategoryId", categoryId);
-//                bundle.putParcelable("ResultDetailFragmentArg", result);
-//                Navigation.findNavController(view).navigate(R.id.action_ResultFragment_to_ResultDetailFragment, bundle);
-//            }
-//        });
-
         new initResultsTask(view, categoryId, componentNames, searchingCriteria).execute("");
+        return view;
     }
 
     private class initResultsTask extends AsyncTask<String, Integer, String> {
@@ -185,8 +172,6 @@ public class ResultFragment extends Fragment {
             } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
-
-
             return "";
         }
 
@@ -199,9 +184,9 @@ public class ResultFragment extends Fragment {
     }
 
     public class ResultAdapter extends BaseAdapter {
-
         private Context mContext;
         private List<IResult> iResultList;
+        private final TypedArray itemImages = getResources().obtainTypedArray(R.array.home_menu_item_images);
 
         public ResultAdapter(Context c, List<IResult> iResultList) {
             this.mContext = c;
@@ -230,19 +215,20 @@ public class ResultFragment extends Fragment {
                 view = inflater.inflate(R.layout.result_display, null);
             }
 
-            ImageView resultIcon = (ImageView) view.findViewById(R.id.result_display_icon);
             TextView resultName = (TextView) view.findViewById(R.id.result_display_name);
-            TextView resultAddress = (TextView) view.findViewById(R.id.result_display_address);
-            TextView resultAnimal = (TextView) view.findViewById(R.id.result_animal);
-            TextView resultCategory = (TextView) view.findViewById(R.id.result_category);
-
-//            this.iResultList.get(position).
-//            resultIcon.setImageResource();
             resultName.setText(this.iResultList.get(position).getNameForResult());
+
+            TextView resultAddress = (TextView) view.findViewById(R.id.result_display_address);
             resultAddress.setText(this.iResultList.get(position).getAddressForResult());
+
+            TextView resultCategory = (TextView) view.findViewById(R.id.result_category);
             resultCategory.setText(this.iResultList.get(position).getDescriptionForResult());
 
-            //Set Invisible txtView.setVisibility(View.INVISIBLE)
+            ImageView image = (ImageView) view.findViewById(R.id.result_display_icon);
+
+            @StyleableRes
+            int itemCategory = this.iResultList.get(position).getCategoryForResult();
+            image.setImageResource(itemImages.getResourceId(itemCategory, -1));
 
             return view;
         }
