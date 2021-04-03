@@ -2,47 +2,88 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
     tools:context=".WriteReviewFragment"
-    android:orientation="vertical">
+    >
 
     <TextView
         android:id="@+id/write_review_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:theme="@style/FontSize_Medium"
         android:text="@string/write_review_title"/>
 
     <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/write_review_good_image"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            app:tint="@color/good"
-            android:drawableTint="@color/orange_dark"
-            android:drawableRight="@drawable/review_good"
+            android:id="@+id/write_review_good_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:buttonTint="@color/very_satisfied_tint"
+            android:button="@drawable/outline_sentiment_very_satisfied_24"
             />
 
         <RadioButton
-            android:id="@+id/write_review_mediocre_image"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            app:tint="@color/mediocre"
+            android:id="@+id/write_review_mediocre_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:buttonTint="@color/satisfied_tint"
+            android:button="@drawable/outline_sentiment_satisfied_24"
             />
 
         <RadioButton
-            android:id="@+id/write_review_bad_image"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            app:tint="@color/bad"
+            android:id="@+id/write_review_bad_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:buttonTint="@color/dissatisfied_tint"
+            android:button="@drawable/outline_sentiment_dissatisfied_24"
             />
 
     </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/write_review_comment"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end">
+
+        <TextView
+            android:id="@+id/write_review_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:theme="@style/FontSize_Medium"
+            android:textColor="@color/orange_dark"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:text="@string/write_review_submit"
+            />
+
+    </LinearLayout>
 
 </LinearLayout>
