@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:theme="@style/Search.Component"
+        android:textSize="25sp"
         android:hint="@string/search_component_name_hint"
         />
 

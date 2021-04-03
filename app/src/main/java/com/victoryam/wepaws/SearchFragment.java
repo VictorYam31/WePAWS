@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
@@ -44,24 +45,30 @@ public class SearchFragment extends Fragment {
         String[] componentsName = {};
         searchingCriteria = new HashMap<>();
 
+        String title = getResources().getString(R.string.search_component_search);
         switch (getArguments().getInt("SearchFragmentArg")) {
             case 0:
                 categoryId = 1;
                 componentsName = getResources().getStringArray(R.array.search_clinic_component_names);
+                title += (" " + getResources().getString(R.string.home_menu_clinic));
                 break;
             case 1:
                 categoryId = 2;
                 componentsName = getResources().getStringArray(R.array.search_store_component_names);
+                title += (" " + getResources().getString(R.string.home_menu_store));
                 break;
             case 2:
                 categoryId = 3;
                 componentsName = getResources().getStringArray(R.array.search_dining_component_names);
+                title += (" " + getResources().getString(R.string.home_menu_dining));
                 break;
             case 3:
                 categoryId = 4;
                 componentsName = getResources().getStringArray(R.array.search_park_component_names);
+                title += (" " + getResources().getString(R.string.home_menu_park));
                 break;
         }
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
 
         EditText searchByCategoryKeywords = (EditText) view.findViewById(R.id.search_by_category_keywords);
         if (categoryId != -1) {
