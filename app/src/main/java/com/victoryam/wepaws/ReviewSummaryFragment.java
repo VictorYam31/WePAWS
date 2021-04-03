@@ -5,11 +5,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -36,7 +38,16 @@ public class ReviewSummaryFragment extends Fragment {
         View view = inflater.inflate(R.layout.review_summary, container, false);
 
         TextView reviewSummaryTitle = (TextView) view.findViewById(R.id.review_summary_title);
+        Button writeReview = (Button) view.findViewById(R.id.result_summary_write_review);
         reviewSummaryTitle.setText(getResources().getString(R.string.review_summary_title) + this.name);
+        writeReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("name", name);
+                Navigation.findNavController(view).navigate(R.id.action_ReviewSummaryFragment_to_writeReviewFragment, bundle);
+            }
+        });
 
 //        dummy reviews
         VetReview r1 = new VetReview();

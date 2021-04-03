@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -228,11 +229,14 @@ public class ResultFragment extends Fragment {
                 view = inflater.inflate(R.layout.result_display, null);
             }
 
+            ImageView resultIcon = (ImageView) view.findViewById(R.id.result_display_icon);
             TextView resultName = (TextView) view.findViewById(R.id.result_display_name);
             TextView resultAddress = (TextView) view.findViewById(R.id.result_display_address);
             TextView resultAnimal = (TextView) view.findViewById(R.id.result_animal);
             TextView resultCategory = (TextView) view.findViewById(R.id.result_category);
 
+//            this.iResultList.get(position).
+//            resultIcon.setImageResource();
             resultName.setText(this.iResultList.get(position).getNameForResult());
             resultAddress.setText(this.iResultList.get(position).getAddressForResult());
             resultCategory.setText(this.iResultList.get(position).getDescriptionForResult());

@@ -240,6 +240,14 @@ public class ResultDetailFragment extends Fragment {
                 viewAll.setText("View " + this.clinicReviewModelList.size() + " reviews");
                 Button writeReview = (Button) view.findViewById(R.id.result_detail_3_write_review);
                 viewAll.setOnClickListener(new openReview());
+                writeReview.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("name", iResult.getNameForResult());
+                        Navigation.findNavController(view).navigate(R.id.action_ResultDetailFragment_to_writeReviewFragment, bundle);
+                    }
+                });
             }
 
             return view;

@@ -5,27 +5,29 @@
     android:layout_height="match_parent"
     >
 
-    <LinearLayout
-        android:id="@+id/review_sumamry_top_bar"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/review_summary_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:orientation="horizontal">
+        android:theme="@style/FontSize_Medium"
+        android:text="Showing Reviews For"/>
 
-        <TextView
-            android:id="@+id/review_summary_title"
+    <LinearLayout
+        android:id="@+id/review_summary_horizontal_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="right"
+        android:layout_below="@id/review_summary_title">
+
+        <Button
+            android:id="@+id/result_summary_write_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:theme="@style/FontSize_Medium"
-            android:text="Showing Reviews For"/>
-
-        <ImageButton
-            android:id="@+id/review_summary_write_review_btn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:theme="@style/Button_Medium"
-            android:src="@drawable/write_review"
+            android:theme="@style/Button_Tiny"
+            android:text="@string/result_detail_write_review"
             />
 
     </LinearLayout>
@@ -34,8 +36,7 @@
         android:id="@+id/review_sumamry_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/review_sumamry_top_bar"
-        android:layout_above="@id/review_summary_page_bar"
+        android:layout_below="@id/review_summary_horizontal_bar"
         />
 
     <LinearLayout
@@ -72,3 +73,12 @@
     </LinearLayout>
 
 </RelativeLayout>
+
+<!--<ImageButton-->
+<!--android:id="@+id/review_summary_write_review_btn"-->
+<!--android:layout_width="50dp"-->
+<!--android:layout_height="50dp"-->
+<!--android:layout_below="@id/review_summary_title"-->
+<!--android:theme="@style/Button_Medium"-->
+<!--android:src="@drawable/write_review"-->
+<!--    />-->
