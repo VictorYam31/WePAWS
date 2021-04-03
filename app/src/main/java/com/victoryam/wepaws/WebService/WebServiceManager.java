@@ -2,10 +2,13 @@ package com.victoryam.wepaws.WebService;
 
 import com.victoryam.wepaws.WebService.Model.ClinicMasterModel;
 import com.victoryam.wepaws.WebService.Model.ClinicReviewModel;
+import com.victoryam.wepaws.WebService.Model.NonQueryResultModel;
 import com.victoryam.wepaws.WebService.Model.WildSearchModel;
 import com.victoryam.wepaws.WebService.Task.AddClinicReviewRatingTask;
+import com.victoryam.wepaws.WebService.Task.CreateAccountTask;
 import com.victoryam.wepaws.WebService.Task.GetClinicMasterTask;
 import com.victoryam.wepaws.WebService.Task.GetClinicReviewTask;
+import com.victoryam.wepaws.WebService.Task.VerifyAccountTask;
 import com.victoryam.wepaws.WebService.Task.WildSearchTask;
 
 import java.util.List;
@@ -46,8 +49,6 @@ public class WebServiceManager {
     //parameter @login - "" only
     //parameter @review - "" or any text
     //parameter @rating - "" or "-1" or "0" or "1"
-
-
     public String add_clinic_review(String clinic_id, String login, String review, String rating) throws ExecutionException, InterruptedException {
         ExecutorService executor = Executors.newCachedThreadPool();
         AddClinicReviewRatingTask task = new AddClinicReviewRatingTask(clinic_id, login, review, rating);
@@ -69,6 +70,36 @@ public class WebServiceManager {
         return wildSearchList;
     }
 
+    //parameter @login - text
+    //parameter @password - text
 
+    //info = 0 - SUCCESS
+    //info = 1 - USER ALREADY EXISTS
+    public NonQueryResultModel create_account(String login, String password) throws ExecutionException, InterruptedException {
+        ExecutorService executor = Executors.newCachedThreadPool();
+        CreateAccountTask task = new CreateAccountTask(login, password);
+        Future<NonQueryResultModel> future = executor.submit(task);
+        NonQueryResultModel createAccountResult = future.get();
+        executor.shutdown();
+
+        return createAccountResult;
+    }
+
+    //parameter @login - text
+    //parameter @password - text
+
+    //info = 0 - SUCCESS
+    //info = 1 - WRONG PASSWORD
+    //info = 2 - USER DOES NOT EXIST
+    //info = 3 - UNKNOWN
+    public NonQueryResultModel verify_account(String login, String password) throws ExecutionException, InterruptedException {
+        ExecutorService executor = Executors.newCachedThreadPool();
+        VerifyAccountTask task = new VerifyAccountTask(login, password);
+        Future<NonQueryResultModel> future = executor.submit(task);
+        NonQueryResultModel createAccountResult = future.get();
+        executor.shutdown();
+
+        return createAccountResult;
+    }
 }
 
