@@ -14,7 +14,6 @@ import com.victoryam.wepaws.Utils.IReview;
 import java.util.List;
 
 public class ResultSummaryAdapter extends BaseAdapter {
-
     private Context mContext;
     private List<IReview> reviewList;
 

@@ -34,7 +34,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 public class SearchFragment extends Fragment {
-    //private ComponentAdapter componentAdapter;
     private HashMap<Integer, List<String>> searchingCriteria;
 
     @Nullable
@@ -75,23 +74,9 @@ public class SearchFragment extends Fragment {
             searchByCategoryKeywords.setVisibility(View.GONE);
         }
 
-//        initComponents(view, categoryId, componentsName);
         initExpandableComponents(view, categoryId, componentsName);
         TextView searchBtn = (TextView) view.findViewById(R.id.search_by_category_button);
         searchBtn.setOnClickListener(new onSearchButtonClicked(categoryId, searchingCriteria));
-
-//        NavController navController = NavHostFragment.findNavController(this);
-//        MutableLiveData<List<String>> liveData = navController.getCurrentBackStackEntry().getSavedStateHandle().getLiveData("key");
-//        liveData.observe(getViewLifecycleOwner(), new Observer<List<String>>() {
-//            @Override
-//            public void onChanged(List<String> l) {
-//                int position = Integer.parseInt(l.get(0));
-//                List<String> selectedItems = new ArrayList<String>(l);
-//                selectedItems.remove(0);
-//                searchingCriteria.put(position, selectedItems);
-//                componentAdapter.updateItem(position, selectedItems.toString());
-//            }
-//        });
 
         return view;
     }

@@ -58,8 +58,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class ResultFragment extends Fragment {
-
-
     Utility utility;
 
     @Nullable
@@ -109,7 +107,6 @@ public class ResultFragment extends Fragment {
         HashMap<String, String> searchingCriteriaForWebService;
         List<IResult> iResultList;
         ListView listView;
-
 
         initResultsTask(View view, int categoryId, String[] componentNames, HashMap<Integer, List<String>> searchingCriteria) {
             this.view = view;
