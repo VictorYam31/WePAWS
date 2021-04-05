@@ -4,12 +4,14 @@ import com.victoryam.wepaws.WebService.Model.ClinicMasterModel;
 import com.victoryam.wepaws.WebService.Model.ClinicReviewModel;
 import com.victoryam.wepaws.WebService.Model.MasterModel;
 import com.victoryam.wepaws.WebService.Model.NonQueryResultModel;
+import com.victoryam.wepaws.WebService.Model.ReviewModel;
 import com.victoryam.wepaws.WebService.Model.WildSearchModel;
 import com.victoryam.wepaws.WebService.Task.AddClinicReviewRatingTask;
 import com.victoryam.wepaws.WebService.Task.CreateAccountTask;
 import com.victoryam.wepaws.WebService.Task.GetClinicMasterTask;
 import com.victoryam.wepaws.WebService.Task.GetClinicReviewTask;
 import com.victoryam.wepaws.WebService.Task.GetMasterTask;
+import com.victoryam.wepaws.WebService.Task.GetReviewTask;
 import com.victoryam.wepaws.WebService.Task.VerifyAccountTask;
 import com.victoryam.wepaws.WebService.Task.WildSearchTask;
 import com.victoryam.wepaws.WebService.Test.SendEmailTask;
@@ -161,6 +163,50 @@ public class WebServiceManager {
         GetMasterTask task = new GetMasterTask(url, jsonContent, GetMasterTask.SHOP);
         Future<List<MasterModel>> future = executor.submit(task);
         List<MasterModel> hotelMasterList = future.get();
+        executor.shutdown();
+
+        return hotelMasterList;
+    }
+
+    //parameter @hotel_id - From 1 to 63, e.g. "1", "6", "24"
+    public List<ReviewModel> get_hotel_review(String hotel_id) throws ExecutionException, InterruptedException {
+
+        String url = "https://wepaws.azurewebsites.net/hotelws.asmx/get_hotel_review";
+        String jsonContent = "";
+        try {
+            jsonContent = new JSONObject()
+                    .put("hotel_id", hotel_id)
+                    .toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ExecutorService executor = Executors.newCachedThreadPool();
+        GetReviewTask task = new GetReviewTask(url, jsonContent, GetReviewTask.HOTEL);
+        Future<List<ReviewModel>> future = executor.submit(task);
+        List<ReviewModel> hotelMasterList = future.get();
+        executor.shutdown();
+
+        return hotelMasterList;
+    }
+
+    //parameter @shop_id - From 1 to 138, e.g. "1", "6", "24"
+    public List<ReviewModel> get_shop_review(String shop_id) throws ExecutionException, InterruptedException {
+
+        String url = "https://wepaws.azurewebsites.net/shopws.asmx/get_shop_review";
+        String jsonContent = "";
+        try {
+            jsonContent = new JSONObject()
+                    .put("shop_id", shop_id)
+                    .toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ExecutorService executor = Executors.newCachedThreadPool();
+        GetReviewTask task = new GetReviewTask(url, jsonContent, GetReviewTask.SHOP);
+        Future<List<ReviewModel>> future = executor.submit(task);
+        List<ReviewModel> hotelMasterList = future.get();
         executor.shutdown();
 
         return hotelMasterList;
