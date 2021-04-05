@@ -17,7 +17,6 @@
         android:paddingTop="15dp"
         android:paddingRight="15dp"
         android:paddingBottom="15dp"
-        android:textSize="25sp"
         android:iconifiedByDefault="false"
         android:queryHint="@string/home_menu_search_hint"
         />
