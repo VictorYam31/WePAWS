@@ -60,7 +60,7 @@ public class WriteReviewFragment extends Fragment {
         title.setText(this.name);
 
         reviewContent = (EditText) view.findViewById(R.id.review_content);
-        reviewContent.setHint("Write Review By " + userName);
+        reviewContent.setHint(getResources().getString(R.string.write_review_write_review_by) + userName);
 
         RadioGroup ratingButton = (RadioGroup) view.findViewById(R.id.rating_button);
         ratingButton.check(R.id.write_review_mediocre_radio_button);

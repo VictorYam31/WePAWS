@@ -21,15 +21,7 @@
     <string name="preference_language">語言</string>
     <string name="preference_save">保存</string>
     <string name="search_component_select">選擇</string>
-    <string name="search_component_name">名稱</string>
     <string name="search_component_name_hint">輸入名稱</string>
-    <string name="search_component_overnight">通宵</string>
-    <string name="search_component_overnight_yes">是</string>
-    <string name="search_component_overnight_no">否</string>
-    <string name="search_component_animal">動物</string>
-    <string name="search_component_district">區域</string>
-    <string name="search_component_opening_hours">營業時間</string>
-    <string name="search_component_specialist">專家</string>
     <string name="search_component_keyword">關鍵詞</string>
     <string name="search_component_keyword_hint">輸入關鍵詞</string>
     <string name="search_component_search">搜尋</string>
@@ -40,7 +32,7 @@
     <string name="result_detail_address">地址</string>
     <string name="result_detail_view_all">查看全部</string>
     <string name="result_detail_write_review">寫評論</string>
-    <string name="review_summary">評論總結</string>
+    <string name="review_summary">評論</string>
     <string name="write_review">寫評論</string>
     <string name="write_review_comment">評論:</string>
     <string name="write_review_submit">提交</string>
@@ -65,4 +57,18 @@
     <string name="hk_district_Tsuen_Wan">荃灣區</string>
     <string name="hk_district_Tuen_Mun">屯門區</string>
     <string name="hk_district_Yuen_Long">元朗區</string>
+    <string name="search_component_name_display">名稱</string>
+    <string name="search_component_overnight_display">通宵</string>
+    <string name="search_component_overnight_yes_display">是</string>
+    <string name="search_component_overnight_no_display">否</string>
+    <string name="search_component_animal_display">動物</string>
+    <string name="search_component_district_display">"區域 "</string>
+    <string name="search_component_opening_hours_display">營業時間</string>
+    <string name="search_component_specialist_display">專家</string>
+    <string name="result_detail_review_summary">評論</string>
+    <string name="result_detail_view">查看</string>
+    <string name="result_detail_reviews">篇評論</string>
+    <string name="write_review_write_review_by">留下評論\u0020</string>
+    <string name="nav_menu_preference">帳號</string>
+
 </resources>
