@@ -25,7 +25,7 @@
         <item>@drawable/baseline_local_hospital_24</item>
         <item>@drawable/baseline_store_24</item>
         <item>@drawable/dog_house</item>
-        <item>@drawable/baseline_park_24</item>
+        <item>@drawable/outline_info_24</item>
     </integer-array>
 
     <string name="profile_logged_in_as">Logged in as\u0020</string>
