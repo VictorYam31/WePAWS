@@ -173,6 +173,10 @@ public class ResultDetailFragment extends Fragment {
 
                 ImageView callImage = (ImageView) view.findViewById(R.id.result_detail_0_phone_call);
                 callImage.setOnClickListener(new makePhoneCall(mContext, this.result.getPhoneNumberForResult()));
+
+                ImageView shareImage = (ImageView) view.findViewById(R.id.result_detail_0_bookmark);
+                shareImage.setOnClickListener(new shareInfo(mContext, this.result.getNameForResult(),
+                        this.result.getAddressForResult(), this.result.getPhoneNumberForResult()));
             } else if (type == 1) {
                 view = inflater.inflate(R.layout.result_detail_1, null);
 
@@ -211,7 +215,7 @@ public class ResultDetailFragment extends Fragment {
                 view = inflater.inflate(R.layout.result_detail_2, null);
 
                 TextView viewAll = (TextView) view.findViewById(R.id.result_detail_2_view_all);
-                viewAll.setOnClickListener(new openReview(reviewList));
+                viewAll.setOnClickListener(new openReview(categoryId, reviewList));
             } else if (type == 3) {
                 view = inflater.inflate(R.layout.review_display, null);
 
@@ -257,12 +261,14 @@ public class ResultDetailFragment extends Fragment {
 
                 Button writeReview = (Button) view.findViewById(R.id.result_detail_3_write_review);
 
-                viewAll.setOnClickListener(new openReview(reviewList));
+                viewAll.setOnClickListener(new openReview(categoryId, reviewList));
                 writeReview.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Bundle bundle = new Bundle();
-                        bundle.putString("name", iResult.getNameForResult());
+                        bundle.putString("Name", result.getNameForResult());
+                        bundle.putInt("ID", result.getIDForResult());
+                        bundle.putInt("CategoryId", categoryId);
                         Navigation.findNavController(view).navigate(R.id.action_ResultDetailFragment_to_writeReviewFragment, bundle);
                     }
                 });
@@ -273,15 +279,19 @@ public class ResultDetailFragment extends Fragment {
     }
 
     private class openReview implements View.OnClickListener {
+        private int categoryId;
         private ArrayList<IReview> reviewList;
 
-        private openReview(List<IReview> reviewList) {
+        private openReview(int categoryId, List<IReview> reviewList) {
+            this.categoryId = categoryId;
             this.reviewList = new ArrayList<IReview>(reviewList);
         }
 
         @Override
         public void onClick(View view) {
             Bundle bundle = new Bundle();
+            bundle.putInt("CategoryId", categoryId);
+            bundle.putInt("ID", iResult.getIDForResult());
             bundle.putString("Name", iResult.getNameForResult());
             bundle.putParcelableArrayList("ReviewList", reviewList);
             Navigation.findNavController(view).navigate(R.id.action_ResultDetailFragment_to_ReviewSummaryFragment, bundle);
@@ -302,6 +312,37 @@ public class ResultDetailFragment extends Fragment {
             Intent intent = new Intent(Intent.ACTION_DIAL);
             intent.setData(Uri.parse("tel:" + phoneNumber));
             startActivity(intent);
+        }
+    }
+
+    private class shareInfo implements View.OnClickListener {
+        private String name;
+        private String address;
+        private String phoneNumber;
+        private Context mContext;
+
+        private shareInfo(Context mContext, String name, String address, String phoneNumber) {
+            this.mContext = mContext;
+
+            this.name = name;
+            this.address = address;
+            this.phoneNumber = phoneNumber;
+        }
+
+        @Override
+        public void onClick(View view) {
+//            String message = "Share from WePAWS:" + "\\r\\n";
+//            message += "Name: " + name +  "\\r\\n";
+//            message += "Addr: " + address +  "\\r\\n";
+//            message += "Tel: " + phoneNumber +  "\\r\\n";
+
+            String message = "Share from WePAWS: https://www.google.com/search?q=" + name ;
+
+            Intent share = new Intent(Intent.ACTION_SEND);
+            share.setType("text/plain");
+            share.putExtra(Intent.EXTRA_TEXT, message);
+
+            startActivity(Intent.createChooser(share, "WePAWS Share Info"));
         }
     }
 }

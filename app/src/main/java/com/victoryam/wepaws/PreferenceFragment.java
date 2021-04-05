@@ -35,6 +35,7 @@ public class PreferenceFragment extends Fragment {
     EditText passwordEditText;
 
     Button loginButton;
+    Button logoutButton;
 
     TextView profileUserNameTextView;
     TextView loginStatusTextView;
@@ -58,6 +59,9 @@ public class PreferenceFragment extends Fragment {
         loginButton = (Button) view.findViewById(R.id.profile_login_button);
         loginButton.setOnClickListener(new loginButtonClicked(this.getContext()));
 
+        logoutButton = (Button) view.findViewById(R.id.profile_logout_button);
+        logoutButton.setOnClickListener(new logoutButtonClicked(this.getContext()));
+
         createAccount = (TextView) view.findViewById(R.id.profile_create_account);
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,18 +79,19 @@ public class PreferenceFragment extends Fragment {
 
     private void loadPreference() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this.getContext());
-        preferences.edit().remove("Name");
-//        String name = preferences.getString("Name", "");
-//        if (!name.equals("")) { // Success
-//            profileUserTextView.setVisibility(View.GONE);
-//            profilePasswordTextView.setVisibility(View.GONE);
-//            userNameEditText.setVisibility(View.GONE);
-//            passwordEditText.setVisibility(View.GONE);
-//            loginButton.setVisibility(View.GONE);
-//            createAccount.setVisibility(View.GONE);
-//
-//            profileUserNameTextView.setText(name);
-//        }
+        String name = preferences.getString("Name", "");
+        if (!name.equals("")) { // Success
+            profileUserTextView.setVisibility(View.GONE);
+            profilePasswordTextView.setVisibility(View.GONE);
+            userNameEditText.setVisibility(View.GONE);
+            passwordEditText.setVisibility(View.GONE);
+            loginButton.setVisibility(View.GONE);
+            createAccount.setVisibility(View.GONE);
+
+            logoutButton.setVisibility(View.VISIBLE);
+
+            profileUserNameTextView.setText(name);
+        }
     }
 
     private class loginButtonClicked implements View.OnClickListener {
@@ -124,16 +129,55 @@ public class PreferenceFragment extends Fragment {
                 profilePasswordTextView.setVisibility(View.GONE);
                 userNameEditText.setVisibility(View.GONE);
                 passwordEditText.setVisibility(View.GONE);
-                loginButton.setVisibility(View.GONE);
                 createAccount.setVisibility(View.GONE);
+
+                loginButton.setVisibility(View.GONE);
+                logoutButton.setVisibility(View.VISIBLE);
 
                 profileUserNameTextView.setText(userName);
 
-            } else if (nonQueryResultModel.getIsSuccess() == 0) {
-                loginStatusTextView.setText("Login Account Fail.");
+            } else if (nonQueryResultModel.getIsSuccess() == 0) { //Fail
+                int info = nonQueryResultModel.getInfo();
+                switch (info) {
+                    case 1:
+                        loginStatusTextView.setText("Login Account Fail: Wrong Password");
+                        break;
+                    case 2:
+                        loginStatusTextView.setText("Login Account Fail: Username dose not exist");
+                        break;
+                    case 3:
+                        loginStatusTextView.setText("Login Account Fail: Error Unknown");
+                        break;
+                }
+
                 loginStatusTextView.setVisibility(View.VISIBLE);
                 loginStatusTextView.setTextColor(getResources().getColor(R.color.light_red));
             }
+        }
+    }
+
+    private class logoutButtonClicked implements View.OnClickListener {
+        Context mContext;
+
+        public logoutButtonClicked(Context mContext) {
+            this.mContext = mContext;
+        }
+
+        @Override
+        public void onClick(View v) {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+            preferences.edit().remove("Name").commit();
+
+            profileUserTextView.setVisibility(View.VISIBLE);
+            profilePasswordTextView.setVisibility(View.VISIBLE);
+            userNameEditText.setVisibility(View.VISIBLE);
+            passwordEditText.setVisibility(View.VISIBLE);
+            createAccount.setVisibility(View.VISIBLE);
+
+            loginButton.setVisibility(View.VISIBLE);
+            logoutButton.setVisibility(View.INVISIBLE);
+
+            profileUserNameTextView.setText("Guest");
         }
     }
 

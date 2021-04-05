@@ -18,6 +18,7 @@
         android:text="@string/write_review_title"/>
 
     <RadioGroup
+        android:id="@+id/rating_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -65,8 +66,10 @@
         />
 
     <EditText
+        android:id="@+id/review_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
