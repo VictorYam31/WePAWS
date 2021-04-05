@@ -19,7 +19,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:layout_marginLeft="25dp"
-            android:theme="@style/Search.Component"
+            android:theme="@style/FontSize_Medium"
             android:text="Component"
             />
 
@@ -32,8 +32,8 @@
             android:layout_marginRight="25dp"
             android:thumbTint="@color/orange_dark"
             android:trackTint="@color/orange_dark"
-            android:scaleX="1.5"
-            android:scaleY="1.5"
+            android:scaleX="1.3"
+            android:scaleY="1.3"
             android:showText="true"
             android:switchTextAppearance="@style/Search.Component.Switch"
             android:textOff="@string/search_component_overnight_no"

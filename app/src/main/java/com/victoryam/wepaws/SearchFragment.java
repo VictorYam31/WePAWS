@@ -365,7 +365,7 @@ public class SearchFragment extends Fragment {
                 }
             });
             thirdLevelTextView.setText(childArray[i1]);
-            thirdLevelTextView.setTextSize(15);
+            thirdLevelTextView.setTextSize(18);
             thirdLevelTextView.setPadding(100, 0, 0, 0);
             return view;
         }

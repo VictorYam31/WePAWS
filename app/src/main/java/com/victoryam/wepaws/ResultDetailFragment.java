@@ -220,14 +220,14 @@ public class ResultDetailFragment extends Fragment {
 
                 if (isOverNight) {
                     status = "Open  24 Hours";
-                    openingHoursStatus.setTextColor(getResources().getColor(R.color.light_green));
+                    openingHoursStatus.setTextColor(getResources().getColor(R.color.good));
                 } else {
                     if (currentHour > 21 || currentHour < 9) {
-                        status = "Close  9:00 - 21:00";
+                        status = "Closed / Open at 9:00 - 21:00";
                         openingHoursStatus.setTextColor(getResources().getColor(R.color.light_red));
                     } else {
                         status = "Open  9:00 - 21:00";
-                        openingHoursStatus.setTextColor(getResources().getColor(R.color.light_green));
+                        openingHoursStatus.setTextColor(getResources().getColor(R.color.good));
                     }
                 }
 
