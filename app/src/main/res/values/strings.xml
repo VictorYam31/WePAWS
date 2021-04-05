@@ -28,6 +28,20 @@
         <item>@drawable/outline_info_24</item>
     </integer-array>
 
+    <string name="information_dialog_reference_websites">Reference Websites</string>
+    <string-array name="information_dialog_reference_websites_array">
+        <item>AFCD Animal Management</item>
+        <item>SPCA</item>
+        <item>Mo City Property</item>
+        <item>SCMP Animals</item>
+    </string-array>
+    <string-array name="information_dialog_reference_websites_url">
+        <item>https://www.pets.gov.hk/english/index.html</item>
+        <item>https://www.spca.org.hk/en/</item>
+        <item>http://www.mocityproperty.com.hk/</item>
+        <item>https://www.scmp.com/topics/animals</item>
+    </string-array>
+
     <string name="profile_logged_in_as">Logged in as\u0020</string>
     <string name="profile_username">Username</string>
     <string name="profile_password">Password</string>

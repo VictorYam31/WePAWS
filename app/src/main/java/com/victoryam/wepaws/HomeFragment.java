@@ -90,9 +90,14 @@ public class HomeFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Bundle bundle = new Bundle();
-            bundle.putInt("SearchFragmentArg", position);
-            Navigation.findNavController(v).navigate(R.id.action_HomeFragment_to_SearchFragment, bundle);
+            if (this.position == 3) {
+                Navigation.findNavController(v).navigate(R.id.action_HomeFragment_to_SearchDialog);
+            }
+            else {
+                Bundle bundle = new Bundle();
+                bundle.putInt("SearchFragmentArg", position);
+                Navigation.findNavController(v).navigate(R.id.action_HomeFragment_to_SearchFragment, bundle);
+            }
         }
     }
 
