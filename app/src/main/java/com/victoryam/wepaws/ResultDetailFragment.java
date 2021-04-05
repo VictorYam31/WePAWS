@@ -257,8 +257,8 @@ public class ResultDetailFragment extends Fragment {
 
                 TextView comment = (TextView) view.findViewById(R.id.review_display_comment);
                 String review = this.reviewList.get(reviewPointer).getReviewForReview();
-                if (review.length() > 30) {
-                    review = review.substring(0, 30) + "...";
+                if (review.length() > 25) {
+                    review = review.substring(0, 25) + "...";
                 }
                 comment.setText(review);
 
