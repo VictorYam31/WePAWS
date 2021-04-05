@@ -18,7 +18,7 @@ public class MasterModel implements IResult, Parcelable {
     private String desc = "";
     private int district_id = -1;
     private String phone = "";
-    private String overnight = "";
+    //    private String overnight = "";
     private int negative_count = 0;
     private int neutral_count = 0;
     private int positive_count = 0;
@@ -34,7 +34,7 @@ public class MasterModel implements IResult, Parcelable {
         desc = in.readString();
         district_id = in.readInt();
         phone = in.readString();
-        overnight = in.readString();
+//        overnight = in.readString();
         negative_count = in.readInt();
         neutral_count = in.readInt();
         positive_count = in.readInt();
@@ -57,7 +57,7 @@ public class MasterModel implements IResult, Parcelable {
 
     }
 
-    public void SetHotelMasterModel(@NotNull JSONObject jsonObject){
+    public void SetHotelMasterModel(@NotNull JSONObject jsonObject) {
         try {
             id = jsonObject.getInt("hotel_id");
             name = jsonObject.getString("hotel_name");
@@ -67,7 +67,7 @@ public class MasterModel implements IResult, Parcelable {
             desc = jsonObject.getString("hotel_desc");
             district_id = jsonObject.getInt("district_id");
             phone = jsonObject.getString("phone");
-            overnight = jsonObject.getString("overnight");
+//            overnight = jsonObject.getString("overnight");
             negative_count = jsonObject.getInt("negative_count");
             neutral_count = jsonObject.getInt("neutral_count");
             positive_count = jsonObject.getInt("positive_count");
@@ -77,7 +77,7 @@ public class MasterModel implements IResult, Parcelable {
         }
     }
 
-    public void SetShopMasterModel(@NotNull JSONObject jsonObject){
+    public void SetShopMasterModel(@NotNull JSONObject jsonObject) {
         try {
             id = jsonObject.getInt("shop_id");
             name = jsonObject.getString("shop_name");
@@ -111,7 +111,7 @@ public class MasterModel implements IResult, Parcelable {
         parcel.writeString(desc);
         parcel.writeInt(district_id);
         parcel.writeString(phone);
-        parcel.writeString(overnight);
+//        parcel.writeString(overnight);
         parcel.writeInt(negative_count);
         parcel.writeInt(neutral_count);
         parcel.writeInt(positive_count);
@@ -159,11 +159,7 @@ public class MasterModel implements IResult, Parcelable {
     }
 
     public boolean getIsOvernight() {
-        if (overnight.equals("Y")) {
-            return true;
-        } else {
-            return false;
-        }
+        return false;
     }
 
     @Override

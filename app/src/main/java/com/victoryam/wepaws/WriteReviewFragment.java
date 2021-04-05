@@ -93,7 +93,7 @@ public class WriteReviewFragment extends Fragment {
         public void onClick(View v) {
             String success = "";
             String reviewContentString = String.valueOf(reviewContent.getText());
-            if(reviewContentString.equals("")){
+            if (reviewContentString.equals("")) {
                 return;
             }
 
@@ -109,10 +109,14 @@ public class WriteReviewFragment extends Fragment {
                                 new ArrayList<IReview>(webServiceManager.get_clinic_review(String.valueOf(id)));
                         break;
                     case 2:
+                        webServiceManager.add_shop_review(String.valueOf(id), userName, reviewContentString, String.valueOf(rating));
+                        reviewList =
+                                new ArrayList<IReview>(webServiceManager.get_shop_review(String.valueOf(id)));
                         break;
                     case 3:
-                        break;
-                    case 4:
+                        webServiceManager.add_hotel_review(String.valueOf(id), userName, reviewContentString, String.valueOf(rating));
+                        reviewList =
+                                new ArrayList<IReview>(webServiceManager.get_hotel_review(String.valueOf(id)));
                         break;
                 }
             } catch (ExecutionException e) {
