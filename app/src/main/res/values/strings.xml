@@ -38,20 +38,20 @@
     <string name="create_account">Create Account</string>
 
     <string name="preference_language">Language</string>
-    <string name="preference_language_en">English</string>
-    <string name="preference_language_zh">中文</string>
+    <string name="preference_language_en" translatable="false">English</string>
+    <string name="preference_language_zh" translatable="false">中文</string>
     <string name="preference_save">Save</string>
 
     <string name="search_component_select">Select</string>
-    <string name="search_component_name">Name</string>
+    <string name="search_component_name" translatable="false">Name</string>
     <string name="search_component_name_hint">Enter name</string>
-    <string name="search_component_overnight">Overnight</string>
-    <string name="search_component_overnight_yes">Yes</string>
-    <string name="search_component_overnight_no">No</string>
-    <string name="search_component_animal">Animal</string>
-    <string name="search_component_district">District</string>
-    <string name="search_component_opening_hours">Opening Hours</string>
-    <string name="search_component_specialist">Specialist</string>
+    <string name="search_component_overnight" translatable="false">Overnight</string>
+    <string name="search_component_overnight_yes" translatable="false">Yes</string>
+    <string name="search_component_overnight_no" translatable="false">No</string>
+    <string name="search_component_animal" translatable="false">Animal</string>
+    <string name="search_component_district" translatable="false">District</string>
+    <string name="search_component_opening_hours" translatable="false">Opening Hours</string>
+    <string name="search_component_specialist" translatable="false">Specialist</string>
     <string name="search_component_keyword">Keyword</string>
     <string name="search_component_keyword_hint">Enter keywords</string>
     <string name="search_component_search">Search</string>
@@ -71,7 +71,7 @@
     <string name="result_detail_phone">Phone No.</string>
     <string name="result_detail_address">Address</string>
     <string name="result_detail_info"><u>Information</u></string>
-    <string name="result_detail_review_summary"><u>Review Summary</u></string>
+    <string name="result_detail_review_summary">Review Summary</string>
     <string name="result_detail_view_all">View All</string>
     <string name="result_detail_write_review">Write Review</string>
     <string name="result_detail_good">Good</string>
@@ -132,5 +132,16 @@
     <string name="specialist_oncology">Oncology</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_component_name_display">Name</string>
+    <string name="search_component_overnight_display">Overnight</string>
+    <string name="search_component_overnight_yes_display">Yes</string>
+    <string name="search_component_overnight_no_display">No</string>
+    <string name="search_component_animal_display">Animal</string>
+    <string name="search_component_district_display">District</string>
+    <string name="search_component_opening_hours_display">Opening Hours</string>
+    <string name="search_component_specialist_display">Specialist</string>
+    <string name="result_detail_view">View</string>
+    <string name="result_detail_reviews">reviews</string>
+    <string name="write_review_write_review_by">Write Review By\u0020</string>
 
 </resources>

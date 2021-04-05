@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -59,6 +60,18 @@ public class ResultDetailFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.result_detail, container, false);
         initResultDetails(view, categoryId, this.iResult);
+
+        String title;
+        Log.v("categoryId", String.valueOf(categoryId));
+        switch (categoryId) {
+            case 1:
+                title = getResources().getString(R.string.home_menu_clinic);
+                break;
+            default:
+                title = getResources().getString(R.string.result_detail);
+                break;
+        }
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
 
         return view;
     }
@@ -257,7 +270,7 @@ public class ResultDetailFragment extends Fragment {
                 view = inflater.inflate(R.layout.result_detail_3, null);
 
                 TextView viewAll = (TextView) view.findViewById(R.id.result_detail_3_view_all);
-                viewAll.setText("View " + this.reviewList.size() + " reviews");
+                viewAll.setText(getResources().getString(R.string.result_detail_view) + " " + this.reviewList.size() + " " + getResources().getString(R.string.result_detail_reviews));
 
                 Button writeReview = (Button) view.findViewById(R.id.result_detail_3_write_review);
 

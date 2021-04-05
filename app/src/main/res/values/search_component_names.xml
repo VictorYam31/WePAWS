@@ -5,21 +5,39 @@
         <item>@string/search_component_district</item>
         <item>@string/search_component_overnight</item>
     </string-array>
+    <string-array name="search_clinic_component_names_display">
+        <item>@string/search_component_name_display</item>
+        <item>@string/search_component_district_display</item>
+        <item>@string/search_component_overnight_display</item>
+    </string-array>
 
     <string-array name="search_store_component_names">
         <item>@string/search_component_animal</item>
         <item>@string/search_component_district</item>
         <item>@string/search_component_opening_hours</item>
     </string-array>
+    <string-array name="search_store_component_names_display">
+        <item>@string/search_component_animal_display</item>
+        <item>@string/search_component_district_display</item>
+        <item>@string/search_component_opening_hours_display</item>
+    </string-array>
 
     <string-array name="search_dining_component_names">
         <item>@string/search_component_district</item>
         <item>@string/search_component_opening_hours</item>
     </string-array>
+    <string-array name="search_dining_component_names_display">
+        <item>@string/search_component_district_display</item>
+        <item>@string/search_component_opening_hours_display</item>
+    </string-array>
 
     <string-array name="search_park_component_names">
         <item>@string/search_component_district</item>
         <item>@string/search_component_opening_hours</item>
+    </string-array>
+    <string-array name="search_park_component_names_display">
+        <item>@string/search_component_district_display</item>
+        <item>@string/search_component_opening_hours_display</item>
     </string-array>
 
     <string-array name="all_search_components">

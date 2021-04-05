@@ -79,7 +79,7 @@
     <fragment
         android:id="@+id/ResultDetailFragment"
         android:name="com.victoryam.wepaws.ResultDetailFragment"
-        android:label="@string/result_detail"
+        android:label=""
         tools:layout="@layout/result_detail">
         <argument
             android:name="ResultDetailFragmentArg"

@@ -49,22 +49,22 @@ public class SearchFragment extends Fragment {
         switch (getArguments().getInt("SearchFragmentArg")) {
             case 0:
                 categoryId = 1;
-                componentsName = getResources().getStringArray(R.array.search_clinic_component_names);
+                componentsName = getResources().getStringArray(R.array.search_clinic_component_names_display);
                 title += (" " + getResources().getString(R.string.home_menu_clinic));
                 break;
             case 1:
                 categoryId = 2;
-                componentsName = getResources().getStringArray(R.array.search_store_component_names);
+                componentsName = getResources().getStringArray(R.array.search_store_component_names_display);
                 title += (" " + getResources().getString(R.string.home_menu_store));
                 break;
             case 2:
                 categoryId = 3;
-                componentsName = getResources().getStringArray(R.array.search_dining_component_names);
+                componentsName = getResources().getStringArray(R.array.search_dining_component_names_display);
                 title += (" " + getResources().getString(R.string.home_menu_dining));
                 break;
             case 3:
                 categoryId = 4;
-                componentsName = getResources().getStringArray(R.array.search_park_component_names);
+                componentsName = getResources().getStringArray(R.array.search_park_component_names_display);
                 title += (" " + getResources().getString(R.string.home_menu_park));
                 break;
         }
@@ -120,7 +120,7 @@ public class SearchFragment extends Fragment {
         List<String[]> secondLevel = new ArrayList<>();
         List<LinkedHashMap<String, String[]>> thirdLevel = new ArrayList<>();
         for (String firstLevelComponent : firstLevel) {
-            if (firstLevelComponent.equals(getResources().getString(R.string.search_component_district))) {
+            if (firstLevelComponent.equals(getResources().getString(R.string.search_component_district_display))) {
                 secondLevel.add(getResources().getStringArray(R.array.hk_districts));
                 LinkedHashMap<String, String[]> thirdLevelData = new LinkedHashMap<>();
                 thirdLevelData.put(getResources().getString(R.string.hk_district_Hong_Kong_Island), getResources().getStringArray(R.array.hk_district_Hong_Kong_Island));
@@ -193,14 +193,14 @@ public class SearchFragment extends Fragment {
         public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             // maybe separate into different layouts, maybe not
-            if (firstLevel[i].equals(getResources().getString(R.string.search_component_district))) {
+            if (firstLevel[i].equals(getResources().getString(R.string.search_component_district_display))) {
                 view = inflater.inflate(R.layout.search_component_1, null);
                 TextView componentName = (TextView) view.findViewById(R.id.search_component_1_name);
                 Switch switchButton = (Switch) view.findViewById(R.id.search_component_1_switch);
                 componentName.setText(firstLevel[i]);
                 switchButton.setVisibility(View.INVISIBLE);
                 switchButton.setFocusable(false);
-            } else if (firstLevel[i].equals(getResources().getString(R.string.search_component_name))) {
+            } else if (firstLevel[i].equals(getResources().getString(R.string.search_component_name_display))) {
                 view = inflater.inflate(R.layout.search_component_2, null);
                 EditText editText = (EditText) view.findViewById(R.id.search_component_2_edittext);
                 if (input != null) {
