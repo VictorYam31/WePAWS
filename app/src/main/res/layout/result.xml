@@ -13,6 +13,7 @@
         android:layout_marginLeft="10dp"
         android:theme="@style/Button_Small"
         android:text="@string/result_filter"
+        android:visibility="gone"
         />
 
     <ListView

@@ -1,13 +1,12 @@
 package com.victoryam.wepaws;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,8 +25,6 @@ import androidx.navigation.Navigation;
 
 import com.victoryam.wepaws.WebService.Model.NonQueryResultModel;
 import com.victoryam.wepaws.WebService.WebServiceManager;
-
-import org.w3c.dom.Text;
 
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
@@ -70,7 +67,7 @@ public class PreferenceFragment extends Fragment {
         });
 
         languageSpinner = view.findViewById(R.id.preference_language_spinner);
-        initSpinnerFooter();
+        initLanguageFooter();
 
         loadPreference();
         return view;
@@ -140,13 +137,14 @@ public class PreferenceFragment extends Fragment {
         }
     }
 
-    private void initSpinnerFooter() {
+    private void initLanguageFooter() {
         String[] items = new String[]{
                 getResources().getString(R.string.preference_language_en), getResources().getString(R.string.preference_language_zh)
         };
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.preference_spinner_item, items);
         languageSpinner.setAdapter(adapter);
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getContext());
+        languageSpinner.setSelection(pref.getInt("lang", 0),false);
         languageSpinner.setOnItemSelectedListener(new languageSpinnerOnItemSelected());
     }
 
@@ -155,21 +153,31 @@ public class PreferenceFragment extends Fragment {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             Log.v("item", (String) parent.getItemAtPosition(position));
 //                ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.black));
+            String languageCode;
+            if (position == 0) {
+                languageCode = "en";
+            }
+            else {
+                languageCode = "zh";
+            }
+            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
+            pref.edit().putInt("lang", position).apply();
+            setLocale(getActivity(), languageCode);
+            getActivity().finish();
+            getActivity().startActivity(getActivity().getIntent());
         }
 
         public void onNothingSelected(AdapterView<?> parent) {
         }
     }
 
-    private void setLocale(String lang) {
-        Locale myLocale = new Locale(lang);
-        Resources res = getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-        conf.locale = myLocale;
-        res.updateConfiguration(conf, dm);
-        Intent refresh = new Intent(getActivity(), MainActivity.class);
-        startActivity(refresh);
+    public static void setLocale(Activity activity, String languageCode) {
+        Locale locale = new Locale(languageCode);
+        Locale.setDefault(locale);
+        Resources resources = activity.getResources();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
 }

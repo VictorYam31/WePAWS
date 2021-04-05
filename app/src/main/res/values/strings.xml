@@ -38,8 +38,8 @@
     <string name="create_account">Create Account</string>
 
     <string name="preference_language">Language</string>
-    <string name="preference_language_en">English</string>
-    <string name="preference_language_zh">中文</string>
+    <string name="preference_language_en" translatable="false">English</string>
+    <string name="preference_language_zh" translatable="false">中文</string>
     <string name="preference_save">Save</string>
 
     <string name="search_component_select">Select</string>
