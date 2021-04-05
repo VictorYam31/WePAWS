@@ -21,7 +21,8 @@ import com.victoryam.wepaws.Utils.IReview;
 import java.util.List;
 
 public class ReviewSummaryFragment extends Fragment {
-
+    private int id;
+    private int categoryId;
     private String name;
     private List<IReview> reviewList;
 
@@ -29,6 +30,8 @@ public class ReviewSummaryFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (this.getArguments() != null) {
+            this.id = this.getArguments().getInt("ID");
+            this.categoryId = this.getArguments().getInt("CategoryId");
             this.name = this.getArguments().getString("Name");
             this.reviewList = this.getArguments().getParcelableArrayList("ReviewList");
         }
@@ -46,7 +49,9 @@ public class ReviewSummaryFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                bundle.putString("name", name);
+                bundle.putString("Name", name);
+                bundle.putInt("ID", id);
+                bundle.putInt("CategoryId", categoryId);
                 Navigation.findNavController(view).navigate(R.id.action_ReviewSummaryFragment_to_writeReviewFragment, bundle);
             }
         });

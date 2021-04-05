@@ -10,6 +10,7 @@ import com.victoryam.wepaws.WebService.Task.GetClinicMasterTask;
 import com.victoryam.wepaws.WebService.Task.GetClinicReviewTask;
 import com.victoryam.wepaws.WebService.Task.VerifyAccountTask;
 import com.victoryam.wepaws.WebService.Task.WildSearchTask;
+import com.victoryam.wepaws.WebService.Test.SendEmailTask;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -95,6 +96,16 @@ public class WebServiceManager {
     public NonQueryResultModel verify_account(String login, String password) throws ExecutionException, InterruptedException {
         ExecutorService executor = Executors.newCachedThreadPool();
         VerifyAccountTask task = new VerifyAccountTask(login, password);
+        Future<NonQueryResultModel> future = executor.submit(task);
+        NonQueryResultModel createAccountResult = future.get();
+        executor.shutdown();
+
+        return createAccountResult;
+    }
+
+    public NonQueryResultModel send_email(String emailTo, String subject, String content) throws ExecutionException, InterruptedException {
+        ExecutorService executor = Executors.newCachedThreadPool();
+        SendEmailTask task = new SendEmailTask(emailTo, subject, content);
         Future<NonQueryResultModel> future = executor.submit(task);
         NonQueryResultModel createAccountResult = future.get();
         executor.shutdown();

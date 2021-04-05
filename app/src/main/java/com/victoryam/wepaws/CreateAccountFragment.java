@@ -65,15 +65,14 @@ public class CreateAccountFragment extends Fragment {
             }
 
             if (nonQueryResultModel.getIsSuccess() == 1) { // Success
-                createStatusTextView.setText("Create Account Success.");
-                createStatusTextView.setTextColor(getResources().getColor(R.color.light_green));
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("Name", userName);
-                editor.putString("Password", password);
                 editor.apply();
-            } else if (nonQueryResultModel.getIsSuccess() == 0) {
-                createStatusTextView.setText("Create Account Fail.");
+
+                Navigation.findNavController(v).navigate(R.id.PreferenceFragment);
+            } else if (nonQueryResultModel.getIsSuccess() == 0) { // Fail
+                createStatusTextView.setText("Create Account Fail: Username Exists");
                 createAccountEditText.setTextColor(getResources().getColor(R.color.light_red));
             }
         }
