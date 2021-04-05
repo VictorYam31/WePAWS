@@ -12,6 +12,7 @@ import com.victoryam.wepaws.WebService.Task.GetClinicMasterTask;
 import com.victoryam.wepaws.WebService.Task.GetClinicReviewTask;
 import com.victoryam.wepaws.WebService.Task.GetMasterTask;
 import com.victoryam.wepaws.WebService.Task.GetReviewTask;
+import com.victoryam.wepaws.WebService.Task.NonQueryTask;
 import com.victoryam.wepaws.WebService.Task.VerifyAccountTask;
 import com.victoryam.wepaws.WebService.Task.WildSearchTask;
 import com.victoryam.wepaws.WebService.Test.SendEmailTask;
@@ -210,6 +211,63 @@ public class WebServiceManager {
         executor.shutdown();
 
         return hotelMasterList;
+    }
+
+
+    //parameter @id - From 1 to 38, e.g. "1", "6", "24"
+    //parameter @login - "" only
+    //parameter @review - "" or any text
+    //parameter @rate - "" or "-1" or "0" or "1"
+    public NonQueryResultModel add_hotel_review(String id, String login, String review, String rate) throws ExecutionException, InterruptedException {
+
+        String url = "https://wepaws.azurewebsites.net/hotelws.asmx/add_hotel_review";
+        String jsonContent = "";
+        try {
+            jsonContent = new JSONObject()
+                    .put("hotel_id", id)
+                    .put("login", login)
+                    .put("review", review)
+                    .put("rate", rate)
+                    .toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ExecutorService executor = Executors.newCachedThreadPool();
+        NonQueryTask task = new NonQueryTask(url, jsonContent);
+        Future<NonQueryResultModel> future = executor.submit(task);
+        NonQueryResultModel result = future.get();
+        executor.shutdown();
+
+        return result;
+    }
+
+    //parameter @id - From 1 to 38, e.g. "1", "6", "24"
+    //parameter @login - "" only
+    //parameter @review - "" or any text
+    //parameter @rate - "" or "-1" or "0" or "1"
+    public NonQueryResultModel add_shop_review(String id, String login, String review, String rate) throws ExecutionException, InterruptedException {
+
+        String url = "https://wepaws.azurewebsites.net/shopws.asmx/add_shop_review";
+        String jsonContent = "";
+        try {
+            jsonContent = new JSONObject()
+                    .put("shop_id", id)
+                    .put("login", login)
+                    .put("review", review)
+                    .put("rate", rate)
+                    .toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ExecutorService executor = Executors.newCachedThreadPool();
+        NonQueryTask task = new NonQueryTask(url, jsonContent);
+        Future<NonQueryResultModel> future = executor.submit(task);
+        NonQueryResultModel result = future.get();
+        executor.shutdown();
+
+        return result;
     }
 }
 
