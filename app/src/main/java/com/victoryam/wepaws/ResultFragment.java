@@ -167,7 +167,6 @@ public class ResultFragment extends Fragment {
                         String clinic_name = searchingCriteriaForWebService.get("Name");
                         String clinic_district_id = searchingCriteriaForWebService.get("District");
                         String overnight = searchingCriteriaForWebService.get("Overnight");
-
                         iResultList = new ArrayList<>(webServiceManager.get_clinic_master(clinic_name, clinic_district_id, overnight));
                         break;
                     case 2:
@@ -176,6 +175,9 @@ public class ResultFragment extends Fragment {
                         iResultList = new ArrayList<>(webServiceManager.get_shop_master(shop_name, shop_district_id));
                         break;
                     case 3:
+                        String hotel_name = searchingCriteriaForWebService.get("Name");
+                        String hotel_district_id = searchingCriteriaForWebService.get("District");
+                        iResultList = new ArrayList<>(webServiceManager.get_hotel_master(hotel_name, hotel_district_id));
                         break;
                 }
             } catch (ExecutionException | InterruptedException e) {

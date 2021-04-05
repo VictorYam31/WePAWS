@@ -94,8 +94,12 @@ public class ResultDetailFragment extends Fragment {
                             new ArrayList<IReview>(webServiceManager.get_clinic_review(String.valueOf(this.iResult.getIDForResult())));
                     break;
                 case 2:
+                    reviewList =
+                            new ArrayList<IReview>(webServiceManager.get_shop_review(String.valueOf(this.iResult.getIDForResult())));
                     break;
                 case 3:
+                    reviewList =
+                            new ArrayList<IReview>(webServiceManager.get_hotel_review(String.valueOf(this.iResult.getIDForResult())));
                     break;
                 case 4:
                     break;

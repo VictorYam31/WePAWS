@@ -62,26 +62,32 @@ public class ClinicReviewModel implements IReview, Parcelable {
         return updated_datetime;
     }
 
+    @Override
     public int getIDForReview() {
         return getClinicID();
     }
 
+    @Override
     public String getLoginIDForReview() {
         return getLoginID();
     }
 
+    @Override
     public int getRateForReview() {
         return getRate();
     }
 
+    @Override
     public String getReviewForReview() {
         return getReview();
     }
 
+    @Override
     public String gerCreateDateForReview() {
         return getCreateDateTime();
     }
 
+    @Override
     public String getLastUpdateDateForReview() {
         return getLastUpdateDateTime();
     }
