@@ -58,14 +58,14 @@ public class SearchFragment extends Fragment {
                 break;
             case 2:
                 categoryId = 3;
-                componentsName = getResources().getStringArray(R.array.search_dining_component_names_display);
-                title += (" " + getResources().getString(R.string.home_menu_dining));
+                componentsName = getResources().getStringArray(R.array.search_hotel_component_names_display);
+                title += (" " + getResources().getString(R.string.home_menu_hotel));
                 break;
-            case 3:
-                categoryId = 4;
-                componentsName = getResources().getStringArray(R.array.search_park_component_names_display);
-                title += (" " + getResources().getString(R.string.home_menu_park));
-                break;
+//            case 3:
+//                categoryId = 4;
+//                componentsName = getResources().getStringArray(R.array.search_park_component_names_display);
+//                title += (" " + getResources().getString(R.string.home_menu_park));
+//                break;
         }
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
 

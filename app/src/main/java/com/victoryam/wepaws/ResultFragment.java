@@ -90,11 +90,11 @@ public class ResultFragment extends Fragment {
                 componentNames = getResources().getStringArray(R.array.search_store_component_names);
                 break;
             case 3:
-                componentNames = getResources().getStringArray(R.array.search_dining_component_names);
+                componentNames = getResources().getStringArray(R.array.search_hotel_component_names);
                 break;
-            case 4:
-                componentNames = getResources().getStringArray(R.array.search_park_component_names);
-                break;
+//            case 4:
+//                componentNames = getResources().getStringArray(R.array.search_park_component_names);
+//                break;
         }
 
         new initResultsTask(view, categoryId, componentNames, searchingCriteria).execute("");
@@ -176,8 +176,6 @@ public class ResultFragment extends Fragment {
                         iResultList = new ArrayList<>(webServiceManager.get_shop_master(shop_name, shop_district_id));
                         break;
                     case 3:
-                        break;
-                    case 4:
                         break;
                 }
             } catch (ExecutionException | InterruptedException e) {
