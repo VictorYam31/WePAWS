@@ -73,6 +73,7 @@ public class CreateAccountFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.PreferenceFragment);
             } else if (nonQueryResultModel.getIsSuccess() == 0) { // Fail
                 createStatusTextView.setText("Create Account Fail: Username Exists");
+                createStatusTextView.setTextColor(getResources().getColor(R.color.light_red));
                 createAccountEditText.setTextColor(getResources().getColor(R.color.light_red));
             }
         }

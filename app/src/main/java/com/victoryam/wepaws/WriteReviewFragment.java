@@ -54,6 +54,7 @@ public class WriteReviewFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.write_review, container, false);
+        loadPreference();
 
         TextView title = (TextView) view.findViewById(R.id.write_review_title);
         title.setText(this.name);
@@ -81,7 +82,6 @@ public class WriteReviewFragment extends Fragment {
 
         TextView submit = (TextView) view.findViewById(R.id.write_review_submit);
         submit.setOnClickListener(new addReview());
-        loadPreference();
         return view;
     }
 
