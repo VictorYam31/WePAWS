@@ -30,6 +30,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:itemTextAppearanceActive="@style/Navigationbar.FontSize"
+        app:itemTextAppearanceInactive="@style/Navigationbar.FontSize"
         app:itemIconTint="@drawable/nav_menu_selector"
         app:itemBackground="@color/orange"
         app:itemTextColor="@color/white"
