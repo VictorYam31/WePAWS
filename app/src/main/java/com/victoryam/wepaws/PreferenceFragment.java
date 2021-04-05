@@ -108,6 +108,17 @@ public class PreferenceFragment extends Fragment {
         public void onClick(View v) {
             String userName = String.valueOf(userNameEditText.getText());
             String password = String.valueOf(passwordEditText.getText());
+
+            if (userName.equals("")) {
+                loginStatusTextView.setText("Username cannot be null");
+                loginStatusTextView.setTextColor(getResources().getColor(R.color.light_red));
+                return;
+            } else if (password.equals("")) {
+                loginStatusTextView.setText("Password cannot be null");
+                loginStatusTextView.setTextColor(getResources().getColor(R.color.light_red));
+                return;
+            }
+
             NonQueryResultModel nonQueryResultModel = new NonQueryResultModel();
 
             WebServiceManager webServiceManager = new WebServiceManager();
