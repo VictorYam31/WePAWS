@@ -58,8 +58,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class ResultFragment extends Fragment {
-
-
     Utility utility;
 
     @Nullable
@@ -81,7 +79,7 @@ public class ResultFragment extends Fragment {
 
         switch (categoryId) {
             case 0:
-                componentNames =  getResources().getStringArray(R.array.wild_search_names);
+                componentNames = getResources().getStringArray(R.array.wild_search_names);
                 break;
             case 1:
                 componentNames = getResources().getStringArray(R.array.search_clinic_component_names);
@@ -109,7 +107,6 @@ public class ResultFragment extends Fragment {
         HashMap<String, String> searchingCriteriaForWebService;
         List<IResult> iResultList;
         ListView listView;
-
 
         initResultsTask(View view, int categoryId, String[] componentNames, HashMap<Integer, List<String>> searchingCriteria) {
             this.view = view;
@@ -163,6 +160,7 @@ public class ResultFragment extends Fragment {
                     case 0:
                         String name = searchingCriteriaForWebService.get("Name");
                         iResultList = new ArrayList<IResult>(webServiceManager.wild_search(name));
+                        break;
                     case 1:
                         String clinic_name = searchingCriteriaForWebService.get("Name");
                         String district_id = searchingCriteriaForWebService.get("District");

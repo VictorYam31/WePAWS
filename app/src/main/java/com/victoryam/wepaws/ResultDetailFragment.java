@@ -62,7 +62,6 @@ public class ResultDetailFragment extends Fragment {
         initResultDetails(view, categoryId, this.iResult);
 
         String title;
-        Log.v("categoryId", String.valueOf(categoryId));
         switch (categoryId) {
             case 1:
                 title = getResources().getString(R.string.home_menu_clinic);
@@ -344,11 +343,6 @@ public class ResultDetailFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-//            String message = "Share from WePAWS:" + "\\r\\n";
-//            message += "Name: " + name +  "\\r\\n";
-//            message += "Addr: " + address +  "\\r\\n";
-//            message += "Tel: " + phoneNumber +  "\\r\\n";
-
             String message = "Share from WePAWS: https://www.google.com/search?q=" + name ;
 
             Intent share = new Intent(Intent.ACTION_SEND);

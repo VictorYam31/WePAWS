@@ -1,8 +1,13 @@
 package com.victoryam.wepaws;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +30,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 public class HomeFragment extends Fragment {
 
@@ -66,29 +72,10 @@ public class HomeFragment extends Fragment {
 
         });
 
-        /*Button vetButton = (Button) view.findViewById(R.id.home_menu_clinic_btn);
-        vetButton.setOnClickListener(new onButtonClicked());
-
-        Button storeButton = (Button) view.findViewById(R.id.home_menu_store_btn);
-        storeButton.setOnClickListener(new onButtonClicked());
-
-        Button diningButton = (Button) view.findViewById(R.id.home_menu_dining_btn);
-        diningButton.setOnClickListener(new onButtonClicked());
-
-        Button parkButton = (Button) view.findViewById(R.id.home_menu_park_btn);
-        parkButton.setOnClickListener(new onButtonClicked());*/
         return view;
     }
 
-//    @Override
-//    public void onResume(){
-//        super.onResume();
-//        ((AppCompatActivity)getActivity()).getWindow().setSoftInputMode(
-//                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
-//        );
-//    }
-
-    private class onButtonClicked implements  View.OnClickListener {
+    private class onButtonClicked implements View.OnClickListener {
         int position;
 
         private onButtonClicked(int position) {
@@ -106,22 +93,26 @@ public class HomeFragment extends Fragment {
     public class HomeAdapter extends RecyclerView.Adapter<HomeHolder> {
         Context c;
         ArrayList<HomeModel> models;
+
         public HomeAdapter(Context c, ArrayList<HomeModel> models) {
             this.c = c;
             this.models = models;
         }
+
         @NonNull
         @Override
         public HomeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_item, null);
             return new HomeHolder(v);
         }
+
         @Override
         public void onBindViewHolder(@NonNull HomeHolder holder, int position) {
             holder.homeItemName.setText(models.get(position).getItemName());
             holder.homeItemImageView.setImageResource(models.get(position).getImage());
             holder.homeRelativeLayout.setOnClickListener(new onButtonClicked(position));
         }
+
         @Override
         public int getItemCount() {
             return models.size();
@@ -134,12 +125,13 @@ public class HomeFragment extends Fragment {
         ArrayList<HomeModel> models = new ArrayList<>();
         HomeModel p = new HomeModel();
         for (int i = 0; i < itemNames.length; i++) {
-            if (i !=0) { p = new HomeModel(); }
+            if (i != 0) {
+                p = new HomeModel();
+            }
             p.setItemName(itemNames[i]);
-            p.setImage(itemImages.getResourceId(i , -1));
+            p.setImage(itemImages.getResourceId(i, -1));
             models.add(p);
         }
         return models;
     }
-
 }

@@ -15,20 +15,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.victoryam.wepaws.Utils.Utility;
 import com.victoryam.wepaws.WebService.Model.NonQueryResultModel;
 import com.victoryam.wepaws.WebService.WebServiceManager;
 
 import java.util.concurrent.ExecutionException;
 
 public class CreateAccountFragment extends Fragment {
+    Utility utility;
     EditText createAccountEditText;
     EditText createPasswordEditText;
-
     TextView createStatusTextView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.create_account, container, false);
+        utility = new Utility();
 
         createAccountEditText = (EditText) view.findViewById(R.id.create_account_username_edittext);
         createPasswordEditText = (EditText) view.findViewById(R.id.create_account_password_edittext);
@@ -54,18 +56,18 @@ public class CreateAccountFragment extends Fragment {
             String password = String.valueOf(createPasswordEditText.getText());
 
             if (userName.equals("")) {
-                createStatusTextView.setText("Username cannot be null");
+                createStatusTextView.setText(getResources().getString(R.string.preference_login_password_null));
                 createStatusTextView.setTextColor(getResources().getColor(R.color.light_red));
                 return;
             } else if (password.equals("")) {
-                createStatusTextView.setText("Password cannot be null");
+                createStatusTextView.setText(getResources().getString(R.string.preference_login_password_null));
                 createStatusTextView.setTextColor(getResources().getColor(R.color.light_red));
                 return;
             }
 
             NonQueryResultModel nonQueryResultModel = new NonQueryResultModel();
-
             WebServiceManager webServiceManager = new WebServiceManager();
+
             try {
                 nonQueryResultModel = webServiceManager.create_account(userName, password);
             } catch (ExecutionException e) {
@@ -75,14 +77,10 @@ public class CreateAccountFragment extends Fragment {
             }
 
             if (nonQueryResultModel.getIsSuccess() == 1) { // Success
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("Name", userName);
-                editor.apply();
-
+                utility.saveUsernameToSharePreference(mContext, userName);
                 Navigation.findNavController(v).navigate(R.id.PreferenceFragment);
             } else if (nonQueryResultModel.getIsSuccess() == 0) { // Fail
-                createStatusTextView.setText("Create Account Fail: Username Exists");
+                createStatusTextView.setText(getResources().getString(R.string.preference_create_profile_fail_r0));
                 createStatusTextView.setTextColor(getResources().getColor(R.color.light_red));
                 createAccountEditText.setTextColor(getResources().getColor(R.color.light_red));
             }

@@ -23,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.victoryam.wepaws.Utils.Utility;
 import com.victoryam.wepaws.WebService.Model.NonQueryResultModel;
 import com.victoryam.wepaws.WebService.WebServiceManager;
 
@@ -30,12 +31,7 @@ import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 public class PreferenceFragment extends Fragment {
-    Spinner languageSpinner;
-    EditText userNameEditText;
-    EditText passwordEditText;
-
-    Button loginButton;
-    Button logoutButton;
+    Utility utility;
 
     TextView profileUserNameTextView;
     TextView loginStatusTextView;
@@ -43,25 +39,24 @@ public class PreferenceFragment extends Fragment {
     TextView profilePasswordTextView;
     TextView createAccount;
 
+    EditText userNameEditText;
+    EditText passwordEditText;
+
+    Button loginButton;
+    Button logoutButton;
+
+    Spinner languageSpinner;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.preference, container, false);
-
-        userNameEditText = (EditText) view.findViewById(R.id.profile_username_edittext);
-        passwordEditText = (EditText) view.findViewById(R.id.profile_password_edittext);
+        utility = new Utility();
 
         profileUserNameTextView = (TextView) view.findViewById(R.id.profile_username);
         loginStatusTextView = (TextView) view.findViewById(R.id.profile_status);
         profileUserTextView = (TextView) view.findViewById(R.id.profile_username_text);
         profilePasswordTextView = (TextView) view.findViewById(R.id.profile_password);
-
-        loginButton = (Button) view.findViewById(R.id.profile_login_button);
-        loginButton.setOnClickListener(new loginButtonClicked(this.getContext()));
-
-        logoutButton = (Button) view.findViewById(R.id.profile_logout_button);
-        logoutButton.setOnClickListener(new logoutButtonClicked(this.getContext()));
-
         createAccount = (TextView) view.findViewById(R.id.profile_create_account);
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +64,15 @@ public class PreferenceFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_PreferenceFragment_to_CreateAccountFragment);
             }
         });
+
+        userNameEditText = (EditText) view.findViewById(R.id.profile_username_edittext);
+        passwordEditText = (EditText) view.findViewById(R.id.profile_password_edittext);
+
+        loginButton = (Button) view.findViewById(R.id.profile_login_button);
+        loginButton.setOnClickListener(new loginButtonClicked(this.getContext()));
+
+        logoutButton = (Button) view.findViewById(R.id.profile_logout_button);
+        logoutButton.setOnClickListener(new logoutButtonClicked(this.getContext()));
 
         languageSpinner = view.findViewById(R.id.preference_language_spinner);
         initLanguageFooter();
@@ -81,15 +85,7 @@ public class PreferenceFragment extends Fragment {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this.getContext());
         String name = preferences.getString("Name", "");
         if (!name.equals("")) { // Success
-            profileUserTextView.setVisibility(View.GONE);
-            profilePasswordTextView.setVisibility(View.GONE);
-            userNameEditText.setVisibility(View.GONE);
-            passwordEditText.setVisibility(View.GONE);
-            loginButton.setVisibility(View.GONE);
-            createAccount.setVisibility(View.GONE);
-
-            logoutButton.setVisibility(View.VISIBLE);
-
+            setLoginInputInvisible();
             profileUserNameTextView.setText(name);
         }
     }
@@ -107,11 +103,11 @@ public class PreferenceFragment extends Fragment {
             String password = String.valueOf(passwordEditText.getText());
 
             if (userName.equals("")) {
-                loginStatusTextView.setText("Username cannot be null");
+                loginStatusTextView.setText(getResources().getString(R.string.preference_login_username_null));
                 loginStatusTextView.setTextColor(getResources().getColor(R.color.light_red));
                 return;
             } else if (password.equals("")) {
-                loginStatusTextView.setText("Password cannot be null");
+                loginStatusTextView.setText(getResources().getString(R.string.preference_login_password_null));
                 loginStatusTextView.setTextColor(getResources().getColor(R.color.light_red));
                 return;
             }
@@ -128,7 +124,7 @@ public class PreferenceFragment extends Fragment {
             }
 
             if (nonQueryResultModel.getIsSuccess() == 1) { // Success
-                loginStatusTextView.setText("Login Account Success.");
+                loginStatusTextView.setText(getResources().getString(R.string.preference_login_success));
                 loginStatusTextView.setVisibility(View.VISIBLE);
                 loginStatusTextView.setTextColor(getResources().getColor(R.color.light_green));
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
@@ -136,28 +132,20 @@ public class PreferenceFragment extends Fragment {
                 editor.putString("Name", userName);
                 editor.apply();
 
-                profileUserTextView.setVisibility(View.GONE);
-                profilePasswordTextView.setVisibility(View.GONE);
-                userNameEditText.setVisibility(View.GONE);
-                passwordEditText.setVisibility(View.GONE);
-                createAccount.setVisibility(View.GONE);
-
-                loginButton.setVisibility(View.GONE);
-                logoutButton.setVisibility(View.VISIBLE);
-
+                setLoginInputInvisible();
                 profileUserNameTextView.setText(userName);
 
             } else if (nonQueryResultModel.getIsSuccess() == 0) { //Fail
                 int info = nonQueryResultModel.getInfo();
                 switch (info) {
                     case 1:
-                        loginStatusTextView.setText("Login Account Fail: Wrong Password");
+                        loginStatusTextView.setText(getResources().getString(R.string.preference_login_fail_r0));
                         break;
                     case 2:
-                        loginStatusTextView.setText("Login Account Fail: Username dose not exist");
+                        loginStatusTextView.setText(getResources().getString(R.string.preference_login_fail_r1));
                         break;
                     case 3:
-                        loginStatusTextView.setText("Login Account Fail: Error Unknown");
+                        loginStatusTextView.setText(getResources().getString(R.string.preference_login_fail_r2));
                         break;
                 }
 
@@ -176,20 +164,33 @@ public class PreferenceFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-            preferences.edit().remove("Name").commit();
+            utility.deleteUsernameFromSharePreference(mContext);
 
-            profileUserTextView.setVisibility(View.VISIBLE);
-            profilePasswordTextView.setVisibility(View.VISIBLE);
-            userNameEditText.setVisibility(View.VISIBLE);
-            passwordEditText.setVisibility(View.VISIBLE);
-            createAccount.setVisibility(View.VISIBLE);
-
-            loginButton.setVisibility(View.VISIBLE);
-            logoutButton.setVisibility(View.INVISIBLE);
-
+            setLoginInputVisible();
             profileUserNameTextView.setText("Guest");
         }
+    }
+
+    private void setLoginInputVisible() {
+        profileUserTextView.setVisibility(View.VISIBLE);
+        profilePasswordTextView.setVisibility(View.VISIBLE);
+        userNameEditText.setVisibility(View.VISIBLE);
+        passwordEditText.setVisibility(View.VISIBLE);
+        createAccount.setVisibility(View.VISIBLE);
+
+        loginButton.setVisibility(View.VISIBLE);
+        logoutButton.setVisibility(View.INVISIBLE);
+    }
+
+    private void setLoginInputInvisible() {
+        profileUserTextView.setVisibility(View.GONE);
+        profilePasswordTextView.setVisibility(View.GONE);
+        userNameEditText.setVisibility(View.GONE);
+        passwordEditText.setVisibility(View.GONE);
+        createAccount.setVisibility(View.GONE);
+
+        loginButton.setVisibility(View.GONE);
+        logoutButton.setVisibility(View.VISIBLE);
     }
 
     private void initLanguageFooter() {
@@ -199,7 +200,7 @@ public class PreferenceFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.preference_spinner_item, items);
         languageSpinner.setAdapter(adapter);
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getContext());
-        languageSpinner.setSelection(pref.getInt("lang", 0),false);
+        languageSpinner.setSelection(pref.getInt("lang", 0), false);
         languageSpinner.setOnItemSelectedListener(new languageSpinnerOnItemSelected());
     }
 
@@ -211,8 +212,7 @@ public class PreferenceFragment extends Fragment {
             String languageCode;
             if (position == 0) {
                 languageCode = "en";
-            }
-            else {
+            } else {
                 languageCode = "zh";
             }
             SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -234,5 +234,4 @@ public class PreferenceFragment extends Fragment {
         config.setLocale(locale);
         resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
-
 }

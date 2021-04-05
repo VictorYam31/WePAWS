@@ -70,5 +70,12 @@
     <string name="result_detail_reviews">篇評論</string>
     <string name="write_review_write_review_by">留下評論\u0020</string>
     <string name="nav_menu_preference">帳號</string>
+    <string name="preference_login_success">成功登入帳號</string>
+    <string name="preference_login_username_null">帳號不能為空</string>
+    <string name="preference_login_password_null">密碼不能為空</string>
+    <string name="preference_login_fail_r0">登入帳號失敗: 錯誤密碼</string>
+    <string name="preference_login_fail_r1">登入帳號失敗: 帳號不存在</string>
+    <string name="preference_login_fail_r2">登入帳號失敗: 未知錯誤</string>
+    <string name="preference_create_profile_fail_r0">創建帳號失敗: 帳號已存在</string>
 
 </resources>
