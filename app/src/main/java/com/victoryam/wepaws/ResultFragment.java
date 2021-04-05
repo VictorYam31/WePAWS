@@ -230,7 +230,17 @@ public class ResultFragment extends Fragment {
             resultAddress.setText(this.iResultList.get(position).getAddressForResult());
 
             TextView resultCategory = (TextView) view.findViewById(R.id.result_category);
-            resultCategory.setText(this.iResultList.get(position).getDescriptionForResult());
+            String categoryText = this.iResultList.get(position).getDescriptionForResult();
+            if (categoryText.length() > 50) {
+                categoryText = categoryText.substring(0, 50) + "...";
+            }
+            resultCategory.setText(categoryText);
+
+            TextView goodNumberText = (TextView) view.findViewById(R.id.result_display_good_number);
+            goodNumberText.setText(String.valueOf(this.iResultList.get(position).getPositiveCountForResult()));
+
+            TextView badNumberText = (TextView) view.findViewById(R.id.result_display_bad_number);
+            badNumberText.setText(String.valueOf(this.iResultList.get(position).getNegativeCountForResult()));
 
             ImageView image = (ImageView) view.findViewById(R.id.result_display_icon);
 

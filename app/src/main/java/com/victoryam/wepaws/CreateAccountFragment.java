@@ -53,6 +53,16 @@ public class CreateAccountFragment extends Fragment {
             String userName = String.valueOf(createAccountEditText.getText());
             String password = String.valueOf(createPasswordEditText.getText());
 
+            if (userName.equals("")) {
+                createStatusTextView.setText("Username cannot be null");
+                createStatusTextView.setTextColor(getResources().getColor(R.color.light_red));
+                return;
+            } else if (password.equals("")) {
+                createStatusTextView.setText("Password cannot be null");
+                createStatusTextView.setTextColor(getResources().getColor(R.color.light_red));
+                return;
+            }
+
             NonQueryResultModel nonQueryResultModel = new NonQueryResultModel();
 
             WebServiceManager webServiceManager = new WebServiceManager();

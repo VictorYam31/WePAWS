@@ -90,6 +90,10 @@ public class WriteReviewFragment extends Fragment {
         public void onClick(View v) {
             String success = "";
             String reviewContentString = String.valueOf(reviewContent.getText());
+            if(reviewContentString.equals("")){
+                return;
+            }
+
             ArrayList<IReview> reviewList = new ArrayList<IReview>();
 
             WebServiceManager webServiceManager = new WebServiceManager();
