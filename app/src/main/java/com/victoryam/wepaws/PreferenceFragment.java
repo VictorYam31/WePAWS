@@ -208,16 +208,9 @@ public class PreferenceFragment extends Fragment {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             Log.v("item", (String) parent.getItemAtPosition(position));
 //                ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.black));
-            String languageCode;
-            if (position == 0) {
-                languageCode = "en";
-            }
-            else {
-                languageCode = "zh";
-            }
             SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
             pref.edit().putInt("lang", position).apply();
-            setLocale(getActivity(), languageCode);
+            setLocale(getActivity(), position);
             getActivity().finish();
             getActivity().startActivity(getActivity().getIntent());
         }
@@ -226,7 +219,15 @@ public class PreferenceFragment extends Fragment {
         }
     }
 
-    public static void setLocale(Activity activity, String languageCode) {
+    public static void setLocale(Activity activity, int position) {
+        String languageCode;
+        if (position == 0) {
+            languageCode = "en";
+        }
+        else {
+            languageCode = "zh";
+        }
+
         Locale locale = new Locale(languageCode);
         Locale.setDefault(locale);
         Resources resources = activity.getResources();

@@ -10,13 +10,17 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.victoryam.wepaws.WebService.Test.ClinicMasterActivity;
 import com.victoryam.wepaws.WebService.Test.WildSearchActivity;
+
+import static com.victoryam.wepaws.PreferenceFragment.setLocale;
 
 public class MainActivity extends AppCompatActivity {
     private NavController navController;
@@ -31,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         setContentView(R.layout.activity_main);
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        setLocale(this, pref.getInt("lang", 0));
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -74,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         navigationBar = findViewById(R.id.navigationbar);
+
         NavigationUI.setupWithNavController(navigationBar, navController);
         navigationBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -95,6 +102,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        navigationBar.getMenu().getItem(0).setTitle(getResources().getString(R.string.nav_menu_home));
+        navigationBar.getMenu().getItem(1).setTitle(getResources().getString(R.string.nav_menu_search));
+        navigationBar.getMenu().getItem(2).setTitle(getResources().getString(R.string.nav_menu_preference));
+        navController.navigate(R.id.HomeFragment);
     }
 
     @Override
