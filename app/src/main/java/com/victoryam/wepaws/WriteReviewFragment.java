@@ -20,6 +20,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.victoryam.wepaws.Utils.IReview;
+import com.victoryam.wepaws.Utils.Utility;
 import com.victoryam.wepaws.WebService.Model.NonQueryResultModel;
 import com.victoryam.wepaws.WebService.WebServiceManager;
 
@@ -28,6 +29,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class WriteReviewFragment extends Fragment {
+    private Utility utility;
 
     private int categoryId;
     private int id;
@@ -54,6 +56,7 @@ public class WriteReviewFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.write_review, container, false);
+        utility = new Utility();
         loadPreference();
 
         TextView title = (TextView) view.findViewById(R.id.write_review_title);
@@ -128,8 +131,6 @@ public class WriteReviewFragment extends Fragment {
     }
 
     private void loadPreference() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this.getContext());
-        String name = preferences.getString("Name", "Guest");
-        this.userName = name;
+        this.userName = utility.getUsernameFromSharePreference(this.getContext());
     }
 }

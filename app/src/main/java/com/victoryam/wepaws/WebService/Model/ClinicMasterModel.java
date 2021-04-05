@@ -57,9 +57,18 @@ public class ClinicMasterModel implements IResult, Parcelable {
         return clinic_name;
     }
 
+    public String getClinicNameCN() {
+        return clinic_name_cn;
+    }
+
     public String getClinicAddress() {
         return clinic_address;
     }
+
+    public String getClinicAddressCN() {
+        return clinic_address_cn;
+    }
+
 
     public String getPhone() {
 
@@ -103,8 +112,18 @@ public class ClinicMasterModel implements IResult, Parcelable {
     }
 
     @Override
+    public String getNameCNForResult() {
+        return getClinicNameCN();
+    }
+
+    @Override
     public String getAddressForResult() {
         return getClinicAddress();
+    }
+
+    @Override
+    public String getAddressCNForResult() {
+        return getClinicAddressCN();
     }
 
     @Override

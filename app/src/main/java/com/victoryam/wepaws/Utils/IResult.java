@@ -5,7 +5,9 @@ import android.os.Parcelable;
 public interface IResult extends Parcelable {
     public int getIDForResult();
     public String getNameForResult();
+    public String getNameCNForResult();
     public String getAddressForResult();
+    public String getAddressCNForResult();
     public String getDescriptionForResult();
     public int getNegativeCountForResult();
     public int getNeutralCountForResult();

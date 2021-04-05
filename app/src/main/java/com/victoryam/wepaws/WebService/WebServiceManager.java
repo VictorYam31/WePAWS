@@ -2,15 +2,20 @@ package com.victoryam.wepaws.WebService;
 
 import com.victoryam.wepaws.WebService.Model.ClinicMasterModel;
 import com.victoryam.wepaws.WebService.Model.ClinicReviewModel;
+import com.victoryam.wepaws.WebService.Model.MasterModel;
 import com.victoryam.wepaws.WebService.Model.NonQueryResultModel;
 import com.victoryam.wepaws.WebService.Model.WildSearchModel;
 import com.victoryam.wepaws.WebService.Task.AddClinicReviewRatingTask;
 import com.victoryam.wepaws.WebService.Task.CreateAccountTask;
 import com.victoryam.wepaws.WebService.Task.GetClinicMasterTask;
 import com.victoryam.wepaws.WebService.Task.GetClinicReviewTask;
+import com.victoryam.wepaws.WebService.Task.GetMasterTask;
 import com.victoryam.wepaws.WebService.Task.VerifyAccountTask;
 import com.victoryam.wepaws.WebService.Task.WildSearchTask;
 import com.victoryam.wepaws.WebService.Test.SendEmailTask;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -111,6 +116,54 @@ public class WebServiceManager {
         executor.shutdown();
 
         return createAccountResult;
+    }
+
+    //parameter @hotel_name - "" or any text
+    //parameter @district_id - 1 to 18, can be empty or single or multiply, ""  "2"  "2,6"
+    public List<MasterModel> get_hotel_master(String hotel_name, String district_id) throws ExecutionException, InterruptedException {
+
+        String url = "https://wepaws.azurewebsites.net/hotelws.asmx/get_hotel_master";
+        String jsonContent = "";
+        try {
+            jsonContent = new JSONObject()
+                    .put("hotel_name", hotel_name)
+                    .put("district_id", district_id)
+                    .toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ExecutorService executor = Executors.newCachedThreadPool();
+        GetMasterTask task = new GetMasterTask(url, jsonContent, GetMasterTask.HOTEL);
+        Future<List<MasterModel>> future = executor.submit(task);
+        List<MasterModel> hotelMasterList = future.get();
+        executor.shutdown();
+
+        return hotelMasterList;
+    }
+
+    //parameter @shop_name - "" or any text
+    //parameter @district_id - 1 to 18, can be empty or single or multiply, ""  "2"  "2,6"
+    public List<MasterModel> get_shop_master(String hotel_name, String district_id) throws ExecutionException, InterruptedException {
+
+        String url = "https://wepaws.azurewebsites.net/shopws.asmx/get_shop_master";
+        String jsonContent = "";
+        try {
+            jsonContent = new JSONObject()
+                    .put("shop_name", hotel_name)
+                    .put("district_id", district_id)
+                    .toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ExecutorService executor = Executors.newCachedThreadPool();
+        GetMasterTask task = new GetMasterTask(url, jsonContent, GetMasterTask.SHOP);
+        Future<List<MasterModel>> future = executor.submit(task);
+        List<MasterModel> hotelMasterList = future.get();
+        executor.shutdown();
+
+        return hotelMasterList;
     }
 }
 

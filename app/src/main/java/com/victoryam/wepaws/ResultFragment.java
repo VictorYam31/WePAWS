@@ -58,9 +58,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class ResultFragment extends Fragment {
-
-
     Utility utility;
+    int language;
 
     @Nullable
     @Override
@@ -69,6 +68,7 @@ public class ResultFragment extends Fragment {
         Bundle bundle = this.getArguments();
 
         utility = new Utility();  //Initialize Utility
+        language = utility.getLocale(this.getContext());
 
         int categoryId = -1;
         String[] componentNames = {};
@@ -81,7 +81,7 @@ public class ResultFragment extends Fragment {
 
         switch (categoryId) {
             case 0:
-                componentNames =  getResources().getStringArray(R.array.wild_search_names);
+                componentNames = getResources().getStringArray(R.array.wild_search_names);
                 break;
             case 1:
                 componentNames = getResources().getStringArray(R.array.search_clinic_component_names);
@@ -109,7 +109,6 @@ public class ResultFragment extends Fragment {
         HashMap<String, String> searchingCriteriaForWebService;
         List<IResult> iResultList;
         ListView listView;
-
 
         initResultsTask(View view, int categoryId, String[] componentNames, HashMap<Integer, List<String>> searchingCriteria) {
             this.view = view;
@@ -163,6 +162,7 @@ public class ResultFragment extends Fragment {
                     case 0:
                         String name = searchingCriteriaForWebService.get("Name");
                         iResultList = new ArrayList<IResult>(webServiceManager.wild_search(name));
+                        break;
                     case 1:
                         String clinic_name = searchingCriteriaForWebService.get("Name");
                         String district_id = searchingCriteriaForWebService.get("District");
@@ -224,10 +224,23 @@ public class ResultFragment extends Fragment {
             }
 
             TextView resultName = (TextView) view.findViewById(R.id.result_display_name);
-            resultName.setText(this.iResultList.get(position).getNameForResult());
+            String tempName = "";
+            if (language == 0) { //EN
+                tempName = this.iResultList.get(position).getNameForResult();
+            } else { //CN
+                tempName = this.iResultList.get(position).getNameCNForResult();
+            }
+            resultName.setText(tempName);
 
             TextView resultAddress = (TextView) view.findViewById(R.id.result_display_address);
-            resultAddress.setText(this.iResultList.get(position).getAddressForResult());
+            String tempAddress = "";
+            if (language == 0) { //EN
+                tempAddress = this.iResultList.get(position).getAddressForResult();
+            } else { //CN
+                tempAddress = this.iResultList.get(position).getAddressCNForResult();
+            }
+            resultAddress.setText(tempAddress);
+
 
             TextView resultCategory = (TextView) view.findViewById(R.id.result_category);
             String categoryText = this.iResultList.get(position).getDescriptionForResult();

@@ -1,6 +1,11 @@
 package com.victoryam.wepaws.Utils;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
+
+import androidx.navigation.Navigation;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -10,6 +15,7 @@ import com.victoryam.wepaws.Domain.Dining;
 import com.victoryam.wepaws.Domain.Hotel;
 import com.victoryam.wepaws.Domain.Park;
 import com.victoryam.wepaws.Domain.Store;
+import com.victoryam.wepaws.R;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,62 +24,31 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 public class Utility {
-    private Gson gson;
 
-    public Utility() {
-        gson = new Gson();
+/*    public Utility() {
+
+    }*/
+
+    public int getLocale(Context mContext) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
+        return pref.getInt("lang", 0);
     }
 
-    public List<Clinic> DeserializeClinic(String json) {
-        List<Clinic> targetObject = gson.fromJson(json, new TypeToken<List<Clinic>>(){}.getType());
-        return targetObject;
+    public String getUsernameFromSharePreference(Context mContext) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        String name = preferences.getString("Name", "Guest");
+        return name;
     }
 
-    public List<Store> DeserializeStore(String json) {
-        List<Store> targetObject = gson.fromJson(json, new TypeToken<List<Store>>(){}.getType());
-        return targetObject;
+    public void deleteUsernameFromSharePreference(Context mContext) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        preferences.edit().remove("Name").commit();
     }
 
-    public List<Dining> DeserializeDining(String json) {
-        List<Dining> targetObject = gson.fromJson(json, new TypeToken<List<Dining>>(){}.getType());
-        return targetObject;
-    }
-
-    public List<Park> DeserializePark(String json) {
-        List<Park> targetObject = gson.fromJson(json, new TypeToken<List<Park>>(){}.getType());
-        return targetObject;
-    }
-
-    public List<Park> DeserializeHotel(String json) {
-        List<Park> targetObject = gson.fromJson(json, new TypeToken<List<Hotel>>(){}.getType());
-        return targetObject;
-    }
-
-    public String SerializeObject(Object targetObject) {
-        String jsonString = gson.toJson(targetObject);
-        return jsonString;
-    }
-
-    public static String readStream(InputStream in) {
-        BufferedReader reader = null;
-        StringBuffer data = new StringBuffer("");
-        try {
-            reader = new BufferedReader(new InputStreamReader(in));
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-                data.append(line);
-            }
-        } catch (IOException e) {
-            Log.e("HttpGetTask", "IOException");
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return data.toString();
+    public void saveUsernameToSharePreference(Context mContext, String userName) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("Name", userName);
+        editor.apply();
     }
 }

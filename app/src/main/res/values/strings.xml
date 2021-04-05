@@ -143,5 +143,12 @@
     <string name="result_detail_view">View</string>
     <string name="result_detail_reviews">reviews</string>
     <string name="write_review_write_review_by">Write Review By\u0020</string>
+    <string name="preference_login_success">Login Account Success</string>
+    <string name="preference_login_username_null">Username cannot be null</string>
+    <string name="preference_login_password_null">Password cannot be null</string>
+    <string name="preference_login_fail_r0">Login Account Fail: Wrong Password</string>
+    <string name="preference_login_fail_r1">Login Account Fail: Username does not exist</string>
+    <string name="preference_login_fail_r2">Login Accoung Fail: Error Unknown</string>
+    <string name="preference_create_profile_fail_r0">Create Account Fail: Username exists</string>
 
 </resources>

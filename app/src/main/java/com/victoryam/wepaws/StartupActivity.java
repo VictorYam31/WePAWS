@@ -8,25 +8,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 public class StartupActivity extends Activity {
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.startup);
-//
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                Intent intent = new Intent(StartupActivity.this, MainActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        }, 3000);
-//
-//    }
-
-    ImageView startuplogo;
+    ImageView startupLogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +25,8 @@ public class StartupActivity extends Activity {
             }
         }, 4200);
 
-        startuplogo = (ImageView) findViewById(R.id.startup_image);
-        startuplogo.startAnimation(AnimationUtils.loadAnimation(this,R.anim.rotate_logo));
+        startupLogo = (ImageView) findViewById(R.id.startup_image);
+        startupLogo.startAnimation(AnimationUtils.loadAnimation(this,R.anim.rotate_logo));
 
     }
 }
