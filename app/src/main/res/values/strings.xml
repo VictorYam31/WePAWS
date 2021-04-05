@@ -85,7 +85,7 @@
 
     <string name="write_review">Write Review</string>
     <string name="write_review_title">Write a review for\u0020</string>
-    <string name="write_review_comment">Comment:</string>
+    <string name="write_review_comment">Leave review:</string>
     <string name="write_review_submit">Submit</string>
 
     <string name="animal_type_dog">Dog</string>

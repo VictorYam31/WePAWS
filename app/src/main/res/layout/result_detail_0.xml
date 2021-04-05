@@ -130,13 +130,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginStart="40dp"
             android:gravity="center">
 
             <ImageView
                 android:id="@+id/result_detail_0_phone_call"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:theme="@style/Button_Medium"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                app:tint="@color/orange_dark"
                 android:src="@drawable/phone_call"
                 />
 
@@ -150,9 +151,9 @@
 
             <ImageView
                 android:id="@+id/result_detail_0_bookmark"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:theme="@style/Button_Medium"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                app:tint="@color/orange_dark"
                 android:src="@drawable/share"
                 />
 

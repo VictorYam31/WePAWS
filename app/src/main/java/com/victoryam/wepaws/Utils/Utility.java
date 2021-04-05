@@ -29,6 +29,11 @@ public class Utility {
 
     }*/
 
+    public int getLocale(Context mContext) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
+        return pref.getInt("lang", 0);
+    }
+
     public String getUsernameFromSharePreference(Context mContext) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         String name = preferences.getString("Name", "Guest");

@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
+    android:theme="@style/FontSize_Medium"
     >
     
     <SearchView
@@ -34,7 +35,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/home_menu_search"
-        android:theme="@style/Button_Medium"
         android:text="@string/home_menu_clinic"
         android:visibility="gone"
         />
@@ -44,7 +44,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/home_menu_clinic_btn"
-        android:theme="@style/Button_Medium"
         android:text="@string/home_menu_store"
         android:visibility="gone"
         />
@@ -54,7 +53,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/home_menu_store_btn"
-        android:theme="@style/Button_Medium"
         android:text="@string/home_menu_dining"
         android:visibility="gone"
         />
@@ -64,7 +62,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/home_menu_dining_btn"
-        android:theme="@style/Button_Medium"
         android:text="@string/home_menu_park"
         android:visibility="gone"
         />
@@ -74,9 +71,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:theme="@style/Button_Medium"
         android:text="Web Service Test"
         android:onClick="test1"
+        android:visibility="gone"
         />
 
 </RelativeLayout>

@@ -27,6 +27,7 @@ import androidx.navigation.Navigation;
 import com.victoryam.wepaws.Domain.VetReview;
 import com.victoryam.wepaws.Utils.IResult;
 import com.victoryam.wepaws.Utils.IReview;
+import com.victoryam.wepaws.Utils.Utility;
 import com.victoryam.wepaws.WebService.Model.ClinicReviewModel;
 import com.victoryam.wepaws.WebService.WebServiceManager;
 
@@ -41,12 +42,18 @@ import java.util.concurrent.ExecutionException;
 import kotlin.collections.ArrayDeque;
 
 public class ResultDetailFragment extends Fragment {
+    private Utility utility;
+    private int language;
+
     private IResult iResult;
     private int categoryId;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        utility = new Utility();
+        language = utility.getLocale(this.getContext());
+
         Bundle bundle = this.getArguments();
 
         if (bundle != null) {
@@ -172,7 +179,14 @@ public class ResultDetailFragment extends Fragment {
                 view = inflater.inflate(R.layout.result_detail_0, null);
 
                 TextView resultName = (TextView) view.findViewById(R.id.result_detail_0_name);
-                resultName.setText(String.valueOf(this.result.getNameForResult()));
+                String tempName = "";
+                if (language == 0) { //EN
+                    tempName = this.result.getNameForResult();
+                } else { //CN
+                    tempName = this.result.getNameCNForResult();
+                }
+                resultName.setText(tempName);
+
 
                 TextView goodRating = (TextView) view.findViewById(R.id.result_detail_0_good_number);
                 goodRating.setText(String.valueOf(this.result.getPositiveCountForResult()));
@@ -219,7 +233,13 @@ public class ResultDetailFragment extends Fragment {
                 phoneText.setText(this.result.getPhoneNumberForResult());
 
                 TextView addressText = (TextView) view.findViewById(R.id.result_detail_1_address);
-                addressText.setText(this.result.getAddressForResult());
+                String tempAddress = "";
+                if (language == 0) { //EN
+                    tempAddress = this.result.getAddressForResult();
+                } else { //CN
+                    tempAddress = this.result.getAddressCNForResult();
+                }
+                addressText.setText(tempAddress);
 
                 TextView descriptionText = (TextView) view.findViewById(R.id.result_detail_1_description);
                 descriptionText.setText(this.result.getDescriptionForResult());

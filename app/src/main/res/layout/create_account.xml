@@ -17,6 +17,7 @@
             android:id="@+id/create_account_username_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:theme="@style/FontSize_Tiny"
             android:text="@string/profile_username"/>
 
         <EditText
@@ -28,6 +29,7 @@
             android:id="@+id/create_account_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:theme="@style/FontSize_Tiny"
             android:text="@string/profile_password"/>
 
         <EditText
@@ -49,6 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:theme="@style/FontSize_Tiny"
             android:text=""/>
 
     </LinearLayout>

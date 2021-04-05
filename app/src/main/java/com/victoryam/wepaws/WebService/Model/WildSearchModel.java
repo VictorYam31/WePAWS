@@ -107,8 +107,18 @@ public class WildSearchModel implements IResult, Parcelable {
     }
 
     @Override
+    public String getNameCNForResult() {
+        return getClinic_name_cn();
+    }
+
+    @Override
     public String getAddressForResult() {
         return getClinicAddress();
+    }
+
+    @Override
+    public String getAddressCNForResult() {
+        return getClinic_address_cn();
     }
 
     @Override
