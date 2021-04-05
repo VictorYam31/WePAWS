@@ -165,12 +165,15 @@ public class ResultFragment extends Fragment {
                         break;
                     case 1:
                         String clinic_name = searchingCriteriaForWebService.get("Name");
-                        String district_id = searchingCriteriaForWebService.get("District");
+                        String clinic_district_id = searchingCriteriaForWebService.get("District");
                         String overnight = searchingCriteriaForWebService.get("Overnight");
 
-                        iResultList = new ArrayList<>(webServiceManager.get_clinic_master(clinic_name, district_id, overnight));
+                        iResultList = new ArrayList<>(webServiceManager.get_clinic_master(clinic_name, clinic_district_id, overnight));
                         break;
                     case 2:
+                        String shop_name = searchingCriteriaForWebService.get("Name");
+                        String shop_district_id = searchingCriteriaForWebService.get("District");
+                        iResultList = new ArrayList<>(webServiceManager.get_shop_master(shop_name, shop_district_id));
                         break;
                     case 3:
                         break;
@@ -246,6 +249,8 @@ public class ResultFragment extends Fragment {
             String categoryText = this.iResultList.get(position).getDescriptionForResult();
             if (categoryText.length() > 50) {
                 categoryText = categoryText.substring(0, 50) + "...";
+            } else if(categoryText.equals("")){
+                resultCategory.setVisibility(View.GONE);
             }
             resultCategory.setText(categoryText);
 
