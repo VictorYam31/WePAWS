@@ -56,11 +56,11 @@ public class CreateAccountFragment extends Fragment {
             String password = String.valueOf(createPasswordEditText.getText());
 
             if (userName.equals("")) {
-                createStatusTextView.setText("Username cannot be null");
+                createStatusTextView.setText(getResources().getString(R.string.preference_login_password_null));
                 createStatusTextView.setTextColor(getResources().getColor(R.color.light_red));
                 return;
             } else if (password.equals("")) {
-                createStatusTextView.setText("Password cannot be null");
+                createStatusTextView.setText(getResources().getString(R.string.preference_login_password_null));
                 createStatusTextView.setTextColor(getResources().getColor(R.color.light_red));
                 return;
             }
@@ -80,7 +80,7 @@ public class CreateAccountFragment extends Fragment {
                 utility.saveUsernameToSharePreference(mContext, userName);
                 Navigation.findNavController(v).navigate(R.id.PreferenceFragment);
             } else if (nonQueryResultModel.getIsSuccess() == 0) { // Fail
-                createStatusTextView.setText("Create Account Fail: Username Exists");
+                createStatusTextView.setText(getResources().getString(R.string.preference_create_profile_fail_r0));
                 createStatusTextView.setTextColor(getResources().getColor(R.color.light_red));
                 createAccountEditText.setTextColor(getResources().getColor(R.color.light_red));
             }

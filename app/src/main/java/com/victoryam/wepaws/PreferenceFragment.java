@@ -103,11 +103,11 @@ public class PreferenceFragment extends Fragment {
             String password = String.valueOf(passwordEditText.getText());
 
             if (userName.equals("")) {
-                loginStatusTextView.setText("Username cannot be null");
+                loginStatusTextView.setText(getResources().getString(R.string.preference_login_username_null));
                 loginStatusTextView.setTextColor(getResources().getColor(R.color.light_red));
                 return;
             } else if (password.equals("")) {
-                loginStatusTextView.setText("Password cannot be null");
+                loginStatusTextView.setText(getResources().getString(R.string.preference_login_password_null));
                 loginStatusTextView.setTextColor(getResources().getColor(R.color.light_red));
                 return;
             }
@@ -124,7 +124,7 @@ public class PreferenceFragment extends Fragment {
             }
 
             if (nonQueryResultModel.getIsSuccess() == 1) { // Success
-                loginStatusTextView.setText("Login Account Success.");
+                loginStatusTextView.setText(getResources().getString(R.string.preference_login_success));
                 loginStatusTextView.setVisibility(View.VISIBLE);
                 loginStatusTextView.setTextColor(getResources().getColor(R.color.light_green));
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
@@ -139,13 +139,13 @@ public class PreferenceFragment extends Fragment {
                 int info = nonQueryResultModel.getInfo();
                 switch (info) {
                     case 1:
-                        loginStatusTextView.setText("Login Account Fail: Wrong Password");
+                        loginStatusTextView.setText(getResources().getString(R.string.preference_login_fail_r0));
                         break;
                     case 2:
-                        loginStatusTextView.setText("Login Account Fail: Username dose not exist");
+                        loginStatusTextView.setText(getResources().getString(R.string.preference_login_fail_r1));
                         break;
                     case 3:
-                        loginStatusTextView.setText("Login Account Fail: Error Unknown");
+                        loginStatusTextView.setText(getResources().getString(R.string.preference_login_fail_r2));
                         break;
                 }
 
