@@ -367,11 +367,18 @@ public class ResultDetailFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            String message = "Share from WePAWS: https://www.google.com/search?q=" + name ;
+            //String message = "Share from WePAWS: https://www.google.com/search?q=" + name ;
+            StringBuilder message = new StringBuilder();
+            message.append("Share from WePAWS: \r\n")
+                    .append(name)
+                    .append("\r\nAddress: ")
+                    .append(address)
+                    .append("\r\nPhone: ")
+                    .append(phoneNumber);
 
             Intent share = new Intent(Intent.ACTION_SEND);
             share.setType("text/plain");
-            share.putExtra(Intent.EXTRA_TEXT, message);
+            share.putExtra(Intent.EXTRA_TEXT, message.toString());
 
             startActivity(Intent.createChooser(share, "WePAWS Share Info"));
         }
