@@ -16,14 +16,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.victoryam.wepaws.Utils.Utility;
+import com.victoryam.wepaws.WebService.Model.MasterModel;
 import com.victoryam.wepaws.WebService.Model.NonQueryResultModel;
 import com.victoryam.wepaws.WebService.WebServiceManager;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class CreateAccountFragment extends Fragment {
     Utility utility;
     EditText createAccountEditText;
+    EditText createEmailEditText;
     EditText createPasswordEditText;
     TextView createStatusTextView;
 
@@ -33,6 +36,7 @@ public class CreateAccountFragment extends Fragment {
         utility = new Utility();
 
         createAccountEditText = (EditText) view.findViewById(R.id.create_account_username_edittext);
+        createEmailEditText = (EditText) view.findViewById(R.id.create_account_email_edittext);
         createPasswordEditText = (EditText) view.findViewById(R.id.create_account_password_edittext);
 
         createStatusTextView = (TextView) view.findViewById(R.id.create_account_status);
@@ -53,10 +57,15 @@ public class CreateAccountFragment extends Fragment {
         @Override
         public void onClick(View v) {
             String userName = String.valueOf(createAccountEditText.getText());
+            String emailAddress = String.valueOf(createEmailEditText.getText());
             String password = String.valueOf(createPasswordEditText.getText());
 
             if (userName.equals("")) {
                 createStatusTextView.setText(getResources().getString(R.string.preference_login_password_null));
+                createStatusTextView.setTextColor(getResources().getColor(R.color.light_red));
+                return;
+            } else if (emailAddress.equals("")) {
+                createStatusTextView.setText(getResources().getString(R.string.preference_login_email_null));
                 createStatusTextView.setTextColor(getResources().getColor(R.color.light_red));
                 return;
             } else if (password.equals("")) {
@@ -69,7 +78,8 @@ public class CreateAccountFragment extends Fragment {
             WebServiceManager webServiceManager = new WebServiceManager();
 
             try {
-                nonQueryResultModel = webServiceManager.create_account(userName, password);
+                //nonQueryResultModel = webServiceManager.create_account(userName, password);
+                nonQueryResultModel = webServiceManager.create_account(userName, emailAddress, password);
             } catch (ExecutionException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
@@ -80,7 +90,17 @@ public class CreateAccountFragment extends Fragment {
                 utility.saveUsernameToSharePreference(mContext, userName);
                 Navigation.findNavController(v).navigate(R.id.PreferenceFragment);
             } else if (nonQueryResultModel.getIsSuccess() == 0) { // Fail
-                createStatusTextView.setText(getResources().getString(R.string.preference_create_profile_fail_r0));
+                int info = nonQueryResultModel.getInfo();
+                switch (info) {
+                    case 1:
+                        createStatusTextView.setText(getResources().getString(R.string.preference_create_profile_fail_r0));
+                        break;
+                    case 2:
+                        createStatusTextView.setText(getResources().getString(R.string.preference_create_profile_fail_r1));
+                        break;
+                }
+
+                //createStatusTextView.setText(getResources().getString(R.string.preference_create_profile_fail_r0));
                 createStatusTextView.setTextColor(getResources().getColor(R.color.light_red));
                 createAccountEditText.setTextColor(getResources().getColor(R.color.light_red));
             }

@@ -44,6 +44,7 @@
 
     <string name="profile_logged_in_as">Logged in as\u0020</string>
     <string name="profile_username">Username</string>
+    <string name="profile_email_address">Email address</string>
     <string name="profile_password">Password</string>
     <string name="profile_login">Login</string>
     <string name="profile_logout">Logout</string>
@@ -159,11 +160,13 @@
     <string name="write_review_write_review_by">Write Review By\u0020</string>
     <string name="preference_login_success">Login Account Success</string>
     <string name="preference_login_username_null">Username cannot be null</string>
+    <string name="preference_login_email_null">Email address cannot be null</string>
     <string name="preference_login_password_null">Password cannot be null</string>
     <string name="preference_login_fail_r0">Login Account Fail: Wrong Password</string>
     <string name="preference_login_fail_r1">Login Account Fail: Username does not exist</string>
     <string name="preference_login_fail_r2">Login Accoung Fail: Error Unknown</string>
     <string name="preference_create_profile_fail_r0">Create Account Fail: Username exists</string>
+    <string name="preference_create_profile_fail_r1">Create Account Fail: Email already registered</string>
     <string name="home_menu_hotel">Hotel</string>
     <string name="home_menu_information">Information</string>
 
