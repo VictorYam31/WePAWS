@@ -23,6 +23,7 @@ public class WebServiceManager {
     private static final int CLINIC = 0;
     private static final int HOTEL = 1;
     private static final int SHOP = 2;
+    private static final int WILD = 99;
 
     //parameter @clinic_name - "" or any text
     //parameter @district_id - 1 to 18, can be empty or single or multiply, ""  "2"  "2,6"
@@ -77,8 +78,8 @@ public class WebServiceManager {
     }
 
     //parameter @input - any text
-    public List<WildSearchModel> wild_search(String input) throws ExecutionException, InterruptedException {
-        String url = "https://wepaws.azurewebsites.net/clinicws.asmx/wild_search";
+    public List<MasterModel> wild_search(String input) throws ExecutionException, InterruptedException {
+        String url = "https://wepaws.azurewebsites.net/generalws.asmx/wild_search";
         String jsonContent = null;
         try {
             jsonContent = new JSONObject()
@@ -87,15 +88,7 @@ public class WebServiceManager {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return jsonToListWildSearchModel(get_webservice_result(url, jsonContent));
-
-     /*   ExecutorService executor = Executors.newCachedThreadPool();
-        WildSearchTask task = new WildSearchTask(input);
-        Future<List<WildSearchModel>> future = executor.submit(task);
-        List<WildSearchModel> wildSearchList = future.get();
-        executor.shutdown();
-
-        return wildSearchList;*/
+        return jsonToListMasterModel(get_webservice_result(url, jsonContent), WILD);
     }
 
     //parameter @hotel_name - "" or any text
@@ -217,6 +210,21 @@ public class WebServiceManager {
         return jsonToNonQueryModel(get_webservice_result(url, jsonContent));
     }
 
+    public NonQueryResultModel create_account(String login, String email, String password) throws ExecutionException, InterruptedException {
+        String url = "https://wepaws.azurewebsites.net/accountws.asmx/create_account_email";
+        String jsonContent = "";
+        try {
+            jsonContent = new JSONObject()
+                    .put("login", login)
+                    .put("email", email)
+                    .put("password", password)
+                    .toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonToNonQueryModel(get_webservice_result(url, jsonContent));
+    }
+
     //parameter @login - text
     //parameter @password - text
 
@@ -321,6 +329,9 @@ public class WebServiceManager {
                     case SHOP:
                         model.SetShopMasterModel(arr.getJSONObject(i));
                         break;
+                    case WILD:
+                        model.setWildMasterModel(arr.getJSONObject(i));
+                        break;
                 }
                 masterList.add(model);
             }
@@ -356,19 +367,5 @@ public class WebServiceManager {
         return reviewList;
     }
 
-    private List<WildSearchModel> jsonToListWildSearchModel(String data) {
-        JSONArray arr;
-        List<WildSearchModel> wildSearchList = new ArrayList<>();
-
-        try {
-            arr = new JSONArray(data);
-            for (int i = 0; i < arr.length(); i++) {
-                wildSearchList.add(new WildSearchModel(arr.getJSONObject(i)));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return wildSearchList;
-    }
 }
 
