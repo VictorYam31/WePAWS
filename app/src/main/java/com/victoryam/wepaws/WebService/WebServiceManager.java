@@ -5,7 +5,6 @@ import com.victoryam.wepaws.WebService.Model.ClinicReviewModel;
 import com.victoryam.wepaws.WebService.Model.MasterModel;
 import com.victoryam.wepaws.WebService.Model.NonQueryResultModel;
 import com.victoryam.wepaws.WebService.Model.ReviewModel;
-import com.victoryam.wepaws.WebService.Model.WildSearchModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;

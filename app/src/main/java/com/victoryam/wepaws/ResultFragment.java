@@ -29,8 +29,6 @@ import com.victoryam.wepaws.Domain.Clinic;
 import com.victoryam.wepaws.Domain.District;
 import com.victoryam.wepaws.Utils.IResult;
 import com.victoryam.wepaws.Utils.Utility;
-import com.victoryam.wepaws.WebService.Model.ClinicMasterModel;
-import com.victoryam.wepaws.WebService.Model.WildSearchModel;
 import com.victoryam.wepaws.WebService.WebServiceManager;
 
 import org.json.JSONException;
