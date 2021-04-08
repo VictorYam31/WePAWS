@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MasterModel implements IResult, Parcelable {
+    private int category = -1; //0 clinic, 1 hotel, 2 shop
     private int id = -1;
     private String name = "";
     private String name_cn = "";
@@ -18,7 +19,7 @@ public class MasterModel implements IResult, Parcelable {
     private String desc = "";
     private int district_id = -1;
     private String phone = "";
-    //    private String overnight = "";
+    private String overnight = ""; //Y/N for clinic, X for hotel and shop
     private int negative_count = 0;
     private int neutral_count = 0;
     private int positive_count = 0;
@@ -26,6 +27,7 @@ public class MasterModel implements IResult, Parcelable {
 
 
     public MasterModel(Parcel in) {
+        category = in.readInt(); // new add
         id = in.readInt();
         name = in.readString();
         name_cn = in.readString();
@@ -34,7 +36,7 @@ public class MasterModel implements IResult, Parcelable {
         desc = in.readString();
         district_id = in.readInt();
         phone = in.readString();
-//        overnight = in.readString();
+        overnight = in.readString(); // new add
         negative_count = in.readInt();
         neutral_count = in.readInt();
         positive_count = in.readInt();
@@ -87,6 +89,27 @@ public class MasterModel implements IResult, Parcelable {
             desc = jsonObject.getString("shop_desc");
             district_id = jsonObject.getInt("district_id");
             phone = jsonObject.getString("phone");
+            negative_count = jsonObject.getInt("negative_count");
+            neutral_count = jsonObject.getInt("neutral_count");
+            positive_count = jsonObject.getInt("positive_count");
+            review_count = jsonObject.getInt("review_count");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setWildMasterModel(@NotNull JSONObject jsonObject) {
+        try {
+            category = jsonObject.getInt("category");
+            id = jsonObject.getInt("id");
+            name = jsonObject.getString("name");
+            name_cn = jsonObject.getString("name_cn");
+            address = jsonObject.getString("address");
+            address_cn = jsonObject.getString("address_cn");
+            desc = jsonObject.getString("desc");
+            district_id = jsonObject.getInt("district_id");
+            phone = jsonObject.getString("phone");
+            overnight = jsonObject.getString("overnight");
             negative_count = jsonObject.getInt("negative_count");
             neutral_count = jsonObject.getInt("neutral_count");
             positive_count = jsonObject.getInt("positive_count");
