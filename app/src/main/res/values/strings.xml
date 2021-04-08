@@ -5,7 +5,7 @@
     <string name="nav_menu_search">Search</string>
     <string name="nav_menu_preference">Profile</string>
 
-    <string name="home_menu_search_hint">Search</string>
+    <string name="home_menu_search_hint">Enter keywords to search</string>
     <string name="home_menu_clinic">Clinic</string>
     <string name="home_menu_search_vet">Search Clinic</string>
     <string name="home_menu_store">Store</string>
@@ -68,7 +68,7 @@
     <string name="search_component_opening_hours" translatable="false">Opening Hours</string>
     <string name="search_component_specialist" translatable="false">Specialist</string>
     <string name="search_component_keyword">Keyword</string>
-    <string name="search_component_keyword_hint">Enter keywords</string>
+    <string name="search_component_keyword_hint">Enter keywords to search</string>
     <string name="search_component_search">Search</string>
 
     <string name="search_dialog_ok">Ok</string>

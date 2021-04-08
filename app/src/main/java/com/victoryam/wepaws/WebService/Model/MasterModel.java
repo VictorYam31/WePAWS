@@ -10,7 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MasterModel implements IResult, Parcelable {
-    private int category = -1; //0 clinic, 1 hotel, 2 shop
+    private int category = 1; //0 clinic, 1 hotel, 2 shop
     private int id = -1;
     private String name = "";
     private String name_cn = "";
@@ -145,6 +145,10 @@ public class MasterModel implements IResult, Parcelable {
         return id;
     }
 
+    public int getCategory() {
+        return category;
+    }
+
     public String getName() {
         return name;
     }
@@ -182,6 +186,13 @@ public class MasterModel implements IResult, Parcelable {
     }
 
     public boolean getIsOvernight() {
+        if (!overnight.equals("") && overnight != null) {
+            if (overnight.equals("N") || overnight.equals("X")) {
+                return false;
+            } else if (overnight.equals("Y")) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -242,6 +253,6 @@ public class MasterModel implements IResult, Parcelable {
 
     @Override
     public int getCategoryForResult() {
-        return 1;
+        return getCategory();
     }
 }
