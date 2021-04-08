@@ -13,8 +13,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WePAWS">
-        <activity android:name=".WebService.Test.ClinicMasterActivity"></activity>
-        <activity android:name=".WebService.Test.WildSearchActivity" />
         <activity android:name=".StartupActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -17,8 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.victoryam.wepaws.WebService.Test.ClinicMasterActivity;
-import com.victoryam.wepaws.WebService.Test.WildSearchActivity;
 
 import static com.victoryam.wepaws.PreferenceFragment.setLocale;
 
@@ -71,8 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (destination.getId() == R.id.HomeFragment) {
                     getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                }
-                else {
+                } else {
                     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 }
                 getSupportActionBar().setTitle(title);
@@ -112,17 +109,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         onBackPressed();
         return super.onOptionsItemSelected(item);
-    }
-
-
-    public void test2(View view) {
-        Intent intent = new Intent(this, WildSearchActivity.class);
-        startActivity(intent);
-    }
-
-    public void test1(View view) {
-        Intent intent = new Intent(this, ClinicMasterActivity.class);
-        startActivity(intent);
     }
 
     //    @Override
