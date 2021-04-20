@@ -3,13 +3,21 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        config {
+            storeFile file('C:\\EE5415\\HW\\WePAWS\\app\\src\\main\\signature.jks')
+            storePassword 'abcd1234'
+            keyAlias 'wepaws'
+            keyPassword 'abcd1234'
+        }
+    }
     useLibrary 'org.apache.http.legacy'
 
     compileSdkVersion 29
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.victoryam.wepaws"
+        applicationId "com.wepaws.wepaws"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -22,6 +30,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     compileOptions {
