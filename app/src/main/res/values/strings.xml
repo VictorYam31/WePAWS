@@ -169,5 +169,6 @@
     <string name="preference_create_profile_fail_r1">Create Account Fail: Email already registered</string>
     <string name="home_menu_hotel">Hotel</string>
     <string name="home_menu_information">Information</string>
+    <string name="progressdialog_text">Loading...</string>
 
 </resources>

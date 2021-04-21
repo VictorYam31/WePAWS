@@ -1,5 +1,6 @@
 package com.wepaws.wepaws;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.AsyncTask;
@@ -81,6 +82,7 @@ public class ResultFragment extends Fragment {
         HashMap<String, String> searchingCriteriaForWebService;
         List<IResult> iResultList;
         ListView listView;
+        ProgressDialog dialog;
 
         initResultsTask(View view, int categoryId, String[] componentNames, HashMap<Integer, List<String>> searchingCriteria) {
             this.view = view;
@@ -88,6 +90,9 @@ public class ResultFragment extends Fragment {
             this.componentNames = componentNames;
             this.searchingCriteria = searchingCriteria;
             this.searchingCriteriaForWebService = new HashMap<String, String>();
+            this.dialog = new ProgressDialog(getActivity());
+            this.dialog.setMessage(getResources().getString(R.string.progressdialog_text));
+            this.dialog.show();
         }
 
         @Override
@@ -163,6 +168,10 @@ public class ResultFragment extends Fragment {
             ResultAdapter resultAdapter = new ResultAdapter(view.getContext(), iResultList);
             listView.setAdapter(resultAdapter);
             listView.setOnItemClickListener(new openDetailResultFragment(categoryId, iResultList));
+
+            if (dialog.isShowing()) {
+                dialog.dismiss();
+            }
         }
     }
 
