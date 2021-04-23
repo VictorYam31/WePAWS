@@ -38,6 +38,7 @@ public class PreferenceFragment extends Fragment {
     TextView profileUserTextView;
     TextView profilePasswordTextView;
     TextView createAccount;
+    TextView forgetPassword;
 
     EditText userNameEditText;
     EditText passwordEditText;
@@ -62,6 +63,14 @@ public class PreferenceFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_PreferenceFragment_to_CreateAccountFragment);
+            }
+        });
+
+        forgetPassword = (TextView) view.findViewById(R.id.profile_forget_password);
+        forgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_PreferenceFragment_to_ResetPasswordFragment);
             }
         });
 

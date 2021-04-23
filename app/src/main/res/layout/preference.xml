@@ -56,12 +56,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/profile_password"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/FontSize_Tiny"
-            android:text="@string/profile_password" />
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/profile_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/FontSize_Tiny"
+                android:text="@string/profile_password" />
+
+            <TextView
+                android:id="@+id/profile_forget_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="@string/profile_forgot_password"
+                android:textColor="@android:color/holo_blue_dark"
+                android:theme="@style/FontSize_Tiny" />
+
+        </RelativeLayout>
 
         <EditText
             android:id="@+id/profile_password_edittext"
@@ -97,6 +113,8 @@
                 android:text="@string/profile_create_account" />
 
         </RelativeLayout>
+
+
 
     </LinearLayout>
 

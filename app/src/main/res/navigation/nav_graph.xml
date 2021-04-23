@@ -69,6 +69,9 @@
         <action
             android:id="@+id/action_PreferenceFragment_to_CreateAccountFragment"
             app:destination="@id/CreateAccountFragment" />
+        <action
+            android:id="@+id/action_PreferenceFragment_to_ResetPasswordFragment"
+            app:destination="@id/ResetPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/ResultFragment"
@@ -119,4 +122,9 @@
         android:name="com.wepaws.wepaws.CreateAccountFragment"
         android:label="@string/create_account"
         tools:layout="@layout/create_account" />
+    <fragment
+        android:id="@+id/ResetPasswordFragment"
+        android:name="com.wepaws.wepaws.ResetPasswordFragment"
+        android:label="Reset Password"
+        tools:layout="@layout/reset_password" />
 </navigation>
