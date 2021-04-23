@@ -53,6 +53,7 @@ public class ResultFragment extends Fragment {
         }
 
         switch (categoryId) {
+            case -1:
             case 0:
                 componentNames = getResources().getStringArray(R.array.wild_search_names);
                 break;
@@ -136,6 +137,7 @@ public class ResultFragment extends Fragment {
 
             try {
                 switch (categoryId) {
+                    case -1:
                     case 0:
                         String name = searchingCriteriaForWebService.get("Name");
                         iResultList = new ArrayList<IResult>(webServiceManager.wild_search(name));
@@ -228,8 +230,8 @@ public class ResultFragment extends Fragment {
 
             TextView resultCategory = (TextView) view.findViewById(R.id.result_category);
             String categoryText = this.iResultList.get(position).getDescriptionForResult();
-            if (categoryText.length() > 50) {
-                categoryText = categoryText.substring(0, 50) + "...";
+            if (categoryText.length() > 80) {
+                categoryText = categoryText.substring(0, 80) + "...";
             } else if(categoryText.equals("")){
                 resultCategory.setVisibility(View.GONE);
             }
@@ -244,7 +246,7 @@ public class ResultFragment extends Fragment {
             ImageView image = (ImageView) view.findViewById(R.id.result_display_icon);
 
             @StyleableRes
-            int itemCategory = this.iResultList.get(position).getCategoryForResult();
+            int itemCategory = this.iResultList.get(position).getCategoryForResult() - 1;
             image.setImageResource(itemImages.getResourceId(itemCategory, -1));
 
             return view;
@@ -266,7 +268,7 @@ public class ResultFragment extends Fragment {
 
             Bundle bundle = new Bundle();
             bundle.putParcelable("IResult", iResult);
-            bundle.putInt("CategoryId", categoryId);
+            bundle.putInt("CategoryId", iResult.getCategoryForResult());
 
             Navigation.findNavController(view).navigate(R.id.action_ResultFragment_to_ResultDetailFragment, bundle);
         }
