@@ -84,6 +84,9 @@
     <string name="preference_login_fail_r2">未知錯誤</string>
     <string name="preference_create_profile_fail_r0">帳號已存在</string>
     <string name="preference_create_profile_fail_r1">電郵已被註冊</string>
+    <string name="preference_reset_success">重設密碼電郵已送出</string>
+    <string name="preference_reset_back">返回</string>
+    <string name="preference_reset_fail_r0">此電郵並未在WePAWS註冊</string>
     <string name="home_menu_hotel">酒店</string>
     <string name="home_menu_information">資訊</string>
     <string name="progressdialog_text">下載中...</string>

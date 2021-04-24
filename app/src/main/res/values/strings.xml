@@ -171,6 +171,9 @@
     <string name="preference_login_fail_r2">Error Unknown</string>
     <string name="preference_create_profile_fail_r0">Username exists</string>
     <string name="preference_create_profile_fail_r1">Email already registered</string>
+    <string name="preference_reset_success">Password reset email sent</string>
+    <string name="preference_reset_back">Back</string>
+    <string name="preference_reset_fail_r0">Email not registered in WePAWS</string>
     <string name="home_menu_hotel">Hotel</string>
     <string name="home_menu_information">Information</string>
     <string name="progressdialog_text">Loading...</string>
