@@ -82,6 +82,7 @@ public class ResultFragment extends Fragment {
         HashMap<String, String> searchingCriteriaForWebService;
         List<IResult> iResultList;
         ListView listView;
+        TextView noResultsTextView;
         ProgressDialog dialog;
 
         initResultsTask(View view, int categoryId, String[] componentNames, HashMap<Integer, List<String>> searchingCriteria) {
@@ -98,6 +99,7 @@ public class ResultFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             listView = (ListView) view.findViewById(R.id.result_listview);
+            noResultsTextView = (TextView) view.findViewById(R.id.result_no_results);
             searchingCriteriaForWebService = new HashMap<String, String>();
 
             for (int i = 0; i < componentNames.length; i++) {
@@ -168,6 +170,11 @@ public class ResultFragment extends Fragment {
             ResultAdapter resultAdapter = new ResultAdapter(view.getContext(), iResultList);
             listView.setAdapter(resultAdapter);
             listView.setOnItemClickListener(new openDetailResultFragment(categoryId, iResultList));
+
+            if (iResultList.size() == 0) {
+                noResultsTextView.setVisibility(View.VISIBLE);
+                listView.setVisibility(View.GONE);
+            }
 
             if (dialog.isShowing()) {
                 dialog.dismiss();

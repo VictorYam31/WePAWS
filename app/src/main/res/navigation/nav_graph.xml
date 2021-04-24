@@ -40,9 +40,6 @@
         <action
             android:id="@+id/action_SearchFragment_to_ResultFragment"
             app:destination="@id/ResultFragment" />
-        <action
-            android:id="@+id/action_SearchFragment_to_SearchDialog"
-            app:destination="@id/SearchDialog" />
     </fragment>
     <dialog
         android:id="@+id/SearchDialog"

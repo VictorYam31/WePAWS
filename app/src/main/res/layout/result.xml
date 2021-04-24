@@ -25,6 +25,18 @@
         android:layout_above="@id/result_page_bar"
         />
 
+    <TextView
+        android:id="@+id/result_no_results"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_filter_btn"
+        android:layout_above="@id/result_page_bar"
+        android:paddingTop="30dp"
+        android:gravity="center_horizontal"
+        android:text="@string/result_no_results"
+        android:visibility="gone"
+        />
+
     <LinearLayout
         android:id="@+id/result_page_bar"
         android:layout_width="match_parent"
