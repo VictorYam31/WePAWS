@@ -12,6 +12,7 @@
         android:layout_gravity="center"
         android:paddingStart="15dp"
         android:theme="@style/FontSize_Small"
+        android:textColor="@color/orange_dark"
         android:text="@string/result_detail_view_all"
         />
 

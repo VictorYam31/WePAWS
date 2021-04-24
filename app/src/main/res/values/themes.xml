@@ -100,5 +100,4 @@
     <style name="Preference.FontSize" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">25sp</item>
     </style>
-
 </resources>

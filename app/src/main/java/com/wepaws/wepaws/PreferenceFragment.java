@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -38,12 +39,15 @@ public class PreferenceFragment extends Fragment {
     TextView profileUserTextView;
     TextView profilePasswordTextView;
     TextView createAccount;
+    TextView forgetPassword;
 
     EditText userNameEditText;
     EditText passwordEditText;
 
     Button loginButton;
     Button logoutButton;
+
+    RelativeLayout passwordLayout;
 
     Spinner languageSpinner;
 
@@ -65,6 +69,14 @@ public class PreferenceFragment extends Fragment {
             }
         });
 
+        forgetPassword = (TextView) view.findViewById(R.id.profile_forget_password);
+        forgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_PreferenceFragment_to_ResetPasswordFragment);
+            }
+        });
+
         userNameEditText = (EditText) view.findViewById(R.id.profile_username_edittext);
         passwordEditText = (EditText) view.findViewById(R.id.profile_password_edittext);
 
@@ -73,6 +85,8 @@ public class PreferenceFragment extends Fragment {
 
         logoutButton = (Button) view.findViewById(R.id.profile_logout_button);
         logoutButton.setOnClickListener(new logoutButtonClicked(this.getContext()));
+
+        passwordLayout = (RelativeLayout) view.findViewById(R.id.password_relative_layout);
 
         languageSpinner = view.findViewById(R.id.preference_language_spinner);
         initLanguageFooter();
@@ -177,6 +191,8 @@ public class PreferenceFragment extends Fragment {
         userNameEditText.setVisibility(View.VISIBLE);
         passwordEditText.setVisibility(View.VISIBLE);
         createAccount.setVisibility(View.VISIBLE);
+        forgetPassword.setVisibility(View.VISIBLE);
+        passwordLayout.setVisibility(View.VISIBLE);
 
         loginButton.setVisibility(View.VISIBLE);
         logoutButton.setVisibility(View.INVISIBLE);
@@ -188,6 +204,8 @@ public class PreferenceFragment extends Fragment {
         userNameEditText.setVisibility(View.GONE);
         passwordEditText.setVisibility(View.GONE);
         createAccount.setVisibility(View.GONE);
+        forgetPassword.setVisibility(View.GONE);
+        passwordLayout.setVisibility(View.GONE);
 
         loginButton.setVisibility(View.GONE);
         logoutButton.setVisibility(View.VISIBLE);

@@ -49,6 +49,10 @@
     <string name="profile_login">Login</string>
     <string name="profile_logout">Logout</string>
     <string name="profile_create_account">Create Account</string>
+    <string name="profile_forgot_password">Forgot password?</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="reset_instruction">Enter the email address associated with your account</string>
+
 
     <string name="create_account">Create Account</string>
 
@@ -159,14 +163,17 @@
     <string name="result_detail_reviews">reviews</string>
     <string name="write_review_write_review_by">Write Review By\u0020</string>
     <string name="preference_login_success">Login Account Success</string>
-    <string name="preference_login_username_null">Username cannot be null</string>
-    <string name="preference_login_email_null">Email address cannot be null</string>
-    <string name="preference_login_password_null">Password cannot be null</string>
-    <string name="preference_login_fail_r0">Login Account Fail: Wrong Password</string>
-    <string name="preference_login_fail_r1">Login Account Fail: Username does not exist</string>
-    <string name="preference_login_fail_r2">Login Accoung Fail: Error Unknown</string>
-    <string name="preference_create_profile_fail_r0">Create Account Fail: Username exists</string>
-    <string name="preference_create_profile_fail_r1">Create Account Fail: Email already registered</string>
+    <string name="preference_login_username_null">Username cannot be empty</string>
+    <string name="preference_login_email_null">Email address cannot be empty</string>
+    <string name="preference_login_password_null">Password cannot be empty</string>
+    <string name="preference_login_fail_r0">Wrong Password</string>
+    <string name="preference_login_fail_r1">Username does not exist</string>
+    <string name="preference_login_fail_r2">Error Unknown</string>
+    <string name="preference_create_profile_fail_r0">Username exists</string>
+    <string name="preference_create_profile_fail_r1">Email already registered</string>
+    <string name="preference_reset_success">Password reset email sent</string>
+    <string name="preference_reset_back">Back</string>
+    <string name="preference_reset_fail_r0">Email not registered in WePAWS</string>
     <string name="home_menu_hotel">Hotel</string>
     <string name="home_menu_information">Information</string>
     <string name="progressdialog_text">Loading...</string>

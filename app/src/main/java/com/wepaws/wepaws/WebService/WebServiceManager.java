@@ -195,20 +195,6 @@ public class WebServiceManager {
 
     //info = 0 - SUCCESS
     //info = 1 - USER ALREADY EXISTS
-    public NonQueryResultModel create_account(String login, String password) throws ExecutionException, InterruptedException {
-        String url = "https://wepaws.azurewebsites.net/accountws.asmx/create_account";
-        String jsonContent = "";
-        try {
-            jsonContent = new JSONObject()
-                    .put("login", login)
-                    .put("password", password)
-                    .toString();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return jsonToNonQueryModel(get_webservice_result(url, jsonContent));
-    }
-
     public NonQueryResultModel create_account(String login, String email, String password) throws ExecutionException, InterruptedException {
         String url = "https://wepaws.azurewebsites.net/accountws.asmx/create_account_email";
         String jsonContent = "";
@@ -217,6 +203,23 @@ public class WebServiceManager {
                     .put("login", login)
                     .put("email", email)
                     .put("password", password)
+                    .toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonToNonQueryModel(get_webservice_result(url, jsonContent));
+    }
+
+    //parameter @email - text
+
+    //info = 0 - SUCCESS
+    //info = 1 - EMAIL NOT REGISTER
+    public NonQueryResultModel reset_password(String email) throws ExecutionException, InterruptedException {
+        String url = "https://wepaws.azurewebsites.net/accountws.asmx/reset_password";
+        String jsonContent = "";
+        try {
+            jsonContent = new JSONObject()
+                    .put("email", email)
                     .toString();
         } catch (JSONException e) {
             e.printStackTrace();

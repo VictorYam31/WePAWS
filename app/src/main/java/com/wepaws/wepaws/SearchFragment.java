@@ -26,6 +26,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 public class SearchFragment extends Fragment {
+    EditText searchByCategoryKeywords;
     private HashMap<Integer, List<String>> searchingCriteria;
 
     @Nullable
@@ -37,6 +38,7 @@ public class SearchFragment extends Fragment {
         searchingCriteria = new HashMap<>();
 
         String title = getResources().getString(R.string.search_component_search);
+        
         switch (getArguments().getInt("SearchFragmentArg")) {
             case 0:
                 categoryId = 1;
@@ -61,7 +63,7 @@ public class SearchFragment extends Fragment {
         }
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
 
-        EditText searchByCategoryKeywords = (EditText) view.findViewById(R.id.search_by_category_keywords);
+        searchByCategoryKeywords = (EditText) view.findViewById(R.id.search_by_category_keywords);
         if (categoryId != -1) {
             searchByCategoryKeywords.setVisibility(View.GONE);
         }
@@ -85,6 +87,13 @@ public class SearchFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Bundle bundle = new Bundle();
+
+            if(categoryId == -1){
+                searchingCriteria.put(0, new ArrayList() {{
+                    add(String.valueOf(searchByCategoryKeywords.getText()));
+                }});
+            }
+
             bundle.putInt("CategoryId", categoryId);
             bundle.putSerializable("SearchingCriteria", searchingCriteria);
             Navigation.findNavController(v).navigate(R.id.action_SearchFragment_to_ResultFragment, bundle);

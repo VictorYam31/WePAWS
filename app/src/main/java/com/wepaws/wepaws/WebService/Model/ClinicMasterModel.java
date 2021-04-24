@@ -153,7 +153,7 @@ public class ClinicMasterModel implements IResult, Parcelable {
 
     @Override
     public int getCategoryForResult() {
-        return 0;
+        return 1;
     }
 
     @Override

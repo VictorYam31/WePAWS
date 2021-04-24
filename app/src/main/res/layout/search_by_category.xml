@@ -14,7 +14,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:theme="@style/FontSize_Medium"
+        android:textSize="22sp"
         android:hint="@string/search_component_keyword_hint"
         />
 

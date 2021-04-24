@@ -10,7 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MasterModel implements IResult, Parcelable {
-    private int category = 1; //0 clinic, 1 hotel, 2 shop
+    private int category = 2; //0 clinic, 1 hotel, 2 shop
     private int id = -1;
     private String name = "";
     private String name_cn = "";
@@ -100,7 +100,7 @@ public class MasterModel implements IResult, Parcelable {
 
     public void setWildMasterModel(@NotNull JSONObject jsonObject) {
         try {
-            category = jsonObject.getInt("category");
+            category = getRealCategoryNo(jsonObject.getInt("category"));
             id = jsonObject.getInt("id");
             name = jsonObject.getString("name");
             name_cn = jsonObject.getString("name_cn");
@@ -254,5 +254,21 @@ public class MasterModel implements IResult, Parcelable {
     @Override
     public int getCategoryForResult() {
         return getCategory();
+    }
+
+    private int getRealCategoryNo(int category) {
+        int realCategory = -1;
+        switch (category) {
+            case 0:
+                realCategory = 1;
+                break;
+            case 1:
+                realCategory = 3;
+                break;
+            case 2:
+                realCategory = 2;
+                break;
+        }
+        return realCategory;
     }
 }
