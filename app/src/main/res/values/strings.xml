@@ -85,6 +85,7 @@
     <string name="result_filter">Filter</string>
     <string name="result_previous">\u003C</string>
     <string name="result_next">\u003E</string>
+    <string name="no_result">No results found</string>
 
     <string name="result_detail">Result Detail</string>
     <string name="result_detail_phone">Phone No.</string>
@@ -172,7 +173,7 @@
     <string name="preference_create_profile_fail_r0">Username exists</string>
     <string name="preference_create_profile_fail_r1">Email already registered</string>
     <string name="preference_reset_success">Password reset email sent</string>
-    <string name="preference_reset_back">Back</string>
+    <string name="preference_reset_back">Go Back</string>
     <string name="preference_reset_fail_r0">Email not registered in WePAWS</string>
     <string name="home_menu_hotel">Hotel</string>
     <string name="home_menu_information">Information</string>

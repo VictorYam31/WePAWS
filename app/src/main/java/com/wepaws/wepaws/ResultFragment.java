@@ -1,7 +1,9 @@
 package com.wepaws.wepaws;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -173,6 +175,19 @@ public class ResultFragment extends Fragment {
 
             if (dialog.isShowing()) {
                 dialog.dismiss();
+            }
+
+            if (iResultList.size() == 0) {
+                new AlertDialog.Builder(view.getContext())
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setMessage(R.string.no_result)
+                        .setCancelable(false)
+                        .setPositiveButton(R.string.search_dialog_ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Navigation.findNavController(view).popBackStack();
+                            }
+                        }).show();
             }
         }
     }

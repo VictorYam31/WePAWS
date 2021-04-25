@@ -3,6 +3,7 @@ package com.wepaws.wepaws;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ public class HomeFragment extends Fragment {
 
     RecyclerView homeRecyclerView;
     HomeAdapter homeAdapter;
+    long lastPressesTime;
 
     @Nullable
     @Override
@@ -48,6 +50,11 @@ public class HomeFragment extends Fragment {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
+                if (SystemClock.elapsedRealtime() - lastPressesTime < 1000) {
+                    return false;
+                }
+                lastPressesTime = SystemClock.elapsedRealtime();
+
                 Bundle bundle = new Bundle();
                 int categoryId = 0;
                 HashMap<Integer, List<String>> searchingCriteria = new HashMap<>();

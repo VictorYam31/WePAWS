@@ -27,6 +27,7 @@ import java.util.List;
 
 public class SearchFragment extends Fragment {
     EditText searchByCategoryKeywords;
+    EditText editText;
     private HashMap<Integer, List<String>> searchingCriteria;
 
     @Nullable
@@ -86,6 +87,9 @@ public class SearchFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
+            if (editText != null) {
+                editText.clearFocus();
+            }
             Bundle bundle = new Bundle();
 
             if(categoryId == -1){
@@ -188,7 +192,8 @@ public class SearchFragment extends Fragment {
                 switchButton.setFocusable(false);
             } else if (firstLevel[i].equals(getResources().getString(R.string.search_component_name_display))) {
                 view = inflater.inflate(R.layout.search_component_2, null);
-                EditText editText = (EditText) view.findViewById(R.id.search_component_2_edittext);
+                //EditText editText = (EditText) view.findViewById(R.id.search_component_2_edittext);
+                editText = (EditText) view.findViewById(R.id.search_component_2_edittext);
                 if (input != null) {
                     editText.setText(input);
                 }

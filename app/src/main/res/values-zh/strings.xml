@@ -33,6 +33,7 @@
     <string name="search_dialog_ok">確定</string>
     <string name="search_dialog_cancel">取消</string>
     <string name="result">搜尋結果</string>
+    <string name="no_result">找不到相關結果</string>
     <string name="result_detail_phone">電話</string>
     <string name="result_detail_address">地址</string>
     <string name="result_detail_view_all">查看全部</string>
