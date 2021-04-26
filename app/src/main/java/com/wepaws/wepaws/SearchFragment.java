@@ -87,7 +87,7 @@ public class SearchFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            if (editText != null) {
+            if (editText != null && !editText.getText().toString().trim().equals("")) {
                 editText.clearFocus();
             }
             Bundle bundle = new Bundle();
