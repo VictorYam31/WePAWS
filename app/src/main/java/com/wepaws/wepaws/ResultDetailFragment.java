@@ -355,20 +355,24 @@ public class ResultDetailFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            //String message = "Share from WePAWS: https://www.google.com/search?q=" + name ;
             StringBuilder message = new StringBuilder();
-            message.append("Share from WePAWS: \r\n")
+            message.append(getResources().getString(R.string.share_title))
+                    .append(":\r\n")
                     .append(name)
-                    .append("\r\nAddress: ")
+                    .append("\r\n\r\n")
+                    .append(getResources().getString(R.string.result_detail_address))
+                    .append(":\r\n")
                     .append(address)
-                    .append("\r\nPhone: ")
+                    .append("\r\n\r\n")
+                    .append(getResources().getString(R.string.result_detail_phone))
+                    .append(":\r\n")
                     .append(phoneNumber);
 
             Intent share = new Intent(Intent.ACTION_SEND);
             share.setType("text/plain");
             share.putExtra(Intent.EXTRA_TEXT, message.toString());
 
-            startActivity(Intent.createChooser(share, "WePAWS Share Info"));
+            startActivity(Intent.createChooser(share, getResources().getString(R.string.share_title)));
         }
     }
 }

@@ -178,5 +178,6 @@
     <string name="home_menu_hotel">Hotel</string>
     <string name="home_menu_information">Information</string>
     <string name="progressdialog_text">Loading...</string>
+    <string name="share_title">WePAWS Share</string>
 
 </resources>

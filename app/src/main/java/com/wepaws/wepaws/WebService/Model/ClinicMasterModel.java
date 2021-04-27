@@ -66,8 +66,6 @@ public class ClinicMasterModel implements IResult, Parcelable {
 
 
     public String getPhone() {
-
-        System.out.println(phone);
         return phone;
     }
 
