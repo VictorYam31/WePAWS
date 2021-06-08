@@ -35,6 +35,7 @@
   </ol>
 </details>
 
+
 ## About The Project
 
 WePAWS is an all-in-one information searching platform for searching Pet’s related services. Users
@@ -52,10 +53,12 @@ WePAWS want to construct a reliable social media platform for pet's service prov
 Our mission is to help pet lovers to find the best services in the market and help them to give the best
 care to their pets.
 
+
 ## Getting Start
 This project uses the Gradle build system. To build this project, use the gradlew build command or use "Import Project" in Android Studio.
 
 For more resources on learning Android development, visit the Developer Guides at [https://example.com](https://example.com).
+
 
 ## Application Architecture
 WePAWS implement with 3-Tier architectural design. The advantage of this design is separating different function components and increased maintainability and flexibility. This design involves 3 components in this architecture:
@@ -69,8 +72,9 @@ information to presentation tier.
 
 3. Data Tier is the database that stored user’s information and Services data. For user’s information, user can sign up as a member of WePAWS can send the login information including Login ID and Password. For services data, Data Tier stored the pet shop, restaurant animal’s clinic. When Data Tier receives the request from Application Tier.
 
+
 ## Screenshots
 
 <img src="https://user-images.githubusercontent.com/70901229/121122116-7377bd80-c853-11eb-8f72-ab52b477dfd6.png">
-<img src="https://user-images.githubusercontent.com/70901229/121122144-7c688f00-c853-11eb-8763-1210b8388d93.png">
+<img src="https://user-images.githubusercontent.com/70901229/121122144-7c688f00-c853-11eb-8763-1210b8388d93.png" width="200"  height="355">
 <img src="https://user-images.githubusercontent.com/70901229/121122187-8d190500-c853-11eb-98af-9667a9f86555.png">
