@@ -76,5 +76,5 @@ information to presentation tier.
 ## Screenshots
 
 <img src="https://user-images.githubusercontent.com/70901229/121122116-7377bd80-c853-11eb-8f72-ab52b477dfd6.png">
-<img src="https://user-images.githubusercontent.com/70901229/121122144-7c688f00-c853-11eb-8763-1210b8388d93.png" width=650"  height="500">
-<img src="https://user-images.githubusercontent.com/70901229/121122187-8d190500-c853-11eb-98af-9667a9f86555.png">
+<img src="https://user-images.githubusercontent.com/70901229/121122144-7c688f00-c853-11eb-8763-1210b8388d93.png" width=651"  height="502">
+<img src="https://user-images.githubusercontent.com/70901229/121122187-8d190500-c853-11eb-98af-9667a9f86555.png" width=651"  height="502">
