@@ -81,7 +81,7 @@ information to presentation tier.
 
 
 ## Technology
-<table>
+<table align="left">
   <tr>
     <th>Android Application Development</th>
   </tr>
