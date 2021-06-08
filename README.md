@@ -5,7 +5,7 @@
   </a>
   <h3 align="center">We Paws</h3>
   <p align="center">
-    An all-in-one information searching platform for Pet!
+    An all-in-one information searching platform for Pets!
   </p>
 </p>
 
@@ -13,25 +13,11 @@
 <details open="open">
   <summary>Table of Contents</summary>
   <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
+    <li><a>About The Project</a></li>
+    <li><a>Getting Started</a></li>
+    <li><a>Application Architecture</a></li>
+    <li><a>Screenshots</a></li>
+    <li><a>Technology</a></li>
   </ol>
 </details>
 
@@ -76,12 +62,12 @@ information to presentation tier.
 ## Screenshots
 
 <img src="https://user-images.githubusercontent.com/70901229/121122116-7377bd80-c853-11eb-8f72-ab52b477dfd6.png">
-<img src="https://user-images.githubusercontent.com/70901229/121122144-7c688f00-c853-11eb-8763-1210b8388d93.png" width=651"  height="622">
-<img src="https://user-images.githubusercontent.com/70901229/121122187-8d190500-c853-11eb-98af-9667a9f86555.png" width=651"  height="622">
+<img src="https://user-images.githubusercontent.com/70901229/121122144-7c688f00-c853-11eb-8763-1210b8388d93.png" width=631"  height="622">
+<img src="https://user-images.githubusercontent.com/70901229/121122187-8d190500-c853-11eb-98af-9667a9f86555.png" width=631"  height="622">
 
 
 ## Technology
-<table align="left">
+<table>
   <tr>
     <th>Android Application Development</th>
   </tr>
@@ -100,5 +86,27 @@ information to presentation tier.
     <tr>
     <th>Development Emulator</th>
     <th>AVD emulator, Pixel 3a API30</th>
+  </tr>
+</table>
+
+<table >
+  <tr>
+    <th>Back End Development</th>
+  </tr>
+  <tr>
+    <th>Web API Language</th>
+    <th>C#</th>
+  </tr>
+    <tr>
+    <th>Web API Host</th>
+    <th>Azure App Service</th>
+  </tr>  
+  <tr>
+    <th>Database</th>
+    <th>Azure SQL Database</th>
+  </tr>
+    <tr>
+    <th>Email Server</th>
+    <th>SendGrid</th>
   </tr>
 </table>
