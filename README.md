@@ -5,7 +5,7 @@
   </a>
   <h3 align="center">We Paws</h3>
   <p align="center">
-    An all-in-one information searching platform for Pet’s!
+    An all-in-one information searching platform for Pet!
   </p>
 </p>
 
